@@ -13,6 +13,8 @@
 		3081F1CA1B109CCB004BA309 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3081F1C91B109CCB004BA309 /* Images.xcassets */; };
 		3081F1CD1B109CCB004BA309 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3081F1CB1B109CCB004BA309 /* LaunchScreen.xib */; };
 		3081F1D91B109CCB004BA309 /* IPEC_ToolboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F1D81B109CCB004BA309 /* IPEC_ToolboxTests.swift */; };
+		3081F1E31B109E41004BA309 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F1E21B109E41004BA309 /* MoreTableViewController.swift */; };
+		3081F2151B10A34C004BA309 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F2141B10A34C004BA309 /* AboutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		3081F1D21B109CCB004BA309 /* IPEC ToolboxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IPEC ToolboxTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3081F1D71B109CCB004BA309 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3081F1D81B109CCB004BA309 /* IPEC_ToolboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPEC_ToolboxTests.swift; sourceTree = "<group>"; };
+		3081F1E21B109E41004BA309 /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
+		3081F2141B10A34C004BA309 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,8 @@
 				3081F1C21B109CCB004BA309 /* AppDelegate.swift */,
 				3081F1C41B109CCB004BA309 /* ViewController.swift */,
 				3081F1C61B109CCB004BA309 /* Main.storyboard */,
+				3081F2141B10A34C004BA309 /* AboutViewController.swift */,
+				3081F1E21B109E41004BA309 /* MoreTableViewController.swift */,
 				3081F1C91B109CCB004BA309 /* Images.xcassets */,
 				3081F1CB1B109CCB004BA309 /* LaunchScreen.xib */,
 				3081F1C01B109CCB004BA309 /* Supporting Files */,
@@ -213,6 +219,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3081F1C51B109CCB004BA309 /* ViewController.swift in Sources */,
+				3081F1E31B109E41004BA309 /* MoreTableViewController.swift in Sources */,
+				3081F2151B10A34C004BA309 /* AboutViewController.swift in Sources */,
 				3081F1C31B109CCB004BA309 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
