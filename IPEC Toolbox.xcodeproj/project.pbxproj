@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		304D0E6F1B165EB2006483A9 /* UnitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304D0E6E1B165EB2006483A9 /* UnitsTableViewController.swift */; };
 		3081F1C31B109CCB004BA309 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F1C21B109CCB004BA309 /* AppDelegate.swift */; };
-		3081F1C51B109CCB004BA309 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F1C41B109CCB004BA309 /* ViewController.swift */; };
+		3081F1C51B109CCB004BA309 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F1C41B109CCB004BA309 /* MainTableViewController.swift */; };
 		3081F1C81B109CCB004BA309 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3081F1C61B109CCB004BA309 /* Main.storyboard */; };
 		3081F1CA1B109CCB004BA309 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3081F1C91B109CCB004BA309 /* Images.xcassets */; };
 		3081F1CD1B109CCB004BA309 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3081F1CB1B109CCB004BA309 /* LaunchScreen.xib */; };
 		3081F1D91B109CCB004BA309 /* IPEC_ToolboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F1D81B109CCB004BA309 /* IPEC_ToolboxTests.swift */; };
 		3081F1E31B109E41004BA309 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F1E21B109E41004BA309 /* MoreTableViewController.swift */; };
 		3081F2151B10A34C004BA309 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F2141B10A34C004BA309 /* AboutViewController.swift */; };
+		30E823301B15B50200835D73 /* Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E8232F1B15B50200835D73 /* Calculations.swift */; };
+		30E823321B15BA9600835D73 /* FormulaDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E823311B15BA9600835D73 /* FormulaDetailTableViewController.swift */; };
+		30E823341B15D7F900835D73 /* FormulaInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E823331B15D7F900835D73 /* FormulaInputCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,10 +32,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		304D0E6E1B165EB2006483A9 /* UnitsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsTableViewController.swift; sourceTree = "<group>"; };
 		3081F1BD1B109CCB004BA309 /* IPEC Toolbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IPEC Toolbox.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3081F1C11B109CCB004BA309 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3081F1C21B109CCB004BA309 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3081F1C41B109CCB004BA309 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3081F1C41B109CCB004BA309 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		3081F1C71B109CCB004BA309 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3081F1C91B109CCB004BA309 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3081F1CC1B109CCB004BA309 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -40,6 +45,9 @@
 		3081F1D81B109CCB004BA309 /* IPEC_ToolboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPEC_ToolboxTests.swift; sourceTree = "<group>"; };
 		3081F1E21B109E41004BA309 /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
 		3081F2141B10A34C004BA309 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		30E8232F1B15B50200835D73 /* Calculations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculations.swift; sourceTree = "<group>"; };
+		30E823311B15BA9600835D73 /* FormulaDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormulaDetailTableViewController.swift; sourceTree = "<group>"; };
+		30E823331B15D7F900835D73 /* FormulaInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormulaInputCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,13 +89,15 @@
 		3081F1BF1B109CCB004BA309 /* IPEC Toolbox */ = {
 			isa = PBXGroup;
 			children = (
-				3081F1C21B109CCB004BA309 /* AppDelegate.swift */,
-				3081F1C41B109CCB004BA309 /* ViewController.swift */,
 				3081F1C61B109CCB004BA309 /* Main.storyboard */,
+				3081F1C41B109CCB004BA309 /* MainTableViewController.swift */,
+				30E823311B15BA9600835D73 /* FormulaDetailTableViewController.swift */,
+				304D0E6E1B165EB2006483A9 /* UnitsTableViewController.swift */,
+				30E823331B15D7F900835D73 /* FormulaInputCell.swift */,
+				30E8232F1B15B50200835D73 /* Calculations.swift */,
 				3081F2141B10A34C004BA309 /* AboutViewController.swift */,
 				3081F1E21B109E41004BA309 /* MoreTableViewController.swift */,
 				3081F1C91B109CCB004BA309 /* Images.xcassets */,
-				3081F1CB1B109CCB004BA309 /* LaunchScreen.xib */,
 				3081F1C01B109CCB004BA309 /* Supporting Files */,
 			);
 			path = "IPEC Toolbox";
@@ -96,6 +106,8 @@
 		3081F1C01B109CCB004BA309 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3081F1CB1B109CCB004BA309 /* LaunchScreen.xib */,
+				3081F1C21B109CCB004BA309 /* AppDelegate.swift */,
 				3081F1C11B109CCB004BA309 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -218,10 +230,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3081F1C51B109CCB004BA309 /* ViewController.swift in Sources */,
+				3081F1C51B109CCB004BA309 /* MainTableViewController.swift in Sources */,
 				3081F1E31B109E41004BA309 /* MoreTableViewController.swift in Sources */,
 				3081F2151B10A34C004BA309 /* AboutViewController.swift in Sources */,
+				304D0E6F1B165EB2006483A9 /* UnitsTableViewController.swift in Sources */,
+				30E823321B15BA9600835D73 /* FormulaDetailTableViewController.swift in Sources */,
+				30E823301B15B50200835D73 /* Calculations.swift in Sources */,
 				3081F1C31B109CCB004BA309 /* AppDelegate.swift in Sources */,
+				30E823341B15D7F900835D73 /* FormulaInputCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +367,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "IPEC Toolbox/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -361,6 +378,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "IPEC Toolbox/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -419,6 +437,7 @@
 				3081F1DE1B109CCB004BA309 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3081F1DF1B109CCB004BA309 /* Build configuration list for PBXNativeTarget "IPEC ToolboxTests" */ = {
 			isa = XCConfigurationList;
@@ -427,6 +446,7 @@
 				3081F1E11B109CCB004BA309 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
