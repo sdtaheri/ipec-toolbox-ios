@@ -8,9 +8,21 @@
 
 import UIKit
 
-class FormulaDetailTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
+class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresentationControllerDelegate, UIPopoverPresentationControllerDelegate, UITextFieldDelegate {
 
-    @IBOutlet weak var headerView: UIImageView!
+    @IBOutlet weak var headerView: UIImageView! {
+        didSet {
+            headerView.image = UIImage(named: "\((navigationItem.title)!) 1")
+            
+            if headerView.image == nil {
+                headerView.frame = CGRectZero
+            }
+        }
+    }
+    
+    private var inputValues = [Double?]()
+
+    private var activeTextField: UITextField?
     
     private weak var selectedUnitButton: UIButton?
     
@@ -37,6 +49,10 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
         return UIModalPresentationStyle.None
     }
     
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController!, traitCollection: UITraitCollection!) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
+    }
+    
     func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
         
         if let utvc = popoverPresentationController.presentedViewController as? UnitsTableViewController {
@@ -46,31 +62,78 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
         
     }
     
+    @IBAction func compute(sender: UIButton) {
+        view.endEditing(true)
+
+        var shouldCompute = true
+        if inputValues.count == 0 {
+            shouldCompute = false
+        }
+        for i in 0..<inputValues.count {
+            if inputValues[i] == nil {
+                shouldCompute = false
+                break
+            }
+        }
+        if shouldCompute {
+            performSegueWithIdentifier(StringConstants.ComputeSegue, sender: nil)
+        }
+    }
+    
+    
     @IBAction func showMoreUnits(sender: UIButton) {
-        
         if let titleInputs = StringConstants.Inputs[formulaTitle!] {
             if let cell = sender.superview!.superview as? FormulaInputCell {
-                if titleInputs[cell.label.text!]?.count > 1 {
-                    performSegueWithIdentifier(StringConstants.ShowUnitSegue, sender: sender)
+                if let unitType = titleInputs[cell.label.text!] {
+                    if let subUnits = StringConstants.Units[unitType] {
+                        if subUnits.count > 1 {
+                            performSegueWithIdentifier(StringConstants.ShowUnitSegue, sender: sender)
+                        }
+                    }
                 }
             }
         }
-
+    }
+    
+    func showMoreInfo(sender: UIButton) {
+        performSegueWithIdentifier(StringConstants.MoreInfo, sender: nil)
+    }
+    
+    @IBAction func dismissMoreInfoController(sender: UIStoryboardSegue) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func keyboardDidShow(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            if let notificationValue = userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue {
+                let keyboardFrame = notificationValue.CGRectValue()
+                
+                let textFieldRectInWindow = activeTextField!.convertRect(activeTextField!.bounds, toView: nil)
+                if textFieldRectInWindow.origin.y + textFieldRectInWindow.size.height >= view.frame.size.height - keyboardFrame.size.height {
+                    let textFieldRectInTableView = activeTextField!.convertRect(activeTextField!.bounds, toView: tableView)
+                    tableView.setContentOffset(CGPoint(x: 0, y: -keyboardFrame.size.height + textFieldRectInTableView.origin.y + activeTextField!.frame.size.height), animated: true)
+                }
+                
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let infoButton = UIButton.buttonWithType(.DetailDisclosure) as! UIButton
+        infoButton.addTarget(self, action: "showMoreInfo:", forControlEvents: .TouchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: infoButton)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        
-        if self.navigationItem.title == "Dew Point Temperature" {
-            headerView.image = UIImage(named: "dewPoint")
-        }
-        
-        if headerView.image == nil {
-            headerView.frame = CGRectZero
-        }
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
     }
 
     // MARK: - Table view data source
@@ -100,10 +163,14 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
         if let titleInputs = StringConstants.Inputs[formulaTitle!] {
             let titleInputsArray = titleInputs.keys.array
             
+            cell.textField.delegate = self
+            
             cell.label.text = titleInputsArray[indexPath.row]
             
-            if let units = titleInputs[(cell.label.text)!] {
-                cell.unitLabel.setTitle(units[0], forState: .Normal)
+            if let unitType = titleInputs[(cell.label.text)!] {
+                if let units = StringConstants.Units[unitType] {
+                    cell.unitLabel.setTitle(units[0], forState: .Normal)
+                }
             } else {
                 cell.unitLabel.setTitle("", forState: .Normal)
             }
@@ -116,7 +183,6 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
         return cell
     }
     
-
     
     // MARK: - Navigation
 
@@ -127,7 +193,11 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
                 if let titleInputs = StringConstants.Inputs[formulaTitle!] {
                     if let button = sender as? UIButton {
                         if let cell = button.superview!.superview as? FormulaInputCell {
-                            dvc.unitsArray = titleInputs[cell.label.text!]
+                            if let unitType = titleInputs[cell.label.text!] {
+                                if let units = StringConstants.Units[unitType] {
+                                    dvc.unitsArray = units
+                                }
+                            }
                             dvc.selectedUnit = button.currentTitle
                             selectedUnitButton = button
                         }
@@ -140,9 +210,51 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
                     
                 }
             }
+        } else if segue.identifier == StringConstants.ComputeSegue {
+            if let nc = segue.destinationViewController as? UINavigationController {
+                if let rtvc = nc.childViewControllers[0] as? ResultsTableViewController {
+                    rtvc.formulaTitle = formulaTitle!
+                    rtvc.inputs = inputValues
+                }
+            }
         }
     }
     
+    // MARK: - TextField 
     
-
+    func textFieldDidBeginEditing(textField: UITextField) {
+        activeTextField = textField
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        activeTextField = nil
+        if let contentView = textField.superview {
+            if let cell = contentView.superview as? FormulaInputCell {
+                if let cellRow = tableView.indexPathForCell(cell) {
+                    if let doubleValue = textField.text.toDouble() {
+                        if inputValues.count != tableView.numberOfRowsInSection(0) {
+                            for _ in 0..<tableView.numberOfRowsInSection(0) {
+                                inputValues.append(nil)
+                            }
+                        }
+                        inputValues[cellRow.row] = doubleValue
+                    }
+                }
+            }
+        }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        compute(UIButton())
+        return true
+    }
+    
 }
+
+extension String {
+    func toDouble() -> Double? {
+        return NSNumberFormatter().numberFromString(self)?.doubleValue
+    }
+}
+

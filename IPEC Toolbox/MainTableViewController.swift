@@ -10,12 +10,13 @@ import UIKit
 
 struct StringConstants {
     static let MainCellReuseIdentifier = "Main Cell"
-    static let ShowFormulaSegueIdentifier = "Formula Detail"
-    
     static let FormulaCellReuseIdentifier = "Formula Detail Cell"
-    static let ShowUnitSegue = "Unit Segue"
-    
     static let UnitCellReuseIdentifier = "Unit Cell"
+
+    static let ShowFormulaSegueIdentifier = "Formula Detail"
+    static let ShowUnitSegue = "Unit Segue"
+    static let ComputeSegue = "Compute"
+    static let MoreInfo = "More Info"
     
     static let FirstSectionHeader = "Design"
     static let SecondSectionHeader = "Precommissioning"
@@ -23,13 +24,32 @@ struct StringConstants {
     
     static let Titles = [["Pipeline Submerged Weight", "Maximum Allowable Working Pressure", "Temprature Drop Access Pipe Wall", "Pipe Wall Thickness"], ["Pressure Drop For Fluid Flow in Pipelines", "Chemical Dosing for Water Treatment", "Pipeline Internal Volume", "Dew Point Temperature", "Mean Flow Velocity"]]
     
-    static let Inputs = ["Dew Point Temperature":["Air Temperature":["°C","K","°F"], "Relative Humidity":["%"], "Air Pressure":["Pa","kPa","psi"] ]]
+    static let Inputs =
+    [
+        "Dew Point Temperature":["Air Temperature":"Temperature", "Relative Humidity":"Percentage", "Air Pressure": "Pressure" ]
+    ]
+    
+    static let Units =
+    [
+        "Temperature":["°C","K","°F"],
+        "Percentage":["%"],
+        "Pressure":["Pa","kPa","bar","millibar","psi","ksi"],
+        "Molar Density":["mole/m3", "mole/cm3", "mole/gallon", "mole/liter", "mole/ft3"],
+        "Density": ["kg/m3", "g/cm3", "lb/ft3", "lb/in3", "g/m3"],
+        "Fraction":[""],
+        "Inverse Volume":["1/cm3", "1/m3", "1/gallon", "1/liter", "1/ft3"]
+    ]
 }
 
-class MainTableViewController: UITableViewController {
+class MainTableViewController: UITableViewController, UISplitViewControllerDelegate {
     
     private let savedData = NSUserDefaults()
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        splitViewController?.delegate = self
+    }
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
     }
@@ -85,6 +105,36 @@ class MainTableViewController: UITableViewController {
             }
         }
     }
+    
+    // MARK: - UISplitViewControllerDelegate
+    
+    func splitViewController(splitViewController: UISplitViewController, showDetailViewController vc: UIViewController, sender: AnyObject?) -> Bool {
         
+        if splitViewController.collapsed {
+            if let master = splitViewController.viewControllers[0] as? UITabBarController {
+                if let masterNC = master.selectedViewController as? UINavigationController {
+                    masterNC.pushViewController(vc, animated: true)
+                    
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+    
+    func splitViewController(splitViewController: UISplitViewController, separateSecondaryViewControllerFromPrimaryViewController primaryViewController: UIViewController!) -> UIViewController? {
+        if let master = splitViewController.viewControllers[0] as? UITabBarController {
+            if let masterNC = master.selectedViewController as? UINavigationController {
+                if let lastController = masterNC.childViewControllers.last as? UINavigationController {
+                    masterNC.popViewControllerAnimated(true)
+                    return lastController
+                }
+            }
+        }
+        
+        return nil
+    }
+    
 }
 

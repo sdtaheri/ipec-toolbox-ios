@@ -15,7 +15,7 @@ class UnitsTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+                
         if let selectedIndex = find(unitsArray, selectedUnit) {
             if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedIndex, inSection: 0)) {
                 cell.accessoryType = .Checkmark
