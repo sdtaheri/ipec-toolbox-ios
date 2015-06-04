@@ -8,30 +8,31 @@
 
 import UIKit
 
-class ResultsTableViewController: UITableViewController {
+class ResultsTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate {
     
     var inputs = [Double?]()
     private var results = [String: (Double,String,Int)]() {
         didSet {
             if results.count > 0 {
                 resultsArrayKeys = results.keys.array
+                resultsValue = [Double?](count: results.count, repeatedValue: nil)
+                resultsUnits = [String?](count: results.count, repeatedValue: nil)
             }
         }
     }
     
     private var resultsArrayKeys = [String]()
+    private var resultsValue = [Double?]()
+    private var resultsUnits = [String?]()
+
+    private weak var selectedUnitButton: UIButton?
     
-    var formulaTitle = String() {
-        didSet {
-            navigationItem.title = formulaTitle
-        }
-    }
+    var formulaTitle = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
-        navigationItem.leftItemsSupplementBackButton = true
+        
+        tableView.estimatedRowHeight = 44.0
         
         switch formulaTitle {
         case "Dew Point Temperature":
@@ -39,6 +40,63 @@ class ResultsTableViewController: UITableViewController {
                 results = Calculations.dewPointTemperature(inputs[0]!, relativeHumidity: inputs[1]!, airPressure: inputs[2]!)
             }
         default: break
+        }
+    }
+    
+    @IBAction func showMoreUnits(sender: UIButton) {
+            if let cell = sender.superview!.superview as? FormulaOutputCell {
+                let resultTitle = cell.label.text!
+                if let resultTuple = results[resultTitle] {
+                    let unitType = resultTuple.1
+                    if let subUnits = StringConstants.Units[unitType] {
+                        if subUnits.count > 1 {
+                            performSegueWithIdentifier(StringConstants.ShowOutputUnitSegue, sender: sender)
+                        }
+                    }
+                }
+            }
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController!, traitCollection: UITraitCollection!) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+        
+        if let utvc = popoverPresentationController.presentedViewController as? UnitsTableViewController {
+            let selectedUnit = utvc.selectedUnit
+            selectedUnitButton?.setTitle(selectedUnit, forState: .Normal)
+            if let contentView = selectedUnitButton?.superview {
+                if let cell = contentView.superview as? FormulaOutputCell {
+                    if let indexPath = tableView.indexPathForCell(cell) {
+                        if let previousValue = resultsValue[indexPath.row], previousUnit = resultsUnits[indexPath.row] {
+                            if let resultTuple = results[cell.label.text!] {
+                                let unitKind = resultTuple.1
+                                if let convertedValue = previousValue.convert(fromUnit: previousUnit , toUnit: selectedUnit , kind: unitKind) {
+                                    resultsValue[indexPath.row] = convertedValue
+                                    resultsUnits[indexPath.row] = selectedUnit
+                                    tableView.reloadData()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if let svc = splitViewController {
+            if !svc.collapsed && tableView.backgroundView == nil {
+                let imageView = UIImageView(image: UIImage(named: "background")!)
+                imageView.contentMode = UIViewContentMode.ScaleAspectFill
+                tableView.backgroundView = imageView
+            }
         }
     }
 
@@ -49,6 +107,9 @@ class ResultsTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if results.count > 0 {
+            tableView.backgroundView = nil
+        }
         return results.count
     }
 
@@ -59,61 +120,72 @@ class ResultsTableViewController: UITableViewController {
         let resultTitle = resultsArrayKeys[indexPath.row]
         cell.label.text = resultTitle
         
-        if let resultValue = results[resultTitle] {
-            cell.result.text = "\(resultValue.0)"
-            
-            if let units = StringConstants.Units[resultValue.1] {
-                cell.unit.setTitle(units[resultValue.2], forState: .Normal)
+        if let value = resultsValue[indexPath.row], unit = resultsUnits[indexPath.row] {
+            cell.result.text = value.doubleToStringWithThounsandSeparator()
+            UIView.performWithoutAnimation {
+                cell.unit.setTitle(unit, forState: .Normal)
+            }
+        } else {
+            if let resultValue = results[resultTitle] {
+                resultsValue[indexPath.row] = resultValue.0
+                cell.result.text = resultValue.0.doubleToStringWithThounsandSeparator()
+                
+                if let units = StringConstants.Units[resultValue.1] {
+                    UIView.performWithoutAnimation {
+                        cell.unit.setTitle(units[resultValue.2], forState: .Normal)
+                        self.resultsUnits[indexPath.row] = units[resultValue.2]
+                    }
+                }
             }
         }
 
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return formulaTitle + " Calculations"
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        if segue.identifier == StringConstants.ShowOutputUnitSegue {
+            if let dvc = segue.destinationViewController as? UnitsTableViewController {
+                if let button = sender as? UIButton {
+                    if let cell = button.superview!.superview as? FormulaOutputCell {
+                        let resultTitle = cell.label.text!
+                        if let resultTuple = results[resultTitle] {
+                            let unitType = resultTuple.1
+                            if let units = StringConstants.Units[unitType] {
+                                dvc.unitsArray = units
+                            }
+                        }
+                        dvc.selectedUnit = button.currentTitle
+                        selectedUnitButton = button
+                    }
+                }
+                
+                if let ppc = dvc.popoverPresentationController {
+                    ppc.delegate = self
+                    ppc.sourceRect = (sender as! UIView).convertRect(sender!.bounds, toView: tableView)
+                    
+                }
+            }
+        }
     }
-    */
+    
+}
+
+extension Double {
+    func roundToNumberOfDigits(number: Int) -> Double {
+        let power = pow(10.0,Double(number))
+        return Double(round(power * self)/power)
+    }
+    
+    func doubleToStringWithThounsandSeparator() -> String? {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .DecimalStyle
+        formatter.locale = NSLocale.currentLocale()
+        formatter.usesGroupingSeparator = true
+        return formatter.stringFromNumber(self)
+    }
 
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresentationControllerDelegate, UIPopoverPresentationControllerDelegate, UITextFieldDelegate {
 
+    weak var resultsTableViewController: ResultsTableViewController?
+    
     @IBOutlet weak var headerView: UIImageView! {
         didSet {
             headerView.image = UIImage(named: "\((navigationItem.title)!) 1")
@@ -20,8 +22,9 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         }
     }
     
-    private var inputValues = [Double?]()
-
+    private var inputValues = [Double?,String?]()
+    private var inputValuesForSegue = [Double?]()
+    private var inputUnits = [String]()
     private var activeTextField: UITextField?
     
     private weak var selectedUnitButton: UIButton?
@@ -44,7 +47,7 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
             }
         }
     }
-    
+        
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.None
     }
@@ -58,6 +61,13 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         if let utvc = popoverPresentationController.presentedViewController as? UnitsTableViewController {
             let selectedUnit = utvc.selectedUnit
             selectedUnitButton?.setTitle(selectedUnit, forState: .Normal)
+            if let contentView = selectedUnitButton?.superview {
+                if let cell = contentView.superview as? FormulaInputCell {
+                    if let indexPath = tableView.indexPathForCell(cell) {
+                        inputUnits[indexPath.row] = selectedUnit
+                    }
+                }
+            }
         }
         
     }
@@ -65,19 +75,42 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
     @IBAction func compute(sender: UIButton) {
         view.endEditing(true)
 
-        var shouldCompute = true
         if inputValues.count == 0 {
-            shouldCompute = false
+            return
         }
+        
+        let inputValuesMirror = reflect(inputValues)
+        
         for i in 0..<inputValues.count {
-            if inputValues[i] == nil {
-                shouldCompute = false
-                break
+            let (_, mirror) = inputValuesMirror[i]
+            let element = mirror.value as! (Double?,String?)
+            if element.0 == nil || element.1 == nil {
+                return
             }
         }
-        if shouldCompute {
-            performSegueWithIdentifier(StringConstants.ComputeSegue, sender: nil)
+        
+        inputValuesForSegue = [Double?](count: inputValues.count, repeatedValue: nil)
+        
+        for i in 0..<inputValues.count {
+            if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0)) as? FormulaInputCell {
+                let (_, mirror) = inputValuesMirror[i]
+                let element = mirror.value as! (Double?, String?)
+                inputValuesForSegue[i] = element.0
+                
+                if let unitKind = element.1 {
+                    switch unitKind {
+                        case "Temperature":
+                            inputValuesForSegue[i] = element.0!.convert(fromUnit: cell.unitLabel.currentTitle!, toUnit: "°C", kind: unitKind)!
+                        case "Pressure":
+                            inputValuesForSegue[i] = element.0!.convert(fromUnit: cell.unitLabel.currentTitle!, toUnit: "Pa", kind: unitKind)!
+                        default: break
+                    }
+                }
+            }
         }
+        
+        performSegueWithIdentifier(StringConstants.ComputeSegue, sender: nil)
+
     }
     
     
@@ -87,7 +120,7 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
                 if let unitType = titleInputs[cell.label.text!] {
                     if let subUnits = StringConstants.Units[unitType] {
                         if subUnits.count > 1 {
-                            performSegueWithIdentifier(StringConstants.ShowUnitSegue, sender: sender)
+                            performSegueWithIdentifier(StringConstants.ShowInputUnitSegue, sender: sender)
                         }
                     }
                 }
@@ -124,6 +157,12 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         let infoButton = UIButton.buttonWithType(.DetailDisclosure) as! UIButton
         infoButton.addTarget(self, action: "showMoreInfo:", forControlEvents: .TouchUpInside)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: infoButton)
+        
+        if let splitVC = self.splitViewController {
+            let controllers = splitVC.viewControllers
+            self.resultsTableViewController = controllers[controllers.count-1].topViewController as? ResultsTableViewController
+        }
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -135,6 +174,7 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
     }
+    
 
     // MARK: - Table view data source
 
@@ -147,6 +187,7 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         if formulaTitle != nil {
             if let inputs = StringConstants.Inputs[formulaTitle!] {
                 let inputsArray = inputs.keys.array
+                inputUnits = [String](count: inputsArray.count, repeatedValue: "")
                 return inputsArray.count
             } else {
                 return 0
@@ -163,23 +204,41 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         if let titleInputs = StringConstants.Inputs[formulaTitle!] {
             let titleInputsArray = titleInputs.keys.array
             
-            cell.textField.delegate = self
-            
             cell.label.text = titleInputsArray[indexPath.row]
             
-            if let unitType = titleInputs[(cell.label.text)!] {
-                if let units = StringConstants.Units[unitType] {
-                    cell.unitLabel.setTitle(units[0], forState: .Normal)
+            cell.textField.delegate = self
+            
+            if inputValues.count == tableView.numberOfRowsInSection(0) {
+                let inputValuesMirror = reflect(inputValues)
+                
+                let (_,mirror) = inputValuesMirror[indexPath.row]
+                let element = mirror.value as! (Double?,String?)
+                if element.0 != nil {
+                    cell.textField.text = "\(element.0!)"
+                } else {
+                    cell.textField.text = ""
+                }
+            }
+            
+            if inputUnits[indexPath.row] == "" {
+                if let unitType = titleInputs[(cell.label.text)!] {
+                    if let units = StringConstants.Units[unitType] {
+                        cell.unitLabel.setTitle(units[0], forState: .Normal)
+                        inputUnits[indexPath.row] = units[0]
+                    }
+                } else {
+                    cell.unitLabel.setTitle("", forState: .Normal)
                 }
             } else {
-                cell.unitLabel.setTitle("", forState: .Normal)
+                cell.unitLabel.setTitle(inputUnits[indexPath.row], forState: .Normal)
             }
+            
 
         } else {
             cell.label.text = ""
             cell.unitLabel.setTitle("", forState: .Normal)
         }
-        
+                
         return cell
     }
     
@@ -187,7 +246,7 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == StringConstants.ShowUnitSegue {
+        if segue.identifier == StringConstants.ShowInputUnitSegue {
             if let dvc = segue.destinationViewController as? UnitsTableViewController {
                 
                 if let titleInputs = StringConstants.Inputs[formulaTitle!] {
@@ -213,8 +272,12 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         } else if segue.identifier == StringConstants.ComputeSegue {
             if let nc = segue.destinationViewController as? UINavigationController {
                 if let rtvc = nc.childViewControllers[0] as? ResultsTableViewController {
+                    if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+                        rtvc.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                        rtvc.navigationItem.leftItemsSupplementBackButton = true
+                    }
                     rtvc.formulaTitle = formulaTitle!
-                    rtvc.inputs = inputValues
+                    rtvc.inputs = inputValuesForSegue
                 }
             }
         }
@@ -234,10 +297,16 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
                     if let doubleValue = textField.text.toDouble() {
                         if inputValues.count != tableView.numberOfRowsInSection(0) {
                             for _ in 0..<tableView.numberOfRowsInSection(0) {
-                                inputValues.append(nil)
+                                inputValues.append(nil,nil)
                             }
                         }
-                        inputValues[cellRow.row] = doubleValue
+                        inputValues[cellRow.row].0 = doubleValue
+                        
+                        if let titleInputs = StringConstants.Inputs[formulaTitle!] {
+                            if let unitType = titleInputs[(cell.label.text)!] {
+                                inputValues[cellRow.row].1 = unitType
+                            }
+                        }
                     }
                 }
             }

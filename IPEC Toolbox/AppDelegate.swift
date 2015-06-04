@@ -9,13 +9,31 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+
+        let splitViewController = self.window!.rootViewController as! UISplitViewController
+        splitViewController.delegate = self
+        
+        let minimumWidth = min(CGRectGetWidth(splitViewController.view.bounds),CGRectGetHeight(splitViewController.view.bounds));
+        splitViewController.minimumPrimaryColumnWidth = minimumWidth / 3;
+        splitViewController.maximumPrimaryColumnWidth = minimumWidth;
+
+        
+        let orangeColor = UIColor(red: 245/255.0, green: 132/255.0, blue: 31/255.0, alpha: 1.0)
+        let grayColor = UIColor(red: 77/255.0, green: 77/255.0, blue: 77/255.0, alpha: 1.0)
+        
+        UINavigationBar.appearance().barTintColor = orangeColor
+        UINavigationBar.appearance().tintColor = grayColor
+        UINavigationBar.appearance().translucent = false
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.blackColor()]
+
+        UITabBar.appearance().tintColor = grayColor
+        
         return true
     }
 
@@ -40,7 +58,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    // MARK: - Split view
+    
+    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
+        if let secondaryAsNavController = secondaryViewController as? UINavigationController {
+            if let topAsDetailController = secondaryAsNavController.topViewController as? ResultsTableViewController {
+                if topAsDetailController.tableView.numberOfRowsInSection(0) > 0 {
+                    // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
+                    return true
+                }
+            }
+        }
+        return false
+    }
 
+    func splitViewController(splitViewController: UISplitViewController, showDetailViewController vc: UIViewController, sender: AnyObject?) -> Bool {
+        
+        if splitViewController.collapsed {
+            if let master = splitViewController.viewControllers[0] as? UITabBarController {
+                if let masterNC = master.selectedViewController as? UINavigationController {
+                    masterNC.pushViewController(vc, animated: true)
+                    
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+    
+    func splitViewController(splitViewController: UISplitViewController, separateSecondaryViewControllerFromPrimaryViewController primaryViewController: UIViewController!) -> UIViewController? {
+        if let master = splitViewController.viewControllers[0] as? UITabBarController {
+            if let masterNC = master.selectedViewController as? UINavigationController {
+                if let lastController = masterNC.childViewControllers.last as? UINavigationController {
+                    if let resultTVC = lastController.childViewControllers[0] as? ResultsTableViewController {
+                        return masterNC.popViewControllerAnimated(true)
+                    }
+                }
+            }
+        }
+        
+        return nil
+    }
 
 }
 

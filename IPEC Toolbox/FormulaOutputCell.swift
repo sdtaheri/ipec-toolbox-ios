@@ -12,14 +12,10 @@ class FormulaOutputCell: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var result: UILabel!
-    @IBOutlet weak var unit: UIButton!
-
-    @IBAction func showMoreUnits(sender: UIButton) {
+    @IBOutlet weak var unit: UIButton! {
+        didSet {
+            unit.contentHorizontalAlignment = .Left
+        }
     }
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    
 }

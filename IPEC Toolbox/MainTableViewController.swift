@@ -14,7 +14,8 @@ struct StringConstants {
     static let UnitCellReuseIdentifier = "Unit Cell"
 
     static let ShowFormulaSegueIdentifier = "Formula Detail"
-    static let ShowUnitSegue = "Unit Segue"
+    static let ShowInputUnitSegue = "Input Unit Segue"
+    static let ShowOutputUnitSegue = "Output Unit Segue"
     static let ComputeSegue = "Compute"
     static let MoreInfo = "More Info"
     
@@ -41,14 +42,23 @@ struct StringConstants {
     ]
 }
 
-class MainTableViewController: UITableViewController, UISplitViewControllerDelegate {
+class MainTableViewController: UITableViewController {
     
     private let savedData = NSUserDefaults()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        splitViewController?.delegate = self
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            self.clearsSelectionOnViewWillAppear = false
+            self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
+        }
     }
+    
+    override func viewDidLoad() {
+        tableView.estimatedRowHeight = 44
+    }
+
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
@@ -72,11 +82,13 @@ class MainTableViewController: UITableViewController, UISplitViewControllerDeleg
         let cell = tableView.dequeueReusableCellWithIdentifier(StringConstants.MainCellReuseIdentifier) as! UITableViewCell
         
         if indexPath.section == 2 {
+            //Recent Section
             if let recentArray = savedData.arrayForKey(StringConstants.RecentFormulas) {
                 cell.textLabel?.text = recentArray[indexPath.row] as? String
             }
         } else {
             cell.textLabel?.text = StringConstants.Titles[indexPath.section][indexPath.row]
+            cell.imageView?.image = UIImage(named: "Formula\(indexPath.section+1)\(indexPath.row+1)")
         }
         
         return cell
@@ -104,36 +116,6 @@ class MainTableViewController: UITableViewController, UISplitViewControllerDeleg
                 }
             }
         }
-    }
-    
-    // MARK: - UISplitViewControllerDelegate
-    
-    func splitViewController(splitViewController: UISplitViewController, showDetailViewController vc: UIViewController, sender: AnyObject?) -> Bool {
-        
-        if splitViewController.collapsed {
-            if let master = splitViewController.viewControllers[0] as? UITabBarController {
-                if let masterNC = master.selectedViewController as? UINavigationController {
-                    masterNC.pushViewController(vc, animated: true)
-                    
-                    return true
-                }
-            }
-        }
-        
-        return false
-    }
-    
-    func splitViewController(splitViewController: UISplitViewController, separateSecondaryViewControllerFromPrimaryViewController primaryViewController: UIViewController!) -> UIViewController? {
-        if let master = splitViewController.viewControllers[0] as? UITabBarController {
-            if let masterNC = master.selectedViewController as? UINavigationController {
-                if let lastController = masterNC.childViewControllers.last as? UINavigationController {
-                    masterNC.popViewControllerAnimated(true)
-                    return lastController
-                }
-            }
-        }
-        
-        return nil
     }
     
 }
