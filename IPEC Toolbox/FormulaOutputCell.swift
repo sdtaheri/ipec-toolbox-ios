@@ -15,6 +15,9 @@ class FormulaOutputCell: UITableViewCell {
     @IBOutlet weak var unit: UIButton! {
         didSet {
             unit.contentHorizontalAlignment = .Left
+            unit.titleLabel?.minimumScaleFactor = 0.5
+            unit.titleLabel?.adjustsFontSizeToFitWidth = true
+            unit.titleLabel?.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         }
     }
     

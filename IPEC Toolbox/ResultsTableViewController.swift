@@ -36,9 +36,11 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         
         switch formulaTitle {
         case "Dew Point Temperature":
-            if inputs.count == 3 {
-                results = Calculations.dewPointTemperature(inputs[0]!, relativeHumidity: inputs[1]!, airPressure: inputs[2]!)
-            }
+            results = Calculations.dewPointTemperature(airTemperature: inputs[1]!, relativeHumidity: inputs[2]!, airPressure: inputs[0]!)
+        case "Pipeline Submerged Weight":
+            let index = Int(inputs[12]!)
+            let condition = (MultipleChoiceItems.Dictionary[formulaTitle+"Pipeline Condition"])![index]
+            results = Calculations.pipeLineSubmergedWeight(steelPipeOutsideDiameter: inputs[16]!, pipeWallThickness: inputs[11]!, corrosionAllowance: inputs[3]!, corrosionCoatingThickness: inputs[6]!, concreteCoatingThickness: inputs[2]!, marineGrowthThickness: inputs[10]!, steelDensity: inputs[15]!, productDensity: inputs[13]!, corrosionCoatingDensity: inputs[5]!, concreteCoatingDensity: inputs[1]!, seaWaterDensity: inputs[14]!, marineGrowthDensity: inputs[9]!, fieldJointDensity: inputs[7]!, jointLenght: inputs[8]!, corrosionCoatingCutbackLength: inputs[4]!, concreteCoatingCutbackLength: inputs[0]!, pipeLineCondition: condition)
         default: break
         }
     }

@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		301491741B223B7A0069C778 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3081F1C91B109CCB004BA309 /* Images.xcassets */; };
+		301D94831B21DB48006FBFC0 /* FormulaInputCellMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301D94821B21DB48006FBFC0 /* FormulaInputCellMultipleChoice.swift */; };
 		303155A71B1BA7F9009B32CA /* UnitsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303155A61B1BA7F9009B32CA /* UnitsExtension.swift */; };
 		304D0E6F1B165EB2006483A9 /* UnitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304D0E6E1B165EB2006483A9 /* UnitsTableViewController.swift */; };
 		304D0E711B1723AB006483A9 /* ResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304D0E701B1723AB006483A9 /* ResultsTableViewController.swift */; };
-		30507A181B19D03200FE68FB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3081F1C91B109CCB004BA309 /* Images.xcassets */; };
 		3081F1C31B109CCB004BA309 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F1C21B109CCB004BA309 /* AppDelegate.swift */; };
 		3081F1C51B109CCB004BA309 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F1C41B109CCB004BA309 /* MainTableViewController.swift */; };
 		3081F1C81B109CCB004BA309 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3081F1C61B109CCB004BA309 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		301D94821B21DB48006FBFC0 /* FormulaInputCellMultipleChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormulaInputCellMultipleChoice.swift; sourceTree = "<group>"; };
 		303155A61B1BA7F9009B32CA /* UnitsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsExtension.swift; sourceTree = "<group>"; };
 		304D0E6E1B165EB2006483A9 /* UnitsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsTableViewController.swift; sourceTree = "<group>"; };
 		304D0E701B1723AB006483A9 /* ResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsTableViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				30DABCD21B18AF000015DE8E /* MoreInfoViewController.swift */,
 				304D0E6E1B165EB2006483A9 /* UnitsTableViewController.swift */,
 				30E823331B15D7F900835D73 /* FormulaInputCell.swift */,
+				301D94821B21DB48006FBFC0 /* FormulaInputCellMultipleChoice.swift */,
 				30DABCD41B18B3BE0015DE8E /* FormulaOutputCell.swift */,
 				304D0E701B1723AB006483A9 /* ResultsTableViewController.swift */,
 				3081F2141B10A34C004BA309 /* AboutViewController.swift */,
@@ -222,7 +225,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30507A181B19D03200FE68FB /* Images.xcassets in Resources */,
+				301491741B223B7A0069C778 /* Images.xcassets in Resources */,
 				3081F1C81B109CCB004BA309 /* Main.storyboard in Resources */,
 				3081F1CD1B109CCB004BA309 /* LaunchScreen.xib in Resources */,
 			);
@@ -247,6 +250,7 @@
 				3081F2151B10A34C004BA309 /* AboutViewController.swift in Sources */,
 				304D0E6F1B165EB2006483A9 /* UnitsTableViewController.swift in Sources */,
 				30E823321B15BA9600835D73 /* FormulaDetailTableViewController.swift in Sources */,
+				301D94831B21DB48006FBFC0 /* FormulaInputCellMultipleChoice.swift in Sources */,
 				30E823301B15B50200835D73 /* Calculations.swift in Sources */,
 				304D0E711B1723AB006483A9 /* ResultsTableViewController.swift in Sources */,
 				30DABCD31B18AF000015DE8E /* MoreInfoViewController.swift in Sources */,

@@ -12,7 +12,13 @@ class FormulaInputCell: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
     
-    @IBOutlet weak var unitLabel: UIButton!
+    @IBOutlet weak var unitLabel: UIButton! {
+        didSet {
+            unitLabel.titleLabel?.minimumScaleFactor = 0.5
+            unitLabel.titleLabel?.adjustsFontSizeToFitWidth = true
+            unitLabel.titleLabel?.lineBreakMode = NSLineBreakMode.ByTruncatingTail
+        }
+    }
     @IBOutlet weak var textField: UITextField!
     
     override func awakeFromNib() {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresentationControllerDelegate, UIPopoverPresentationControllerDelegate, UITextFieldDelegate {
+class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresentationControllerDelegate, UIPopoverPresentationControllerDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
     weak var resultsTableViewController: ResultsTableViewController?
     
@@ -79,31 +79,39 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
             return
         }
         
-        let inputValuesMirror = reflect(inputValues)
+        var inputValuesMirror = reflect(inputValues)
         
         for i in 0..<inputValues.count {
             let (_, mirror) = inputValuesMirror[i]
             let element = mirror.value as! (Double?,String?)
             if element.0 == nil || element.1 == nil {
-                return
+                if formulaTitle != nil {
+                    if let inputs = StringConstants.Inputs[formulaTitle!] {
+                        let inputsArray = inputs.keys.array.sorted {
+                            return $0 < $1
+                        }
+                        inputValues[i].0 = (inputs[inputsArray[i]])!.2
+                        inputValues[i].1 = (inputs[inputsArray[i]])!.0
+                    }
+                }
             }
         }
+        
+        inputValuesMirror = reflect(inputValues)
         
         inputValuesForSegue = [Double?](count: inputValues.count, repeatedValue: nil)
         
         for i in 0..<inputValues.count {
-            if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0)) as? FormulaInputCell {
-                let (_, mirror) = inputValuesMirror[i]
-                let element = mirror.value as! (Double?, String?)
-                inputValuesForSegue[i] = element.0
-                
-                if let unitKind = element.1 {
-                    switch unitKind {
-                        case "Temperature":
-                            inputValuesForSegue[i] = element.0!.convert(fromUnit: cell.unitLabel.currentTitle!, toUnit: "°C", kind: unitKind)!
-                        case "Pressure":
-                            inputValuesForSegue[i] = element.0!.convert(fromUnit: cell.unitLabel.currentTitle!, toUnit: "Pa", kind: unitKind)!
-                        default: break
+            let (_, mirror) = inputValuesMirror[i]
+            let element = mirror.value as! (Double?, String?)
+            inputValuesForSegue[i] = element.0
+            
+            if let unitKind = element.1 {
+                if unitKind != "Multiple Choice" {
+                    inputValuesForSegue[i] = element.0!.convert(fromUnit: inputUnits[i], toUnit: (StringConstants.Units[unitKind])![0], kind: unitKind)!
+                } else {
+                    if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: i, inSection: 0)) as? FormulaInputCellMultipleChoice {
+                        inputValuesForSegue[i] = Double(cell.pickerView.selectedRowInComponent(0))
                     }
                 }
             }
@@ -111,6 +119,7 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         
         performSegueWithIdentifier(StringConstants.ComputeSegue, sender: nil)
 
+        tableView.reloadData()
     }
     
     
@@ -118,7 +127,7 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         if let titleInputs = StringConstants.Inputs[formulaTitle!] {
             if let cell = sender.superview!.superview as? FormulaInputCell {
                 if let unitType = titleInputs[cell.label.text!] {
-                    if let subUnits = StringConstants.Units[unitType] {
+                    if let subUnits = StringConstants.Units[unitType.0] {
                         if subUnits.count > 1 {
                             performSegueWithIdentifier(StringConstants.ShowInputUnitSegue, sender: sender)
                         }
@@ -154,6 +163,8 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.estimatedRowHeight = 44.0
+        
         let infoButton = UIButton.buttonWithType(.DetailDisclosure) as! UIButton
         infoButton.addTarget(self, action: "showMoreInfo:", forControlEvents: .TouchUpInside)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: infoButton)
@@ -187,7 +198,14 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         if formulaTitle != nil {
             if let inputs = StringConstants.Inputs[formulaTitle!] {
                 let inputsArray = inputs.keys.array
-                inputUnits = [String](count: inputsArray.count, repeatedValue: "")
+                if inputUnits.count == 0 {
+                    inputUnits = [String](count: inputsArray.count, repeatedValue: "")
+                }
+                if inputValues.count != inputsArray.count {
+                    for _ in 0..<inputsArray.count {
+                        inputValues.append(nil,nil)
+                    }
+                }
                 return inputsArray.count
             } else {
                 return 0
@@ -202,7 +220,9 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         let cell = tableView.dequeueReusableCellWithIdentifier(StringConstants.FormulaCellReuseIdentifier, forIndexPath: indexPath) as! FormulaInputCell
 
         if let titleInputs = StringConstants.Inputs[formulaTitle!] {
-            let titleInputsArray = titleInputs.keys.array
+            let titleInputsArray = titleInputs.keys.array.sorted {
+                return $0 < $1
+            }
             
             cell.label.text = titleInputsArray[indexPath.row]
             
@@ -222,15 +242,29 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
             
             if inputUnits[indexPath.row] == "" {
                 if let unitType = titleInputs[(cell.label.text)!] {
-                    if let units = StringConstants.Units[unitType] {
-                        cell.unitLabel.setTitle(units[0], forState: .Normal)
-                        inputUnits[indexPath.row] = units[0]
+                    if let units = StringConstants.Units[unitType.0] {
+                        cell.unitLabel.setTitle(units[unitType.1], forState: .Normal)
+                        cell.textField.placeholder = "\(unitType.2)"
+                        inputUnits[indexPath.row] = units[unitType.1]
+                    } else {
+                        if unitType.0 == "Multiple Choice" {
+                            let newCell = tableView.dequeueReusableCellWithIdentifier(StringConstants.FormulaCellMultipleChoiceResuseIdentifier, forIndexPath: indexPath) as! FormulaInputCellMultipleChoice
+                            
+                            newCell.label.text = titleInputsArray[indexPath.row]
+                            newCell.pickerView.dataSource = self
+                            newCell.pickerView.delegate = self
+                            
+                            return newCell
+                        }
                     }
                 } else {
                     cell.unitLabel.setTitle("", forState: .Normal)
                 }
             } else {
                 cell.unitLabel.setTitle(inputUnits[indexPath.row], forState: .Normal)
+                if let unitType = titleInputs[(cell.label.text)!] {
+                    cell.textField.placeholder = "\(unitType.2)"
+                }
             }
             
 
@@ -253,7 +287,7 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
                     if let button = sender as? UIButton {
                         if let cell = button.superview!.superview as? FormulaInputCell {
                             if let unitType = titleInputs[cell.label.text!] {
-                                if let units = StringConstants.Units[unitType] {
+                                if let units = StringConstants.Units[unitType.0] {
                                     dvc.unitsArray = units
                                 }
                             }
@@ -295,16 +329,11 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
             if let cell = contentView.superview as? FormulaInputCell {
                 if let cellRow = tableView.indexPathForCell(cell) {
                     if let doubleValue = textField.text.toDouble() {
-                        if inputValues.count != tableView.numberOfRowsInSection(0) {
-                            for _ in 0..<tableView.numberOfRowsInSection(0) {
-                                inputValues.append(nil,nil)
-                            }
-                        }
                         inputValues[cellRow.row].0 = doubleValue
                         
                         if let titleInputs = StringConstants.Inputs[formulaTitle!] {
                             if let unitType = titleInputs[(cell.label.text)!] {
-                                inputValues[cellRow.row].1 = unitType
+                                inputValues[cellRow.row].1 = unitType.0
                             }
                         }
                     }
@@ -319,6 +348,41 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         return true
     }
     
+    // MARK: - PickerView
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if let cell = pickerView.superview?.superview as? FormulaInputCellMultipleChoice {
+            if let items = MultipleChoiceItems.Dictionary[formulaTitle! + cell.label.text!] {
+                return items.count
+            }
+        }
+        return 0
+    }
+    
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+        var label = view as? UILabel
+        if label == nil {
+            label = UILabel()
+            label?.textAlignment = NSTextAlignment.Center
+            label?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+            label?.lineBreakMode = NSLineBreakMode.ByTruncatingTail
+            label?.adjustsFontSizeToFitWidth = true
+            label?.minimumScaleFactor = 0.5
+            label?.numberOfLines = 0
+        }
+        
+        if let cell = pickerView.superview?.superview as? FormulaInputCellMultipleChoice {
+            if let items = MultipleChoiceItems.Dictionary[formulaTitle! + cell.label.text!] {
+                label?.text = items[row]
+            }
+        }
+        
+        return label!
+    }
 }
 
 extension String {
