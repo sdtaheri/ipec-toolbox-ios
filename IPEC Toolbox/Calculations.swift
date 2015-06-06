@@ -9,7 +9,11 @@
 import UIKit
 
 struct MultipleChoiceItems {
-    static let Dictionary = ["Pipeline Submerged Weight"+"Pipeline Condition" : ["Installation", "Hydrotest", "Operation (Marine Growth Present)", "Operation (Without Marine Growth)"]]
+    static let Dictionary = [
+        "Pipeline Submerged Weight"+"Pipeline Condition" : ["Installation", "Hydrotest", "Operation (Marine Growth Present)", "Operation (Without Marine Growth)"],
+        
+        "Maximum Allowable Working Pressure"+"Joint Efficiency" : ["Type 1 - Fully Radiographed", "Type 1 - Spot Examined", "Type 1 - Not Examined", "Type 2 - Fully Radiographed", "Type 2 - Spot Examined", "Type 2 - Not Examined", "Type 3 - Not Examined", "Type 4 - Not Examined", "Type 5 - Not Examined", "Type 6 - Not Examined" ]
+    ]
 }
 
 class Calculations: NSObject {
@@ -133,6 +137,34 @@ class Calculations: NSObject {
             let W_dry = m_dry * g
     
             return ["Pipeline Submerged Weight":(W_sub,"Force Per Length",0), "Pipeline Dry Weight":(W_dry,"Force Per Length",0)]
+    }
+    
+    class func maximumAllowableWorkingPressure(jointEfficiency E: String, pipelineOutsideDiameter OD: Double, pipelineWallThickness t: Double, var yieldStress S_y: Double) -> [String: (Double,String,Int)] {
+     
+        S_y = S_y.convert(fromUnit: "Pa", toUnit: "psi", kind: "Pressure")!
+        
+        let E_numeric: Double
+        
+        switch E {
+        
+        case "Type 1 - Fully Radiographed": E_numeric = 1.0
+        case "Type 1 - Spot Examined": E_numeric = 0.85
+        case "Type 1 - Not Examined": E_numeric = 0.7
+        case "Type 2 - Fully Radiographed": E_numeric = 0.9
+        case "Type 2 - Spot Examined": E_numeric = 0.8
+        case "Type 2 - Not Examined": E_numeric = 0.65
+        case "Type 3 - Not Examined": E_numeric = 0.6
+        case "Type 4 - Not Examined": E_numeric = 0.55
+        case "Type 5 - Not Examined": E_numeric = 0.5
+        case "Type 6 - Not Examined": E_numeric = 0.45
+
+        default: E_numeric = 0.0
+        }
+        
+        let R = OD / 2
+        let P = (S_y * E_numeric * t) / (R - 0.4 * t)
+        
+        return ["Maximum Allowable Working Pressure":(P,"Pressure",4)]
     }
     
 }

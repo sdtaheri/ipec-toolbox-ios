@@ -35,12 +35,21 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         tableView.estimatedRowHeight = 44.0
         
         switch formulaTitle {
-        case "Dew Point Temperature":
-            results = Calculations.dewPointTemperature(airTemperature: inputs[1]!, relativeHumidity: inputs[2]!, airPressure: inputs[0]!)
+            
+        case "Maximum Allowable Working Pressure":
+            let index = Int(inputs[0]!)
+            let condition = (MultipleChoiceItems.Dictionary[formulaTitle+"Joint Efficiency"])![index]
+            results = Calculations.maximumAllowableWorkingPressure(jointEfficiency: condition, pipelineOutsideDiameter: inputs[1]!, pipelineWallThickness: inputs[2]!, yieldStress: inputs[3]!)
+            
         case "Pipeline Submerged Weight":
             let index = Int(inputs[12]!)
             let condition = (MultipleChoiceItems.Dictionary[formulaTitle+"Pipeline Condition"])![index]
             results = Calculations.pipeLineSubmergedWeight(steelPipeOutsideDiameter: inputs[16]!, pipeWallThickness: inputs[11]!, corrosionAllowance: inputs[3]!, corrosionCoatingThickness: inputs[6]!, concreteCoatingThickness: inputs[2]!, marineGrowthThickness: inputs[10]!, steelDensity: inputs[15]!, productDensity: inputs[13]!, corrosionCoatingDensity: inputs[5]!, concreteCoatingDensity: inputs[1]!, seaWaterDensity: inputs[14]!, marineGrowthDensity: inputs[9]!, fieldJointDensity: inputs[7]!, jointLenght: inputs[8]!, corrosionCoatingCutbackLength: inputs[4]!, concreteCoatingCutbackLength: inputs[0]!, pipeLineCondition: condition)
+            
+        case "Dew Point Temperature":
+            results = Calculations.dewPointTemperature(airTemperature: inputs[1]!, relativeHumidity: inputs[2]!, airPressure: inputs[0]!)
+
+            
         default: break
         }
     }
@@ -145,6 +154,10 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if inputs.count == 0 {
+            navigationItem.title = nil
+            return nil
+        }
         return formulaTitle + " Calculations"
     }
     

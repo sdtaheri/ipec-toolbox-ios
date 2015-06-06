@@ -26,10 +26,12 @@ struct StringConstants {
     
     static let Titles = [["Pipeline Submerged Weight", "Maximum Allowable Working Pressure", "Temprature Drop Access Pipe Wall", "Pipe Wall Thickness"], ["Pressure Drop For Fluid Flow in Pipelines", "Chemical Dosing for Water Treatment", "Pipeline Internal Volume", "Dew Point Temperature", "Mean Flow Velocity"]]
     
-    static let Inputs =
+    static let Inputs: [String: [String:(String,Int,Double)]] =
     //"Formula Name":["Input Name":("Unit Type","Unit Index","Predefined Value")]
     [
         "Pipeline Submerged Weight":["Pipeline Condition":("Multiple Choice",0,0), "Steel Pipe Outside Diameter":("Length",4,32.0), "Pipe Wall Thickness":("Length",2,20.0), "Corrosion Allowance":("Length",2,3.0), "Corrosion Coating Thickness":("Length",2,6.0), "Concrete Coating Thickness":("Length",2,40.0), "Marine Growth Thickness":("Length",2,20.0), "Steel Density":("Density",0,7850.0), "Product Density": ("Density",0,100.0), "Corrosion Coating Density": ("Density",0,980.0), "Concrete Coating Density": ("Density",0,3040.0), "Seawater Density": ("Density",0,1025.0), "Marine Growth Density": ("Density",0,1500.0), "Field Joint Density": ("Density",0,1250.0), "Joint Length": ("Length",0,12.0), "Corrosion Coating Cutback Length": ("Length",0,0.5), "Concrete Coating Cutback Length": ("Length",0,0.5)],
+        
+        "Maximum Allowable Working Pressure": ["Yield Stress":("Pressure",5,20.0), "Pipeline Outside Diameter":("Length",4,32.0), "Pipeline Wall Thickness": ("Length",4,0.5), "Joint Efficiency":("Multiple Choice",0,0)],
         
         "Dew Point Temperature":["Air Temperature":("Temperature",0,28.0), "Relative Humidity":("Percentage",0,75.0), "Air Pressure": ("Pressure",2,1.0) ]
     ]
