@@ -383,13 +383,13 @@
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFj-Do-2q9">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="LFj-Do-2q9" secondAttribute="trailing" id="1rL-gJ-OTi"/>
                             <constraint firstItem="LFj-Do-2q9" firstAttribute="leading" secondItem="bsP-sC-Lhk" secondAttribute="leading" id="HfW-HV-QKp"/>
@@ -398,13 +398,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="More Info" id="Ugr-Y3-dhu">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="DM2-HL-0Vd">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="DM2-HL-0Vd">
                             <connections>
                                 <segue destination="r9l-zJ-siC" kind="unwind" unwindAction="dismissMoreInfoController:" id="ED4-MX-ZCZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <value key="contentSizeForViewInPopover" type="size" width="400" height="400"/>
+                    <connections>
+                        <outlet property="textView" destination="LFj-Do-2q9" id="Gix-Lr-I5Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dSV-Mc-IRE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="r9l-zJ-siC" userLabel="Exit" sceneMemberID="exit"/>
@@ -509,7 +512,7 @@
         <!--Navigation Controller-->
         <scene sceneID="TpD-3Z-qxr">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4fo-Cc-Uip" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="overFullScreen" id="4fo-Cc-Uip" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jBU-nN-usK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
