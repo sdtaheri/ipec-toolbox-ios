@@ -51,6 +51,15 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         case "Temperature Drop Across Pipe Wall":
             results = Calculations.temperatureDropAcrossPipewall(ambientFluidDensity: inputs[0]!, ambientFluidHeatCapacity: inputs[1]!, ambientFluidThermalConductivity: inputs[2]!, ambientFluidVelocity: inputs[3]!, ambientFluidViscosity: inputs[4]!, ambientTemperature: inputs[5]!, coatingThermalConductivity: inputs[6]!, coatingThickness: inputs[7]!, concreteThermalConductivity: inputs[8]!, concreteThickness: inputs[9]!, fluidTemperature: inputs[10]!, internalFluidDensity: inputs[11]!, internalFluidHeatCapacity: inputs[12]!, internalFluidThermalConductivity: inputs[13]!, internalFluidViscosity: inputs[14]!, internalFluidVolumetricFlowRate: inputs[15]!, nominalOuterDiameter: inputs[16]!, pipewallThickness: inputs[17]!, pipelineBuriedHeight: inputs[18]!, pipelineThermalConductivity: inputs[19]!, soilThermalConductivity: inputs[20]!)
             
+        case "Pipe Wall Thickness":
+            
+            let locationClass = MultipleChoiceItems.Dictionary[formulaTitle+"Location Class (For Human Occupancy)"]![Int(inputs[0]!)]
+            let productionType = MultipleChoiceItems.Dictionary[formulaTitle+"Pipeline Production"]![Int(inputs[3]!)]
+            results = Calculations.pipeWallThickness(locationClass: locationClass, pipelineDesignPressure: inputs[1]!, pipelineOutsideDiameter: inputs[2]!, pipelineProduction: productionType, specifiedMinimumYieldStress: inputs[4]!)
+            
+        case "Pressure Drop For Fluid Flow in Pipelines":
+            results = Calculations.pressureDropForFluidFlowInPipelines(fluidDensity: inputs[0]!, fluidDynamicViscosity: inputs[1]!, pipelineInletElevation: inputs[2]!, pipelineLength: inputs[3]!, pipelineOutletElevation: inputs[4]!, pipelineOutsideDiameter: inputs[5]!, pipelineWallThickness: inputs[6]!, surfaceRoughness: inputs[7]!, volumetricFlowRate: inputs[8]!)
+            
         case "Dew Point Temperature":
             results = Calculations.dewPointTemperature(airTemperature: inputs[1]!, relativeHumidity: inputs[2]!, airPressure: inputs[0]!)
 

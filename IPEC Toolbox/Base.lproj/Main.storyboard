@@ -240,18 +240,18 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJN-LD-U1c">
-                                            <rect key="frame" x="20" y="6" width="35.5" height="31.5"/>
+                                            <rect key="frame" x="20" y="6" width="36" height="31"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7G-ym-sPl">
-                                            <rect key="frame" x="63" y="6" width="470.5" height="31.5"/>
+                                            <rect key="frame" x="64" y="6" width="470" height="31"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6L-P2-5xc">
-                                            <rect key="frame" x="542" y="6" width="50" height="31.5"/>
+                                            <rect key="frame" x="542" y="6" width="50" height="31"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="vDb-1O-e4t"/>
                                             </constraints>
@@ -301,6 +301,7 @@
                                         </pickerView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="uAu-5i-VIe" firstAttribute="width" relation="greaterThanOrEqual" secondItem="iS8-7p-ex9" secondAttribute="width" id="1M0-Oy-dUz"/>
                                         <constraint firstAttribute="bottom" secondItem="uAu-5i-VIe" secondAttribute="bottom" constant="-8" id="7gt-Lh-nHk"/>
                                         <constraint firstAttribute="bottom" secondItem="iS8-7p-ex9" secondAttribute="bottom" constant="-8" id="CVG-Me-RIw"/>
                                         <constraint firstItem="uAu-5i-VIe" firstAttribute="leading" secondItem="iS8-7p-ex9" secondAttribute="trailing" constant="8" symbolic="YES" id="RLU-Aw-qte"/>
@@ -425,7 +426,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8V1-l2-kED">
-                                            <rect key="frame" x="542" y="6" width="50" height="31.5"/>
+                                            <rect key="frame" x="542" y="6" width="50" height="31"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="Avk-fj-J5E"/>
                                             </constraints>
@@ -439,13 +440,13 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" text="123.45678" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bom-kC-Nxp">
-                                            <rect key="frame" x="63" y="6" width="470.5" height="31.5"/>
+                                            <rect key="frame" x="64" y="6" width="470" height="31"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRK-gk-tl6">
-                                            <rect key="frame" x="20" y="6" width="35.5" height="31.5"/>
+                                            <rect key="frame" x="20" y="6" width="36" height="31"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>

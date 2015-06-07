@@ -12,7 +12,11 @@ struct MultipleChoiceItems {
     static let Dictionary = [
         "Pipeline Submerged Weight"+"Pipeline Condition" : ["Installation", "Hydrotest", "Operation (Marine Growth Present)", "Operation (Without Marine Growth)"],
         
-        "Maximum Allowable Working Pressure"+"Joint Efficiency" : ["Type 1 - Fully Radiographed", "Type 1 - Spot Examined", "Type 1 - Not Examined", "Type 2 - Fully Radiographed", "Type 2 - Spot Examined", "Type 2 - Not Examined", "Type 3 - Not Examined", "Type 4 - Not Examined", "Type 5 - Not Examined", "Type 6 - Not Examined" ]
+        "Maximum Allowable Working Pressure"+"Joint Efficiency" : ["Type 1 - Fully Radiographed", "Type 1 - Spot Examined", "Type 1 - Not Examined", "Type 2 - Fully Radiographed", "Type 2 - Spot Examined", "Type 2 - Not Examined", "Type 3 - Not Examined", "Type 4 - Not Examined", "Type 5 - Not Examined", "Type 6 - Not Examined" ],
+        
+        "Pipe Wall Thickness"+"Location Class (For Human Occupancy)": ["Location Class 1, Division 1", "Location Class 1, Division 2", "Location Class 2", "Location Class 3", "Location Class 4"],
+        "Pipe Wall Thickness"+"Pipeline Production": ["Gas", "Oil"]
+
     ]
 }
 
@@ -73,26 +77,18 @@ class Calculations: NSObject {
         corrosionCoatingThickness t_corr: Double,
         concreteCoatingThickness t_conc: Double,
         var marineGrowthThickness t_mgt: Double,
-        var steelDensity ro_s: Double,
-        var productDensity ro_f: Double,
-        var corrosionCoatingDensity ro_corr: Double,
-        var concreteCoatingDensity ro_conc: Double,
-        var seaWaterDensity ro_w: Double,
-        var marineGrowthDensity ro_mgt: Double,
-        var fieldJointDensity ro_joint: Double,
+        steelDensity ro_s: Double,
+        productDensity ro_f: Double,
+        corrosionCoatingDensity ro_corr: Double,
+        concreteCoatingDensity ro_conc: Double,
+        seaWaterDensity ro_w: Double,
+        marineGrowthDensity ro_mgt: Double,
+        fieldJointDensity ro_joint: Double,
         jointLenght L_joint: Double,
         corrosionCoatingCutbackLength L_corr: Double,
         concreteCoatingCutbackLength L_conc: Double,
         pipeLineCondition PC: String
         ) -> [String: (Double,String,Int)] {
-            
-            ro_s /= 1000
-            ro_f /= 1000
-            ro_corr /= 1000
-            ro_conc /= 1000
-            ro_w /= 1000
-            ro_mgt /= 1000
-            ro_joint /= 1000
             
             t_mgt = (PC == "Operation (Marine Growth Present)") ? t_mgt : 0
             
@@ -176,7 +172,7 @@ class Calculations: NSObject {
     }
     
     class func temperatureDropAcrossPipewall(
-        var ambientFluidDensity ro_seawater: Double,
+        ambientFluidDensity ro_seawater: Double,
         ambientFluidHeatCapacity C_seawater: Double,
         ambientFluidThermalConductivity K_seawater: Double,
         ambientFluidVelocity v_current: Double,
@@ -187,7 +183,7 @@ class Calculations: NSObject {
         concreteThermalConductivity K_concrete: Double,
         concreteThickness t_concrete: Double,
         fluidTemperature T_fluid: Double,
-        var internalFluidDensity ro_fluid: Double,
+        internalFluidDensity ro_fluid: Double,
         internalFluidHeatCapacity C_fluid: Double,
         internalFluidThermalConductivity K_fluid: Double,
         internalFluidViscosity mu_fluid: Double,
@@ -197,9 +193,6 @@ class Calculations: NSObject {
         pipelineBuriedHeight H_soil: Double,
         pipelineThermalConductivity K_steel: Double,
         soilThermalConductivity K_soil: Double) -> [String: (Double,String,Int)] {
-        
-            ro_seawater /= 1000
-            ro_fluid /= 1000
         
             let ID = OD - 2 * t_steel
             
@@ -289,6 +282,69 @@ class Calculations: NSObject {
             
             
         return ["Heat Loss Across Pipe Wall Per Unit Length":(Q_concrete,"Power Per Length",0), "Ambient Temperature":(T_ambient,"Temperature",0), "Concrete Outer Temperature":(T_concrete,"Temperature",0), "Coating Outer Temperature":(T_coating,"Temperature",0), "Steel Outer Temperature":(T_steel,"Temperature",0), "Pipe Inside Temperature":(T_inside,"Temperature",0), "Fluid Temperature":(T_fluid,"Temperature",0)]
+    }
+    
+    class func pipeWallThickness(locationClass F: String, pipelineDesignPressure P: Double, pipelineOutsideDiameter OD: Double, pipelineProduction GO: String, specifiedMinimumYieldStress S_y: Double) -> [String: (Double,String,Int)] {
+        
+        let GO_numeric: Double?
+        switch GO {
+        case "Gas": GO_numeric = 1.0
+        case "Oil": GO_numeric = 0.0
+        default: GO_numeric = nil
+        }
+        
+        let F_numeric: Double?
+        switch F {
+        case "Location Class 1, Division 1": F_numeric = 0.80
+        case "Location Class 1, Division 2": F_numeric = 0.72
+        case "Location Class 2": F_numeric = 0.60
+        case "Location Class 3": F_numeric = 0.50
+        case "Location Class 4": F_numeric = 0.40
+        default: F_numeric = nil
+        }
+        
+        if F_numeric != nil && GO_numeric != nil {
+            let S_a = GO_numeric! * (S_y * F_numeric!) + (1 - GO_numeric!) * (S_y * 0.72)
+            let t = (P * OD) / (2 * S_a) * 1000
+            
+            return ["Pipeline Wall Thickness": (t,"Length",2)]
+        } else {
+            return ["":(0,"",0)]
+        }
+    }
+    
+    class func pressureDropForFluidFlowInPipelines(fluidDensity ro: Double, fluidDynamicViscosity mu: Double, pipelineInletElevation L_i: Double, pipelineLength L_p: Double, pipelineOutletElevation L_o: Double, pipelineOutsideDiameter OD: Double, pipelineWallThickness t: Double, surfaceRoughness epsilon: Double, volumetricFlowRate Q: Double) -> [String: (Double,String,Int)] {
+        
+        let ID = OD - 2 * t
+        
+        let V = Q / (M_PI_4 * pow(ID, 2.0))
+        
+        let Re = (ro * V / mu) * ID
+        
+        var f_old = 0.25 * pow(log10(epsilon / (3.7 * ID) + 5.74 / pow(Re, 0.9)) , -2)
+        var f_new = f_old
+        
+        do {
+            f_old = f_new
+            let RHS = -2 * log10(epsilon / (3.7 * ID) + 2.51 / (Re * sqrt(f_old)))
+            f_new = 1 / pow(RHS, 2.0)
+
+        } while fabs(f_new - f_old) > pow(10.0, -6.0)
+        
+        
+        let f = f_new
+        
+        let g = 9.81
+        
+        let deltaH_m = f * (L_p / ID) * (pow(V, 2.0) / (2 * g) )
+        
+        let deltaH_z = L_o - L_i
+        
+        let deltaH_T = deltaH_m + deltaH_z
+        
+        let deltaP_T = ro * g * deltaH_T
+        
+        return ["Head Loss Due to Elevation": (deltaH_z,"Length",0), "Major Head Loss": (deltaH_m,"Length",0), "Total Head Loss": (deltaH_T,"Length",0), "Total Pressure Drop": (deltaP_T,"Pressure",0)]
     }
     
 }
