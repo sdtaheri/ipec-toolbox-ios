@@ -69,6 +69,9 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         case "Dew Point Temperature":
             results = Calculations.dewPointTemperature(airTemperature: inputs[1]!, relativeHumidity: inputs[2]!, airPressure: inputs[0]!)
 
+        case "Mean Flow Velocity":
+            results = Calculations.meanFlowVelocity(pipelineOutsideDiameter: inputs[0]!, pipelineWallThickness: inputs[1]!, volumetricFlowRate: inputs[2]!)
+
             
         default: break
         }

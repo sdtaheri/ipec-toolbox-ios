@@ -43,7 +43,10 @@ struct StringConstants {
         
         "Pipeline Internal Volume": ["Pipeline Length":("Length",0,2500.0), "Pipeline Outside Diameter":("Length",4,32.0), "Pipeline Wall Thickness":("Length",4,0.5)],
         
-        "Dew Point Temperature":["Air Temperature":("Temperature",0,28.0), "Relative Humidity":("Percentage",0,75.0), "Air Pressure": ("Pressure",2,1.0) ]
+        "Dew Point Temperature":["Air Temperature":("Temperature",0,28.0), "Relative Humidity":("Percentage",0,75.0), "Air Pressure": ("Pressure",2,1.0) ],
+        
+        "Mean Flow Velocity": ["Pipeline Outside Diameter":("Length",4,32.0), "Pipeline Wall Thickness":("Length",4,0.5), "Volumetric Flow Rate": ("Volume Rate",2,500.0)],
+
     ]
     
     static let Units: [String:[String]] =

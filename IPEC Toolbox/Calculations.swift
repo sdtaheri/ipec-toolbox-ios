@@ -362,4 +362,13 @@ class Calculations: NSObject {
         return ["Internal Volume of The Pipeline": (V,"Volume",0)]
     }
     
+    class func meanFlowVelocity(pipelineOutsideDiameter OD: Double, pipelineWallThickness t: Double, volumetricFlowRate Q: Double) -> [String: (Double,String,Int)] {
+        
+        let ID = OD - 2 * t
+        let V = Q / (M_PI_4 * pow(ID, 2.0))
+        
+        return ["Mean Flow Velocity": (V,"Speed",0)]
+    }
+
+    
 }

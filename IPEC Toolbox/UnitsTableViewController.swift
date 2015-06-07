@@ -25,7 +25,11 @@ class UnitsTableViewController: UITableViewController {
     
     override func viewDidLayoutSubviews() {
         preferredContentSize = CGSizeMake(150, tableView.contentSize.height)
-        tableView.scrollEnabled = false
+        if tableView.contentSize.height > self.popoverPresentationController?.presentedView().frame.size.height {
+            tableView.scrollEnabled = true
+        } else {
+            tableView.scrollEnabled = false
+        }
     }
 
     // MARK: - Table view data source
