@@ -112,6 +112,8 @@ extension Double {
             case "mm": temp = self.mm
             case "ft": temp = self.ft
             case "in": temp = self.inch
+            case "mi": temp = self.mi
+            case "km": temp = self.km
             default: return nil
             }
             switch toUnit {
@@ -120,6 +122,8 @@ extension Double {
             case "mm": return temp.toMm
             case "ft": return temp.toFt
             case "in": return temp.toInch
+            case "mi": return temp.toMi
+            case "km": return temp.toKm
             default: return nil
             }
 
@@ -150,6 +154,9 @@ extension Double {
             case "gal/s": temp = self.gallonPerS
             case "gal/min": temp = self.gallonPerMin
             case "gal/hr": temp = self.gallonPerHr
+            case "ft3/s": temp = self.ft3PerS
+            case "ft3/min": temp = self.ft3PerMin
+            case "ft3/hr": temp = self.ft3PerHr
             default: return nil
             }
             switch toUnit {
@@ -162,6 +169,9 @@ extension Double {
             case "gal/s": return temp.toGallonPerS
             case "gal/min": return temp.toGallonPerMin
             case "gal/hr": return temp.toGallonPerHr
+            case "ft3/s": return temp.toFt3PerS
+            case "ft3/min": return temp.toFt3PerMin
+            case "ft3/hr": return temp.toFt3PerHr
             default: return nil
             }
 
@@ -240,6 +250,28 @@ extension Double {
             case "W/m": return temp.WPerM
             case "Cal/(m.hr)": return temp.toCalPerMHr
             case "Btu/(ft.hr)": return temp.toBtuPerFtHr
+            default: return nil
+            }
+
+        case "Volume":
+            switch unit {
+            case "m3": temp = self.m3
+            case "cm3": temp = self.cm3
+            case "L": temp = self.L
+            case "ft3": temp = self.ft3
+            case "mi3": temp = self.mi3
+            case "gallon": temp = self.gallon
+            case "barrel": temp = self.barrel
+            default: return nil
+            }
+            switch toUnit {
+            case "m3": return temp.m3
+            case "cm3": return temp.toCm3
+            case "L": return temp.toL
+            case "ft3": return temp.toFt3
+            case "mi3": return temp.toMi3
+            case "gallon": return temp.toGallon
+            case "barrel": return temp.toBarrel
             default: return nil
             }
 
@@ -330,11 +362,16 @@ extension Double { //Length
     private var mm: Double { return self / 1_000.0 }
     private var ft: Double { return self * 0.3048 }
     private var inch: Double { return self * 0.0254 }
+    private var mi: Double { return self * 1609.34 }
+    private var km: Double { return self * 1_000.0 }
     
     private var toCm: Double { return self * 100.0 }
     private var toMm: Double { return self * 1_000.0 }
     private var toFt: Double { return self / 0.3048 }
     private var toInch: Double { return self / 0.0254 }
+    private var toMi: Double { return self / 1609.34 }
+    private var toKm: Double { return self / 1_000.0 }
+
 }
 
 extension Double { //Force Per Length
@@ -360,6 +397,9 @@ extension Double { //Volume Rate
     private var gallonPerS: Double { return self * 0.003786 }
     private var gallonPerMin: Double { return self * (0.003786 / 60) }
     private var gallonPerHr: Double { return self * (0.003786 / 3600) }
+    private var ft3PerS: Double { return self / 35.3147 }
+    private var ft3PerMin: Double { return self / 2118.882}
+    private var ft3PerHr: Double { return self / 127132.92}
     
     private var toM3PerHr: Double { return self * 3600 }
     private var toM3PerMin: Double { return self * 60 }
@@ -369,6 +409,10 @@ extension Double { //Volume Rate
     private var toGallonPerS: Double { return self / 0.003786 }
     private var toGallonPerMin: Double { return self / (0.003786 / 60) }
     private var toGallonPerHr: Double { return self / (0.003786 / 3600) }
+    private var toFt3PerS: Double { return self * 35.3147 }
+    private var toFt3PerMin: Double { return self * 2118.882 }
+    private var toFt3PerHr: Double { return self * 127132.92 }
+
 }
 
 extension Double { //Viscosity
@@ -427,5 +471,24 @@ extension Double { //Power Per Length
     
     private var toCalPerMHr: Double { return self / 860.00955566 }
     private var toBtuPerFtHr: Double { return self / 1.0402268658 }
+}
+
+extension Double { //Volume
+    private var m3: Double { return self }
+    
+    private var cm3: Double { return self }
+    private var L: Double { return self / 1000 }
+    private var ft3: Double { return self / 35.3147 }
+    private var mi3: Double { return self * pow(1609.34, 3.0) }
+    private var gallon: Double { return self / 264.172 }
+    private var barrel: Double { return self / 6.28977 }
+
+    private var toCm3: Double { return self }
+    private var toL: Double { return self * 1000 }
+    private var toFt3: Double { return self * 35.3147}
+    private var toMi3: Double { return self / pow(1609.34, 3.0)}
+    private var toGallon: Double { return self * 264.172}
+    private var toBarrel: Double { return self * 6.28977}
+
 }
 

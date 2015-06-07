@@ -57,8 +57,14 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
             let productionType = MultipleChoiceItems.Dictionary[formulaTitle+"Pipeline Production"]![Int(inputs[3]!)]
             results = Calculations.pipeWallThickness(locationClass: locationClass, pipelineDesignPressure: inputs[1]!, pipelineOutsideDiameter: inputs[2]!, pipelineProduction: productionType, specifiedMinimumYieldStress: inputs[4]!)
             
-        case "Pressure Drop For Fluid Flow in Pipelines":
+        case "Pressure Drop for Fluid Flow in Pipelines":
             results = Calculations.pressureDropForFluidFlowInPipelines(fluidDensity: inputs[0]!, fluidDynamicViscosity: inputs[1]!, pipelineInletElevation: inputs[2]!, pipelineLength: inputs[3]!, pipelineOutletElevation: inputs[4]!, pipelineOutsideDiameter: inputs[5]!, pipelineWallThickness: inputs[6]!, surfaceRoughness: inputs[7]!, volumetricFlowRate: inputs[8]!)
+            
+        case "Chemical Dosing for Water Treatment":
+            results = Calculations.chemicalDosingForWaterTreatment(chemicalDosage: inputs[0]!, volumetricFlowRate: inputs[1]!)
+            
+        case "Pipeline Internal Volume":
+            results = Calculations.pipelineInternalVolume(pipelineLength: inputs[0]!, pipelineOutsideDiameter: inputs[1]!, pipelineWallThickness: inputs[2]!)
             
         case "Dew Point Temperature":
             results = Calculations.dewPointTemperature(airTemperature: inputs[1]!, relativeHumidity: inputs[2]!, airPressure: inputs[0]!)

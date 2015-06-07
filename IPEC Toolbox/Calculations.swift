@@ -347,4 +347,19 @@ class Calculations: NSObject {
         return ["Head Loss Due to Elevation": (deltaH_z,"Length",0), "Major Head Loss": (deltaH_m,"Length",0), "Total Head Loss": (deltaH_T,"Length",0), "Total Pressure Drop": (deltaP_T,"Pressure",0)]
     }
     
+    class func chemicalDosingForWaterTreatment(chemicalDosage D_c: Double, volumetricFlowRate Q_w: Double) -> [String: (Double,String,Int)] {
+        
+        let Q_p = (D_c * Q_w) / 1_000_000.0
+        
+        return ["Volumetric Flow Rate of Dosing Pump": (Q_p,"Volume Rate",0)]
+    }
+    
+    class func pipelineInternalVolume(pipelineLength L: Double, pipelineOutsideDiameter OD: Double, pipelineWallThickness t: Double) -> [String: (Double,String,Int)] {
+        
+        let ID = OD - 2 * t
+        let V = M_PI_4 * L * pow(ID, 2.0)
+        
+        return ["Internal Volume of The Pipeline": (V,"Volume",0)]
+    }
+    
 }
