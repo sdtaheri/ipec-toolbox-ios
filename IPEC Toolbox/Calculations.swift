@@ -73,18 +73,26 @@ class Calculations: NSObject {
         corrosionCoatingThickness t_corr: Double,
         concreteCoatingThickness t_conc: Double,
         var marineGrowthThickness t_mgt: Double,
-        steelDensity ro_s: Double,
-        productDensity ro_f: Double,
-        corrosionCoatingDensity ro_corr: Double,
-        concreteCoatingDensity ro_conc: Double,
-        seaWaterDensity ro_w: Double,
-        marineGrowthDensity ro_mgt: Double,
-        fieldJointDensity ro_joint: Double,
+        var steelDensity ro_s: Double,
+        var productDensity ro_f: Double,
+        var corrosionCoatingDensity ro_corr: Double,
+        var concreteCoatingDensity ro_conc: Double,
+        var seaWaterDensity ro_w: Double,
+        var marineGrowthDensity ro_mgt: Double,
+        var fieldJointDensity ro_joint: Double,
         jointLenght L_joint: Double,
         corrosionCoatingCutbackLength L_corr: Double,
         concreteCoatingCutbackLength L_conc: Double,
         pipeLineCondition PC: String
         ) -> [String: (Double,String,Int)] {
+            
+            ro_s /= 1000
+            ro_f /= 1000
+            ro_corr /= 1000
+            ro_conc /= 1000
+            ro_w /= 1000
+            ro_mgt /= 1000
+            ro_joint /= 1000
             
             t_mgt = (PC == "Operation (Marine Growth Present)") ? t_mgt : 0
             
@@ -165,6 +173,122 @@ class Calculations: NSObject {
         let P = (S_y * E_numeric * t) / (R - 0.4 * t)
         
         return ["Maximum Allowable Working Pressure":(P,"Pressure",4)]
+    }
+    
+    class func temperatureDropAcrossPipewall(
+        var ambientFluidDensity ro_seawater: Double,
+        ambientFluidHeatCapacity C_seawater: Double,
+        ambientFluidThermalConductivity K_seawater: Double,
+        ambientFluidVelocity v_current: Double,
+        ambientFluidViscosity mu_seawater: Double,
+        ambientTemperature T_ambient: Double,
+        coatingThermalConductivity K_coat: Double,
+        coatingThickness t_coat: Double,
+        concreteThermalConductivity K_concrete: Double,
+        concreteThickness t_concrete: Double,
+        fluidTemperature T_fluid: Double,
+        var internalFluidDensity ro_fluid: Double,
+        internalFluidHeatCapacity C_fluid: Double,
+        internalFluidThermalConductivity K_fluid: Double,
+        internalFluidViscosity mu_fluid: Double,
+        internalFluidVolumetricFlowRate Q: Double,
+        nominalOuterDiameter OD: Double,
+        pipewallThickness t_steel: Double,
+        pipelineBuriedHeight H_soil: Double,
+        pipelineThermalConductivity K_steel: Double,
+        soilThermalConductivity K_soil: Double) -> [String: (Double,String,Int)] {
+        
+            ro_seawater /= 1000
+            ro_fluid /= 1000
+        
+            let ID = OD - 2 * t_steel
+            
+            let Pr_seawater = mu_seawater * C_seawater / K_seawater
+            
+            let Pr_inside = mu_fluid * C_fluid / K_fluid
+            
+            let v_fluid = Q / (M_PI_4 * pow(ID, 2.0) * ro_fluid)
+            
+            let Re_inside = ro_fluid * v_fluid * ID / mu_fluid
+            
+            let Nu_fluid: Double
+            if Re_inside < 2300 {
+                Nu_fluid = 3.66
+            } else {
+                Nu_fluid = 0.023 * pow(Re_inside, 0.8) * pow(Pr_inside, 0.3)
+            }
+            
+            let h_inside = K_fluid * Nu_fluid / ID
+            
+            let OD_coated_concrete = OD + 2 * t_coat + 2 * t_concrete
+            
+            let D_2concrete: Double
+            if H_soil > 0 {
+                D_2concrete = OD_coated_concrete * (2 * H_soil / OD_coated_concrete + sqrt(pow(2 * H_soil / OD_coated_concrete, 2.0) - 1))
+            } else {
+                D_2concrete = 0
+            }
+            
+            let t_soil_concrete: Double
+            if H_soil > 0 {
+                t_soil_concrete = 0.5 * (D_2concrete - OD_coated_concrete)
+            } else {
+                t_soil_concrete = 0
+            }
+            
+            let Re_outside_concrete = (ro_seawater * v_current * OD_coated_concrete) / mu_seawater
+            
+            let C2, m2 : Double
+            if Re_outside_concrete < 4 {
+                C2 = 0.989
+                m2 = 0.33
+            } else if Re_outside_concrete < 40 {
+                C2 = 0.911
+                m2 = 0.385
+            } else if Re_outside_concrete < 4000 {
+                C2 = 0.683
+                m2 = 0.466
+            } else if Re_outside_concrete < 40_000 {
+                C2 = 0.193
+                m2 = 0.618
+            } else if Re_outside_concrete < 400_000 {
+                C2 = 0.027
+                m2 = 0.805
+            } else {
+                C2 = 0
+                m2 = 0
+            }
+            
+            let Nu_concrete = C2 * pow(Re_outside_concrete, m2) * pow(Pr_seawater, 1/3.0)
+            
+            let h_outside_concrete = K_seawater * Nu_concrete / OD_coated_concrete
+            
+            let R_inside_film = 1 / (h_inside * M_PI * ID)
+            
+            let R_steel = (log(OD/ID)) / (2 * M_PI * K_steel)
+            
+            let R_coat = (log((OD + 2 * t_coat)/OD)) / (2 * M_PI * K_coat)
+            
+            let R_concrete = (log((OD + 2 * t_coat + 2 * t_concrete)/(OD + 2 * t_coat))) / (2 * M_PI * K_concrete)
+            
+            let R_soil_concrete = (log((OD + 2 * t_coat + 2 * t_concrete + 2 * t_soil_concrete)/(OD + 2 * t_coat + 2 * t_concrete))) / (2 * M_PI * K_soil)
+            
+            let R_outside_film_concrete = 1 / (h_outside_concrete * M_PI * (OD_coated_concrete + t_soil_concrete))
+            
+            let R_total_concrete = R_inside_film + R_steel + R_coat + R_concrete + R_outside_film_concrete
+            
+            let Q_concrete = (T_fluid - T_ambient) / R_total_concrete
+            
+            let T_concrete = T_ambient + (R_outside_film_concrete / R_total_concrete) * (T_fluid - T_ambient)
+            
+            let T_coating = t_concrete + (R_concrete / R_total_concrete) * (T_fluid - T_ambient)
+            
+            let T_steel = T_coating + (R_coat / R_total_concrete) * (T_fluid - T_ambient)
+            
+            let T_inside = T_steel + (R_steel / R_total_concrete) * (T_fluid - T_ambient)
+            
+            
+        return ["Heat Loss Across Pipe Wall Per Unit Length":(Q_concrete,"Power Per Length",0), "Ambient Temperature":(T_ambient,"Temperature",0), "Concrete Outer Temperature":(T_concrete,"Temperature",0), "Coating Outer Temperature":(T_coating,"Temperature",0), "Steel Outer Temperature":(T_steel,"Temperature",0), "Pipe Inside Temperature":(T_inside,"Temperature",0), "Fluid Temperature":(T_fluid,"Temperature",0)]
     }
     
 }

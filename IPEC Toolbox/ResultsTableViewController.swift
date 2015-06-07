@@ -14,7 +14,9 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
     private var results = [String: (Double,String,Int)]() {
         didSet {
             if results.count > 0 {
-                resultsArrayKeys = results.keys.array
+                resultsArrayKeys = results.keys.array.sorted {
+                    return $0 < $1
+                }
                 resultsValue = [Double?](count: results.count, repeatedValue: nil)
                 resultsUnits = [String?](count: results.count, repeatedValue: nil)
             }
@@ -45,6 +47,9 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
             let index = Int(inputs[12]!)
             let condition = (MultipleChoiceItems.Dictionary[formulaTitle+"Pipeline Condition"])![index]
             results = Calculations.pipeLineSubmergedWeight(steelPipeOutsideDiameter: inputs[16]!, pipeWallThickness: inputs[11]!, corrosionAllowance: inputs[3]!, corrosionCoatingThickness: inputs[6]!, concreteCoatingThickness: inputs[2]!, marineGrowthThickness: inputs[10]!, steelDensity: inputs[15]!, productDensity: inputs[13]!, corrosionCoatingDensity: inputs[5]!, concreteCoatingDensity: inputs[1]!, seaWaterDensity: inputs[14]!, marineGrowthDensity: inputs[9]!, fieldJointDensity: inputs[7]!, jointLenght: inputs[8]!, corrosionCoatingCutbackLength: inputs[4]!, concreteCoatingCutbackLength: inputs[0]!, pipeLineCondition: condition)
+            
+        case "Temperature Drop Across Pipe Wall":
+            results = Calculations.temperatureDropAcrossPipewall(ambientFluidDensity: inputs[0]!, ambientFluidHeatCapacity: inputs[1]!, ambientFluidThermalConductivity: inputs[2]!, ambientFluidVelocity: inputs[3]!, ambientFluidViscosity: inputs[4]!, ambientTemperature: inputs[5]!, coatingThermalConductivity: inputs[6]!, coatingThickness: inputs[7]!, concreteThermalConductivity: inputs[8]!, concreteThickness: inputs[9]!, fluidTemperature: inputs[10]!, internalFluidDensity: inputs[11]!, internalFluidHeatCapacity: inputs[12]!, internalFluidThermalConductivity: inputs[13]!, internalFluidViscosity: inputs[14]!, internalFluidVolumetricFlowRate: inputs[15]!, nominalOuterDiameter: inputs[16]!, pipewallThickness: inputs[17]!, pipelineBuriedHeight: inputs[18]!, pipelineThermalConductivity: inputs[19]!, soilThermalConductivity: inputs[20]!)
             
         case "Dew Point Temperature":
             results = Calculations.dewPointTemperature(airTemperature: inputs[1]!, relativeHumidity: inputs[2]!, airPressure: inputs[0]!)

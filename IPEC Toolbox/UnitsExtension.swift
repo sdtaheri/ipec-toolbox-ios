@@ -31,6 +31,8 @@ extension Double {
             switch unit {
                 case "Pa": temp = self.pascale
                 case "kPa": temp = self.kiloPascale
+                case "MPa": temp = self.megaPascale
+                case "GPa": temp = self.gigaPascale
                 case "bar": temp = self.bar
                 case "millibar": temp = self.milliBar
                 case "psi": temp = self.psi
@@ -40,6 +42,8 @@ extension Double {
             switch toUnit {
                 case "Pa": return temp.pascale
                 case "kPa": return temp.toKiloPascale
+                case "MPa": return temp.toMegaPascale
+                case "GPa": return temp.toGigaPascale
                 case "bar": return temp.toBar
                 case "millibar": return temp.toMilliBar
                 case "psi": return temp.toPsi
@@ -51,16 +55,16 @@ extension Double {
             switch unit {
             case "mole/m3": temp = self.molePerM3
             case "mole/cm3": temp = self.molePerCm3
-            case "mole/gallon": temp = self.molePerGallon
-            case "mole/liter": temp = self.molePerLiter
+            case "mole/gal": temp = self.molePerGallon
+            case "mole/L": temp = self.molePerLiter
             case "mole/ft3": temp = self.molePerFt3
             default: return nil
             }
             switch toUnit {
             case "mole/m3": return temp.molePerM3
             case "mole/cm3": return temp.toMolePerCm3
-            case "mole/gallon": return temp.toMolePerGallon
-            case "mole/liter": return temp.toMolePerLiter
+            case "mole/gal": return temp.toMolePerGallon
+            case "mole/L": return temp.toMolePerLiter
             case "mole/ft3": return temp.toMolePerFt3
             default: return nil
             }
@@ -87,16 +91,16 @@ extension Double {
             switch unit {
             case "1/m3": temp = self.onePerM3
             case "1/cm3": temp = self.onePerCm3
-            case "1/gallon": temp = self.onePerGallon
-            case "1/liter": temp = self.onePerLiter
+            case "1/gal": temp = self.onePerGallon
+            case "1/L": temp = self.onePerLiter
             case "1/ft3": temp = self.onePerFt3
             default: return nil
             }
             switch toUnit {
             case "1/m3": return temp.onePerM3
             case "1/cm3": return temp.toOnePerCm3
-            case "1/gallon": return temp.toOnePerGallon
-            case "1/liter": return temp.toOnePerLiter
+            case "1/gal": return temp.toOnePerGallon
+            case "1/L": return temp.toOnePerLiter
             case "1/ft3": return temp.toOnePerFt3
             default: return nil
             }
@@ -135,6 +139,110 @@ extension Double {
             default: return nil
             }
 
+        case "Volume Rate":
+            switch unit {
+            case "m3/s": temp = self.m3PerS
+            case "m3/min": temp = self.m3PerMin
+            case "m3/hr": temp = self.m3PerHr
+            case "L/s": temp = self.literPerS
+            case "L/min": temp = self.literPerMin
+            case "L/hr": temp = self.literPerHr
+            case "gal/s": temp = self.gallonPerS
+            case "gal/min": temp = self.gallonPerMin
+            case "gal/hr": temp = self.gallonPerHr
+            default: return nil
+            }
+            switch toUnit {
+            case "m3/s": return temp.m3PerS
+            case "m3/min": return temp.toM3PerMin
+            case "m3/hr": return temp.toM3PerHr
+            case "L/s": return temp.toLiterPerS
+            case "L/min": return temp.toLiterPerMin
+            case "L/hr": return temp.toLiterPerHr
+            case "gal/s": return temp.toGallonPerS
+            case "gal/min": return temp.toGallonPerMin
+            case "gal/hr": return temp.toGallonPerHr
+            default: return nil
+            }
+
+        case "Viscosity":
+            switch unit {
+            case "Pa.s": temp = self.PaS
+            case "N.s/m2": temp = self.NSPerM2
+            case "Poise": temp = self.poise
+            case "cPoise": temp = self.cPoise
+            case "lb.s/ft2": temp = self.lbSPerFt2
+            case "lb.s/in2": temp = self.lbSPerIn2
+            default: return nil
+            }
+            switch toUnit {
+            case "Pa.s": return temp.PaS
+            case "N.s/m2": return temp.toNSPerM2
+            case "Poise": return temp.toPoise
+            case "cPoise": return temp.toCPoise
+            case "lb.s/ft2": return temp.toLbSPerFt2
+            case "lb.s/in2": return temp.toLbSPerIn2
+            default: return nil
+            }
+
+        case "Speed":
+            switch unit {
+            case "m/s": temp = self.mPerS
+            case "km/h": temp = self.kmPerH
+            case "ft/s": temp = self.ftPerS
+            default: return nil
+            }
+            switch toUnit {
+            case "m/s": return temp.mPerS
+            case "km/h": return temp.toKmPerH
+            case "ft/s": return temp.toFtPerS
+            default: return nil
+            }
+            
+        case "Heat Capacity":
+            switch unit {
+            case "J/(kg.°C)": temp = self.JPerKgC
+            case "J/(kg.K)": temp = self.JPerKgK
+            case "Btu/(lbm.R)": temp = self.btuPerLbmR
+            default: return nil
+            }
+            switch toUnit {
+            case "J/(kg.°C)": return temp.JPerKgC
+            case "J/(kg.K)": return temp.toJPerKgK
+            case "Btu/(lbm.R)": return temp.toBtuPerLbmR
+            default: return nil
+            }
+            
+        case "Thermal Conductivity":
+            switch unit {
+            case "W/(m.°C)": temp = self.WPerMC
+            case "W/(m.K)": temp = self.WPerMK
+            case "Cal/(m.hr.K)": temp = self.calPerMHrK
+            case "Btu/(ft.hr.R)": temp = self.btuPerFtHrR
+            default: return nil
+            }
+            switch toUnit {
+            case "W/(m.°C)": return temp.WPerMC
+            case "W/(m.K)": return temp.toWPerMK
+            case "Cal/(m.hr.K)": return temp.toCalPerMHrK
+            case "Btu/(ft.hr.R)": return temp.toBtuPerFtHrR
+            default: return nil
+            }
+            
+        case "Power Per Length":
+            switch unit {
+            case "W/m": temp = self.WPerM
+            case "Cal/(m.hr)": temp = self.calPerMHr
+            case "Btu/(ft.hr)": temp = self.btuPerFtHr
+            default: return nil
+            }
+            switch toUnit {
+            case "W/m": return temp.WPerM
+            case "Cal/(m.hr)": return temp.toCalPerMHr
+            case "Btu/(ft.hr)": return temp.toBtuPerFtHr
+            default: return nil
+            }
+
 
         default: return self
         }
@@ -155,12 +263,16 @@ extension Double { //Pressure
     private var pascale: Double { return self }
     
     private var kiloPascale: Double { return self * 1_000}
+    private var megaPascale: Double { return self * 1_000_000 }
+    private var gigaPascale: Double { return self * 1_000_000_000 }
     private var bar: Double { return self * 100_000 }
     private var milliBar: Double { return self * 100 }
     private var psi: Double { return self * 6_894.76 }
     private var ksi: Double { return self * 6_894_760 }
     
-    private var toKiloPascale: Double { return self * 0.001 }
+    private var toKiloPascale: Double { return self / 1000 }
+    private var toMegaPascale: Double { return self / 1_000_000 }
+    private var toGigaPascale: Double { return self / 1_000_000_000 }
     private var toBar: Double { return self * 0.01 / 1000.0 }
     private var toMilliBar: Double { return self * 0.01 }
     private var toPsi: Double { return self * 0.1450376807 / 1000.0 }
@@ -235,7 +347,85 @@ extension Double { //Force Per Length
     private var toKNPerM: Double { return self / 1_000.0 }
     private var toKgfPerM: Double { return self * 0.101971 }
     private var toLbfPerFt: Double { return self * (0.224809 / 3.28083) }
-
 }
 
+extension Double { //Volume Rate
+    private var m3PerS: Double { return self }
+    
+    private var m3PerHr: Double { return self / 3600 }
+    private var m3PerMin: Double { return self / 60 }
+    private var literPerS: Double { return self / 1000 }
+    private var literPerMin: Double { return self / 60_000 }
+    private var literPerHr: Double { return self / 3_600_000 }
+    private var gallonPerS: Double { return self * 0.003786 }
+    private var gallonPerMin: Double { return self * (0.003786 / 60) }
+    private var gallonPerHr: Double { return self * (0.003786 / 3600) }
+    
+    private var toM3PerHr: Double { return self * 3600 }
+    private var toM3PerMin: Double { return self * 60 }
+    private var toLiterPerS: Double { return self * 1000 }
+    private var toLiterPerMin: Double { return self * 60_000 }
+    private var toLiterPerHr: Double { return self * 3_600_000 }
+    private var toGallonPerS: Double { return self / 0.003786 }
+    private var toGallonPerMin: Double { return self / (0.003786 / 60) }
+    private var toGallonPerHr: Double { return self / (0.003786 / 3600) }
+}
+
+extension Double { //Viscosity
+    private var PaS: Double { return self }
+    
+    private var NSPerM2: Double { return self }
+    private var poise: Double { return self / 10 }
+    private var cPoise: Double { return self / 1000 }
+    private var lbSPerFt2: Double { return self * 47.8803 }
+    private var lbSPerIn2: Double { return self * 6894.8 }
+    
+    private var toNSPerM2: Double { return self }
+    private var toPoise: Double { return self * 10 }
+    private var toCPoise: Double { return self * 1000 }
+    private var toLbSPerFt2: Double { return self / 47.8803 }
+    private var toLbSPerIn2: Double { return self / 6894.8 }
+}
+
+extension Double { //Speed
+    private var mPerS: Double { return self }
+    
+    private var kmPerH: Double { return self / 3.6 }
+    private var ftPerS: Double { return self * 0.3048 }
+    
+    private var toKmPerH: Double { return self * 3.6 }
+    private var toFtPerS: Double { return self / 0.3048 }
+}
+
+extension Double { //Heat Capacity
+    private var JPerKgC: Double { return self }
+    
+    private var JPerKgK: Double { return self }
+    private var btuPerLbmR: Double { return self * 4186.8 }
+    
+    private var toJPerKgK: Double { return self }
+    private var toBtuPerLbmR: Double { return self * 4186.8 }
+}
+
+extension Double { //Thermal Conductivity
+    private var WPerMC: Double { return self }
+    
+    private var WPerMK: Double { return self }
+    private var calPerMHrK: Double { return self * 0.001163 }
+    private var btuPerFtHrR: Double { return self * 1.731 }
+    
+    private var toWPerMK: Double { return self }
+    private var toCalPerMHrK: Double { return self / 0.001163 }
+    private var toBtuPerFtHrR: Double { return self / 1.731 }
+}
+
+extension Double { //Power Per Length
+    private var WPerM: Double { return self }
+    
+    private var calPerMHr: Double { return self * 860.00955566 }
+    private var btuPerFtHr: Double { return self * 1.0402268658 }
+    
+    private var toCalPerMHr: Double { return self / 860.00955566 }
+    private var toBtuPerFtHr: Double { return self / 1.0402268658 }
+}
 
