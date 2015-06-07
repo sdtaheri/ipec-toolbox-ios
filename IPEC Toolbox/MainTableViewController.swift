@@ -86,6 +86,13 @@ class MainTableViewController: UITableViewController {
     override func viewDidLoad() {
         tableView.estimatedRowHeight = 44
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if let indexPath = tableView.indexPathForSelectedRow() {
+            tableView.deselectRowAtIndexPath(indexPath, animated: animated)
+        }
+    }
 
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
