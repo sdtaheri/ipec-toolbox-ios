@@ -22,10 +22,12 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         }
     }
     
+    private var previousContentInset = UIEdgeInsetsZero
+    
     private var inputValues = [Double?,String?]()
     private var inputValuesForSegue = [Double?]()
     private var inputUnits = [String]()
-    private var activeTextField: UITextField?
+    private weak var activeTextField: UITextField?
     
     private weak var selectedUnitButton: UIButton?
     
@@ -152,16 +154,27 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
     
     func keyboardDidShow(notification: NSNotification) {
         if let userInfo = notification.userInfo {
-            if let notificationValue = userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue {
+            if let notificationValue = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
                 let keyboardFrame = notificationValue.CGRectValue()
                 
                 let textFieldRectInWindow = activeTextField!.convertRect(activeTextField!.bounds, toView: nil)
-                if textFieldRectInWindow.origin.y + textFieldRectInWindow.size.height >= view.frame.size.height - keyboardFrame.size.height {
+                if textFieldRectInWindow.origin.y + textFieldRectInWindow.size.height >= UIScreen.mainScreen().bounds.size.height - keyboardFrame.size.height {
+
+                    previousContentInset = tableView.contentInset
+                    tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height * 1.05, right: 0)
+                    tableView.scrollIndicatorInsets = tableView.contentInset
+                    
                     let textFieldRectInTableView = activeTextField!.convertRect(activeTextField!.bounds, toView: tableView)
-                    tableView.setContentOffset(CGPoint(x: 0, y: -keyboardFrame.size.height + textFieldRectInTableView.origin.y + activeTextField!.frame.size.height), animated: true)
+                    tableView.scrollRectToVisible(textFieldRectInTableView, animated: true)
                 }
-                
             }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        UIView.animateWithDuration(0.3) {
+            self.tableView.contentInset = self.previousContentInset
+            self.tableView.scrollIndicatorInsets = self.tableView.contentInset
         }
     }
     
@@ -185,10 +198,12 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         super.viewWillAppear(animated)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }
     
     
