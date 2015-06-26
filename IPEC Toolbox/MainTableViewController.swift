@@ -93,7 +93,16 @@ class MainTableViewController: UITableViewController {
             tableView.deselectRowAtIndexPath(indexPath, animated: animated)
         }
     }
-
+    
+    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+        if let window = UIApplication.sharedApplication().delegate!.window! {
+            if window.traitCollection.horizontalSizeClass == .Regular {
+                tableView.tableFooterView?.frame.size.height = 0.0
+            } else {
+                tableView.tableFooterView?.frame.size.height = 80.0
+            }
+        }
+    }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3

@@ -31,6 +31,8 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
     
     var formulaTitle = String()
     
+    private var footerOnScreen = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,6 +76,34 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
 
             
         default: break
+        }
+    }
+    
+    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+        if let window = UIApplication.sharedApplication().delegate!.window! {
+            if window.traitCollection.horizontalSizeClass == .Regular && results.count == 0 {
+                
+                if let superView = view.superview {
+                    let image = UIImage(named: "logo")!
+                    let aspectRatio = image.size.width / image.size.height
+                    
+                    let imageView = UIImageView(image: image)
+                    imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+                    superView.addSubview(imageView)
+                    
+                    superView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Bottom, relatedBy: .Equal, toItem: superView, attribute: .Bottom, multiplier: 1.0, constant: -8.0))
+                    superView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .CenterX, relatedBy: .Equal, toItem: superView, attribute: .CenterX, multiplier: 1.0, constant: 0.0))
+                    superView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Width, relatedBy: .Equal, toItem: superView, attribute: .Width, multiplier: 0.3, constant: 0.0))
+                    superView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Width, relatedBy: .Equal, toItem: imageView, attribute: .Height, multiplier: aspectRatio, constant: 0.0))
+
+                }
+            } else {
+                for v in view.subviews {
+                    if v is UIImageView {
+                        v.removeFromSuperview()
+                    }
+                }
+            }
         }
     }
     
@@ -124,16 +154,6 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         
     }
     
-    override func viewWillAppear(animated: Bool) {
-        if let svc = splitViewController {
-            if !svc.collapsed && tableView.backgroundView == nil {
-                let imageView = UIImageView(image: UIImage(named: "background")!)
-                imageView.contentMode = UIViewContentMode.ScaleAspectFill
-                tableView.backgroundView = imageView
-            }
-        }
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
