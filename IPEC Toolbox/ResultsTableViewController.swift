@@ -11,6 +11,8 @@ import UIKit
 class ResultsTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate {
     
     var inputs = [Double?]()
+    var userDefaults: NSUserDefaults?
+    private var tutorialView: CRProductTour?
     private var results = [String: (Double,String,Int)]() {
         didSet {
             if results.count > 0 {
@@ -79,11 +81,69 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let formulaDetailTutorial = userDefaults?.boolForKey(StringConstants.ResultsTutorial)
+        
+        if let svc = splitViewController {
+            for v in svc.view.subviews {
+                if v is CRProductTour {
+                    v.removeFromSuperview()
+                }
+            }
+        }
+        
+        if formulaDetailTutorial == false {
+            if tableView.visibleCells().count > 0 {
+                
+                if let firstVisibleRow = tableView.visibleCells()[0] as? FormulaOutputCell {
+                    if tutorialView == nil {
+                        tutorialView = CRProductTour(frame: view.bounds)
+                        
+                        let bubble1 = CRBubble(attachedView: firstVisibleRow.unit, title: "Unit", description: "Tap to convert to a different unit.", arrowPosition: CRArrowPositionTop, andColor: view.tintColor)
+                        
+                        tutorialView!.setBubbles([bubble1])
+                        
+                        tutorialView!.setVisible(false)
+                        if let svc = splitViewController {
+                            svc.view.addSubview(tutorialView!)
+                        }
+                    }
+                    
+                    tutorialView!.setVisible(true)
+                    if let svc = splitViewController {
+                        svc.view.bringSubviewToFront(tutorialView!)
+                    }
+                    
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    appDelegate.shouldRotate = false
+                    
+                    userDefaults?.setBool(true, forKey: StringConstants.ResultsTutorial)
+                }
+            }
+        }
+    }
+    
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        if tutorialView != nil && tutorialView!.isVisible() {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.shouldRotate = true
+            
+            tutorialView?.setVisible(false)
+        }
+    }
+    
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
         if let window = UIApplication.sharedApplication().delegate!.window! {
             if window.traitCollection.horizontalSizeClass == .Regular && results.count == 0 {
                 
                 if let superView = view.superview {
+                    for v in superView.subviews {
+                        if v is UIImageView {
+                            return
+                        }
+                    }
                     let image = UIImage(named: "logo")!
                     let aspectRatio = image.size.width / image.size.height
                     
@@ -96,12 +156,6 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
                     superView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Width, relatedBy: .Equal, toItem: superView, attribute: .Width, multiplier: 0.3, constant: 0.0))
                     superView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Width, relatedBy: .Equal, toItem: imageView, attribute: .Height, multiplier: aspectRatio, constant: 0.0))
 
-                }
-            } else {
-                for v in view.subviews {
-                    if v is UIImageView {
-                        v.removeFromSuperview()
-                    }
                 }
             }
         }
@@ -242,6 +296,14 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if tutorialView != nil && tutorialView!.isVisible() {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.shouldRotate = true
+            
+            tutorialView?.setVisible(false)
+        }
+        
         if segue.identifier == StringConstants.ShowOutputUnitSegue {
             if let dvc = segue.destinationViewController as? UnitsTableViewController {
                 if let button = sender as? UIButton {

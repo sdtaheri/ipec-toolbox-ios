@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NUl-hR-MnK">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Calculations-->
@@ -382,19 +383,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFj-Do-2q9">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="104" width="600" height="496"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M7r-Mj-mkQ">
+                                <rect key="frame" x="253.5" y="52" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="EWn-Re-145"/>
+                                    <constraint firstAttribute="width" constant="44" id="cx4-4P-K4A"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bz2-zv-Hky">
+                                <rect key="frame" x="305.5" y="52" width="41" height="44.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="LFj-Do-2q9" secondAttribute="trailing" id="1rL-gJ-OTi"/>
+                            <constraint firstItem="M7r-Mj-mkQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bsP-sC-Lhk" secondAttribute="leadingMargin" id="82V-Mc-VmT"/>
+                            <constraint firstItem="LFj-Do-2q9" firstAttribute="top" secondItem="M7r-Mj-mkQ" secondAttribute="bottom" priority="750" constant="8" symbolic="YES" id="EeT-s5-EHi"/>
                             <constraint firstItem="LFj-Do-2q9" firstAttribute="leading" secondItem="bsP-sC-Lhk" secondAttribute="leading" id="HfW-HV-QKp"/>
+                            <constraint firstItem="M7r-Mj-mkQ" firstAttribute="top" secondItem="JyH-pc-9py" secondAttribute="bottom" priority="750" constant="8" symbolic="YES" id="J1U-0V-PZU"/>
                             <constraint firstItem="LFj-Do-2q9" firstAttribute="bottom" secondItem="qvc-Go-LIC" secondAttribute="top" id="OPO-aU-c7k"/>
-                            <constraint firstItem="LFj-Do-2q9" firstAttribute="top" secondItem="bsP-sC-Lhk" secondAttribute="top" id="sTq-Qu-EXm"/>
+                            <constraint firstItem="bz2-zv-Hky" firstAttribute="top" secondItem="JyH-pc-9py" secondAttribute="bottom" constant="8" symbolic="YES" id="Pwd-PP-vtg"/>
+                            <constraint firstItem="LFj-Do-2q9" firstAttribute="top" secondItem="bz2-zv-Hky" secondAttribute="bottom" constant="8" symbolic="YES" id="YcO-n9-cqJ"/>
+                            <constraint firstItem="bz2-zv-Hky" firstAttribute="leading" secondItem="M7r-Mj-mkQ" secondAttribute="trailing" constant="8" symbolic="YES" id="jH2-TS-9ke"/>
+                            <constraint firstAttribute="centerX" secondItem="bz2-zv-Hky" secondAttribute="centerX" constant="-26" id="o8r-Ol-Giu"/>
+                            <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="bz2-zv-Hky" secondAttribute="trailing" id="rCe-Hc-aev"/>
+                            <constraint firstItem="bz2-zv-Hky" firstAttribute="centerY" secondItem="M7r-Mj-mkQ" secondAttribute="centerY" id="yWA-0O-q3E"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="More Info" id="Ugr-Y3-dhu">
@@ -404,8 +425,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <value key="contentSizeForViewInPopover" type="size" width="400" height="400"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="450"/>
                     <connections>
+                        <outlet property="formulaIcon" destination="M7r-Mj-mkQ" id="hHs-WS-cjM"/>
+                        <outlet property="formulaLabel" destination="bz2-zv-Hky" id="Ydq-Ze-cNa"/>
                         <outlet property="textView" destination="LFj-Do-2q9" id="Gix-Lr-I5Q"/>
                     </connections>
                 </viewController>
@@ -530,11 +553,11 @@
     </scenes>
     <resources>
         <image name="calc" width="30" height="30"/>
-        <image name="logo" width="2517" height="1276"/>
+        <image name="logo" width="500" height="253"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="yPM-Ox-X8U"/>
         <segue reference="ChO-KV-0Bm"/>
-        <segue reference="cXf-3W-zUW"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.96078431372549022" green="0.51764705882352935" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
 </document>

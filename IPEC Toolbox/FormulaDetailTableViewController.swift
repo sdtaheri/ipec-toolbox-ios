@@ -24,6 +24,9 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
     
     private var previousContentInset = UIEdgeInsetsZero
     
+    var userDefaults: NSUserDefaults?
+    private var tutorialView: CRProductTour?
+    
     private var inputValues = [Double?,String?]()
     private var inputValuesForSegue = [Double?]()
     private var inputUnits = [String]()
@@ -201,9 +204,60 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let svc = splitViewController {
+            for v in svc.view.subviews {
+                if v is CRProductTour {
+                    v.removeFromSuperview()
+                }
+            }
+        }
+        
+        let formulaDetailTutorial = userDefaults?.boolForKey(StringConstants.FormulaDetailTutorial)
+        
+        if formulaDetailTutorial == false {
+            if tableView.visibleCells().count > 1 {
+                
+                if let firstVisibleRow = tableView.visibleCells()[1] as? FormulaInputCell {
+                    if tutorialView == nil {
+                        tutorialView = CRProductTour(frame: view.bounds)
+                        
+                        let bubble1 = CRBubble(attachedView: firstVisibleRow.textField, title: "Value", description: "Tap to enter data.\nIf ignored, dafault value will be used.", arrowPosition: CRArrowPositionBottom, andColor: view.tintColor)
+                        
+                        let bubble2 = CRBubble(attachedView: firstVisibleRow.unitLabel, title: "Unit", description: "Tap to choose a different unit.", arrowPosition: CRArrowPositionTop, andColor: view.tintColor)
+                        
+                        tutorialView!.setBubbles([bubble1, bubble2])
+                        
+                        tutorialView!.setVisible(false)
+                        if let svc = splitViewController {
+                            svc.view.addSubview(tutorialView!)
+                        }
+                    }
+                    
+                    tutorialView!.setVisible(true)
+                    
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    appDelegate.shouldRotate = false
+                    
+                    userDefaults?.setBool(true, forKey: StringConstants.FormulaDetailTutorial)
+                }
+            }
+        }
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        
+        if let svc = splitViewController {
+            for v in svc.view.subviews {
+                if v is CRProductTour {
+                    v.setVisible(false)
+                }
+            }
+        }
     }
     
     
@@ -297,9 +351,26 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
     }
     
     
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        if tutorialView != nil && tutorialView!.isVisible() {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.shouldRotate = true
+            
+            tutorialView?.setVisible(false)
+        }
+    }
+
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if tutorialView != nil && tutorialView!.isVisible() {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.shouldRotate = true
+            
+            tutorialView?.setVisible(false)
+        }
+        
         if segue.identifier == StringConstants.ShowInputUnitSegue {
             if let dvc = segue.destinationViewController as? UnitsTableViewController {
                 
@@ -326,6 +397,7 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         } else if segue.identifier == StringConstants.ComputeSegue {
             if let nc = segue.destinationViewController as? UINavigationController {
                 if let rtvc = nc.childViewControllers[0] as? ResultsTableViewController {
+                    rtvc.userDefaults = userDefaults
                     if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
                         rtvc.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                         rtvc.navigationItem.leftItemsSupplementBackButton = true
@@ -348,6 +420,14 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         
         func textFieldDidBeginEditing(textField: UITextField) {
             activeTextField = textField
+            
+            if tutorialView != nil && tutorialView!.isVisible() {
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.shouldRotate = true
+                
+                tutorialView?.setVisible(false)
+            }
+            
         }
         
         func textFieldDidEndEditing(textField: UITextField) {

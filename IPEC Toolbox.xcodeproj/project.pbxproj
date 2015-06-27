@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		301148221B3D7EE900AEA3EA /* CRBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 3011481F1B3D7EE900AEA3EA /* CRBubble.m */; };
+		301148231B3D7EE900AEA3EA /* CRProductTour.m in Sources */ = {isa = PBXBuildFile; fileRef = 301148211B3D7EE900AEA3EA /* CRProductTour.m */; };
 		301491741B223B7A0069C778 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3081F1C91B109CCB004BA309 /* Images.xcassets */; };
 		301D94831B21DB48006FBFC0 /* FormulaInputCellMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301D94821B21DB48006FBFC0 /* FormulaInputCellMultipleChoice.swift */; };
 		303155A71B1BA7F9009B32CA /* UnitsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303155A61B1BA7F9009B32CA /* UnitsExtension.swift */; };
@@ -37,6 +39,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3011481E1B3D7EE900AEA3EA /* CRBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBubble.h; sourceTree = "<group>"; };
+		3011481F1B3D7EE900AEA3EA /* CRBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBubble.m; sourceTree = "<group>"; };
+		301148201B3D7EE900AEA3EA /* CRProductTour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRProductTour.h; sourceTree = "<group>"; };
+		301148211B3D7EE900AEA3EA /* CRProductTour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRProductTour.m; sourceTree = "<group>"; };
+		301148241B3D7F9A00AEA3EA /* IPEC-Toolbox-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IPEC-Toolbox-Bridging-Header.h"; sourceTree = "<group>"; };
 		301D94821B21DB48006FBFC0 /* FormulaInputCellMultipleChoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormulaInputCellMultipleChoice.swift; sourceTree = "<group>"; };
 		303155A61B1BA7F9009B32CA /* UnitsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsExtension.swift; sourceTree = "<group>"; };
 		304D0E6E1B165EB2006483A9 /* UnitsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitsTableViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +85,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3011481D1B3D7EE900AEA3EA /* ProductTour */ = {
+			isa = PBXGroup;
+			children = (
+				3011481E1B3D7EE900AEA3EA /* CRBubble.h */,
+				3011481F1B3D7EE900AEA3EA /* CRBubble.m */,
+				301148201B3D7EE900AEA3EA /* CRProductTour.h */,
+				301148211B3D7EE900AEA3EA /* CRProductTour.m */,
+			);
+			path = ProductTour;
+			sourceTree = "<group>";
+		};
 		3081F1B41B109CCB004BA309 = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +137,8 @@
 		3081F1C01B109CCB004BA309 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				301148241B3D7F9A00AEA3EA /* IPEC-Toolbox-Bridging-Header.h */,
+				3011481D1B3D7EE900AEA3EA /* ProductTour */,
 				303155A61B1BA7F9009B32CA /* UnitsExtension.swift */,
 				30E8232F1B15B50200835D73 /* Calculations.swift */,
 				3081F1CB1B109CCB004BA309 /* LaunchScreen.xib */,
@@ -189,6 +209,7 @@
 		3081F1B51B109CCB004BA309 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Red Cube";
 				TargetAttributes = {
@@ -249,10 +270,12 @@
 				3081F1E31B109E41004BA309 /* MoreTableViewController.swift in Sources */,
 				3081F2151B10A34C004BA309 /* AboutViewController.swift in Sources */,
 				304D0E6F1B165EB2006483A9 /* UnitsTableViewController.swift in Sources */,
+				301148221B3D7EE900AEA3EA /* CRBubble.m in Sources */,
 				30E823321B15BA9600835D73 /* FormulaDetailTableViewController.swift in Sources */,
 				301D94831B21DB48006FBFC0 /* FormulaInputCellMultipleChoice.swift in Sources */,
 				30E823301B15B50200835D73 /* Calculations.swift in Sources */,
 				304D0E711B1723AB006483A9 /* ResultsTableViewController.swift in Sources */,
+				301148231B3D7EE900AEA3EA /* CRProductTour.m in Sources */,
 				30DABCD31B18AF000015DE8E /* MoreInfoViewController.swift in Sources */,
 				3081F1C31B109CCB004BA309 /* AppDelegate.swift in Sources */,
 				30E823341B15D7F900835D73 /* FormulaInputCell.swift in Sources */,
@@ -391,6 +414,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "IPEC Toolbox/IPEC-Toolbox-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -403,6 +427,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "IPEC Toolbox/IPEC-Toolbox-Bridging-Header.h";
 			};
 			name = Release;
 		};

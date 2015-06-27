@@ -24,6 +24,10 @@ struct StringConstants {
     static let SecondSectionHeader = "Precommissioning"
     static let RecentFormulas = "Recent"
     
+    static let FormulaDetailTutorial = "Formula Detail Tutorial"
+    static let ResultsTutorial = "Results Tutorial"
+
+    
     static let Titles = [["Pipeline Submerged Weight", "Maximum Allowable Working Pressure", "Temperature Drop Across Pipe Wall", "Pipe Wall Thickness"], ["Pressure Drop for Fluid Flow in Pipelines", "Chemical Dosing for Water Treatment", "Pipeline Internal Volume", "Dew Point Temperature", "Mean Flow Velocity"]]
     
     static let Inputs: [String: [String:(String,Int,Double)]] =
@@ -73,7 +77,7 @@ struct StringConstants {
 
 class MainTableViewController: UITableViewController {
     
-    private let savedData = NSUserDefaults()
+    private let userDefaults = NSUserDefaults()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -91,6 +95,21 @@ class MainTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         if let indexPath = tableView.indexPathForSelectedRow() {
             tableView.deselectRowAtIndexPath(indexPath, animated: animated)
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let svc = splitViewController {
+            for v in svc.view.subviews {
+                if v is CRProductTour {
+                    v.removeFromSuperview()
+                    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+                        appDelegate.shouldRotate = true
+                    }
+                }
+            }
         }
     }
     
@@ -112,7 +131,7 @@ class MainTableViewController: UITableViewController {
         
         if section == 2 {
             var recentSectionCount = 0;
-            if let recentFormulas = savedData.arrayForKey(StringConstants.RecentFormulas) {
+            if let recentFormulas = userDefaults.arrayForKey(StringConstants.RecentFormulas) {
                 recentSectionCount = recentFormulas.count
             }
             return recentSectionCount
@@ -127,7 +146,7 @@ class MainTableViewController: UITableViewController {
         
         if indexPath.section == 2 {
             //Recent Section
-            if let recentArray = savedData.arrayForKey(StringConstants.RecentFormulas) {
+            if let recentArray = userDefaults.arrayForKey(StringConstants.RecentFormulas) {
                 cell.textLabel?.text = recentArray[indexPath.row] as? String
             }
         } else {
@@ -143,7 +162,7 @@ class MainTableViewController: UITableViewController {
         case 0: return StringConstants.FirstSectionHeader
         case 1: return StringConstants.SecondSectionHeader
         case 2:
-            if let recentFormulas = savedData.arrayForKey(StringConstants.RecentFormulas) {
+            if let recentFormulas = userDefaults.arrayForKey(StringConstants.RecentFormulas) {
                 return StringConstants.RecentFormulas
             } else {
                 return nil
@@ -157,10 +176,23 @@ class MainTableViewController: UITableViewController {
             if let cell = sender as? UITableViewCell {
                 if let dvc = segue.destinationViewController as? FormulaDetailTableViewController {
                     dvc.selectedIndexPath = tableView.indexPathForCell(cell)
+                    dvc.userDefaults = userDefaults
                 }
             }
         }
     }
     
+}
+
+extension UISplitViewController {
+    
+    public override func shouldAutorotate() -> Bool {
+
+        if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+            return appDelegate.shouldRotate
+        }
+        
+        return true
+    }
 }
 
