@@ -104,7 +104,9 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMQ-nn-6x5">
                                 <rect key="frame" x="16" y="120" width="568" height="179"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">IPEC (Ideh-Pouyan Energy Co.) is a private company, specialized in engineering and services of different types of pipelines. According to the team’s high level of expertise in both onshore and offshore pipelines, IPEC is always interested to carry out projects that challenge the engineering society of oil and gas industry. Our capability spans all types of pipeline services such as basic design, detailed design and precommissioning. By employing the most capable and experienced engineers and industry leading processes.IPEC also has a close contact with local and international partners who have made IPEC gain reputation among most of the local project owners. The international partners of IPEC include those who share the engineering know-how with our engineering team and also those who share their most high-tech equipment with us during the projects. </mutableString>
+                                <string key="text">IPEC (Ideh-Pouyan Energy Co.) is a private company, specialized in engineering and services of different types of pipelines. According to the team’s high level of expertise in both onshore and offshore pipelines, IPEC is always interested to carry out projects that challenge the engineering society of oil and gas industry. Our capability spans all types of pipeline services such as basic design, detailed design and precommissioning. By employing the most capable and experienced engineers and industry leading processes.
+IPEC also has a close contact with local and international partners who have made IPEC gain reputation among most of the local project owners. The international partners of IPEC include those who share the engineering know-how with our engineering team and also those who share their most high-tech equipment with us during the projects. 
+</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -121,13 +123,13 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCx-fi-Z0i">
                                 <rect key="frame" x="16" y="377" width="568" height="215"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Red Cube Process Development Comapny founded in 2013 as a science-based company in Shahid Beheshti University (SUB) Technology Incubator. Our Company has three departments:
+                                <string key="text">Red Cube Process Development Comapny founded in 2013 as a science-based company in Shahid Beheshti University (SUB) Technology Incubator. Our Company has three departments:
 
 - Software Department: Our professional and expert designers and developers work on different customized softwares depend on our customers' needs.  We have different teams for working on different platforms and operating systems such as iOS, OS X, Microsoft Windows, and Android.
 
 - Network Depatment: We are expert in Implementing, Designing, Technical Support and Securing Microsoft-based networks; also, we have an expert team doing peneteration testing and reports and finding security holes in different types of network and softwares.
 
-- Hardware department: We provide different brands of hardwares in Iran and middle east including Switches, Routers, Servers, Backup Storages, Firewalls, WAFs and UTMs.</mutableString>
+- Hardware department: We provide different brands of hardwares in Iran and middle east including Switches, Routers, Servers, Backup Storages, Firewalls, WAFs and UTMs.</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -305,16 +307,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJN-LD-U1c">
-                                            <rect key="frame" x="20" y="6" width="100" height="31"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Bgq-Yt-frZ"/>
-                                            </constraints>
+                                            <rect key="frame" x="20" y="6" width="35.5" height="31"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7G-ym-sPl">
-                                            <rect key="frame" x="128" y="6" width="406" height="31"/>
+                                            <rect key="frame" x="63" y="6" width="470.5" height="31"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                         </textField>
@@ -340,6 +339,7 @@
                                         <constraint firstAttribute="trailing" secondItem="I6L-P2-5xc" secondAttribute="trailing" constant="8" id="S7s-wp-KYo"/>
                                         <constraint firstItem="I6L-P2-5xc" firstAttribute="leading" secondItem="K7G-ym-sPl" secondAttribute="trailing" constant="8" symbolic="YES" id="UXV-I5-sQf"/>
                                         <constraint firstAttribute="bottom" secondItem="HJN-LD-U1c" secondAttribute="bottom" constant="6" id="gDb-1h-bDO"/>
+                                        <constraint firstItem="K7G-ym-sPl" firstAttribute="width" secondItem="HJN-LD-U1c" secondAttribute="width" priority="250" id="nmZ-Rw-cTy"/>
                                         <constraint firstItem="K7G-ym-sPl" firstAttribute="leading" secondItem="HJN-LD-U1c" secondAttribute="trailing" constant="8" symbolic="YES" id="pB1-xM-1FF"/>
                                         <constraint firstItem="I6L-P2-5xc" firstAttribute="top" secondItem="33p-pP-eRo" secondAttribute="top" constant="6" id="uym-Ec-hdZ"/>
                                         <constraint firstAttribute="bottom" secondItem="K7G-ym-sPl" secondAttribute="bottom" constant="6" id="woo-9k-AaX"/>
@@ -359,16 +359,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS8-7p-ex9">
-                                            <rect key="frame" x="20" y="-8" width="100" height="59"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="cQI-pr-1yh"/>
-                                            </constraints>
+                                            <rect key="frame" x="20" y="-8" width="35.5" height="59"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <pickerView contentMode="scaleToFill" horizontalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="uAu-5i-VIe">
-                                            <rect key="frame" x="128" y="-59.5" width="464" height="162"/>
+                                            <rect key="frame" x="63.5" y="-59.5" width="528.5" height="162"/>
                                         </pickerView>
                                     </subviews>
                                     <constraints>
@@ -539,16 +536,13 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" text="123.45678" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bom-kC-Nxp">
-                                            <rect key="frame" x="128" y="6" width="406" height="31"/>
+                                            <rect key="frame" x="63.5" y="6" width="470.5" height="31"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRK-gk-tl6">
-                                            <rect key="frame" x="20" y="6" width="100" height="31"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="LFC-Oe-ZXy"/>
-                                            </constraints>
+                                            <rect key="frame" x="20" y="6" width="35.5" height="31"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -565,6 +559,7 @@
                                         <constraint firstAttribute="bottom" secondItem="8V1-l2-kED" secondAttribute="bottom" constant="6" id="jdC-nr-WmH"/>
                                         <constraint firstAttribute="bottom" secondItem="cRK-gk-tl6" secondAttribute="bottom" constant="6" id="lvb-dX-gVU"/>
                                         <constraint firstAttribute="bottom" secondItem="bom-kC-Nxp" secondAttribute="bottom" constant="6" id="wXL-xs-KHn"/>
+                                        <constraint firstItem="cRK-gk-tl6" firstAttribute="width" secondItem="bom-kC-Nxp" secondAttribute="width" priority="250" id="xeC-hV-MVb"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
