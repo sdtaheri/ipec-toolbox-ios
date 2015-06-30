@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NUl-hR-MnK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NUl-hR-MnK">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Calculations-->
@@ -96,15 +97,82 @@
                     <view key="view" contentMode="scaleToFill" id="ptI-om-RlZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Nqw-n9-g4s">
+                                <rect key="frame" x="0.0" y="52" width="600" height="60"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMQ-nn-6x5">
+                                <rect key="frame" x="16" y="120" width="568" height="179"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">IPEC (Ideh-Pouyan Energy Co.) is a private company, specialized in engineering and services of different types of pipelines. According to the team’s high level of expertise in both onshore and offshore pipelines, IPEC is always interested to carry out projects that challenge the engineering society of oil and gas industry. Our capability spans all types of pipeline services such as basic design, detailed design and precommissioning. By employing the most capable and experienced engineers and industry leading processes.IPEC also has a close contact with local and international partners who have made IPEC gain reputation among most of the local project owners. The international partners of IPEC include those who share the engineering know-how with our engineering team and also those who share their most high-tech equipment with us during the projects. </mutableString>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Twf-5W-3fu">
+                                <rect key="frame" x="0.0" y="299" width="600" height="2"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.51764705879999995" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="OjF-1Z-kRh"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redcube-logo" translatesAutoresizingMaskIntoConstraints="NO" id="0WV-AT-fr4">
+                                <rect key="frame" x="0.0" y="309" width="600" height="60"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCx-fi-Z0i">
+                                <rect key="frame" x="16" y="377" width="568" height="215"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Red Cube Process Development Comapny founded in 2013 as a science-based company in Shahid Beheshti University (SUB) Technology Incubator. Our Company has three departments:
+
+- Software Department: Our professional and expert designers and developers work on different customized softwares depend on our customers' needs.  We have different teams for working on different platforms and operating systems such as iOS, OS X, Microsoft Windows, and Android.
+
+- Network Depatment: We are expert in Implementing, Designing, Technical Support and Securing Microsoft-based networks; also, we have an expert team doing peneteration testing and reports and finding security holes in different types of network and softwares.
+
+- Hardware department: We provide different brands of hardwares in Iran and middle east including Switches, Routers, Servers, Backup Storages, Firewalls, WAFs and UTMs.</mutableString>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Twf-5W-3fu" firstAttribute="top" secondItem="QMQ-nn-6x5" secondAttribute="bottom" id="2TW-5T-pQd"/>
+                            <constraint firstItem="Nqw-n9-g4s" firstAttribute="top" secondItem="qjT-lD-wWt" secondAttribute="bottom" constant="8" symbolic="YES" id="9Hv-DN-kEF"/>
+                            <constraint firstAttribute="centerX" secondItem="Twf-5W-3fu" secondAttribute="centerX" id="9ox-bQ-CSp"/>
+                            <constraint firstItem="PCx-fi-Z0i" firstAttribute="leading" secondItem="QMQ-nn-6x5" secondAttribute="leading" id="DEW-61-r6v"/>
+                            <constraint firstItem="Nqw-n9-g4s" firstAttribute="height" secondItem="ptI-om-RlZ" secondAttribute="height" multiplier="0.1" id="DQX-I1-8kl"/>
+                            <constraint firstItem="0WV-AT-fr4" firstAttribute="top" secondItem="Twf-5W-3fu" secondAttribute="bottom" constant="8" symbolic="YES" id="Gee-Ab-FUE"/>
+                            <constraint firstAttribute="centerX" secondItem="Nqw-n9-g4s" secondAttribute="centerX" id="NWy-6y-eei"/>
+                            <constraint firstItem="0WV-AT-fr4" firstAttribute="trailing" secondItem="Nqw-n9-g4s" secondAttribute="trailing" id="S7e-2z-JpY"/>
+                            <constraint firstItem="0WV-AT-fr4" firstAttribute="leading" secondItem="Nqw-n9-g4s" secondAttribute="leading" id="YgL-QS-NFv"/>
+                            <constraint firstItem="QMQ-nn-6x5" firstAttribute="leading" secondItem="ptI-om-RlZ" secondAttribute="leadingMargin" id="ZYd-Bp-guY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QMQ-nn-6x5" secondAttribute="trailing" id="bkh-52-Kf1"/>
+                            <constraint firstItem="Nqw-n9-g4s" firstAttribute="width" secondItem="ptI-om-RlZ" secondAttribute="width" id="h3d-yA-cgi"/>
+                            <constraint firstAttribute="centerX" secondItem="QMQ-nn-6x5" secondAttribute="centerX" id="hRh-b5-36f"/>
+                            <constraint firstItem="QMQ-nn-6x5" firstAttribute="top" secondItem="Nqw-n9-g4s" secondAttribute="bottom" constant="8" symbolic="YES" id="i08-R2-MS3"/>
+                            <constraint firstItem="0WV-AT-fr4" firstAttribute="height" secondItem="Nqw-n9-g4s" secondAttribute="height" id="k3b-1s-YFS"/>
+                            <constraint firstAttribute="width" secondItem="Twf-5W-3fu" secondAttribute="width" id="law-eF-Coj"/>
+                            <constraint firstItem="PCx-fi-Z0i" firstAttribute="trailing" secondItem="QMQ-nn-6x5" secondAttribute="trailing" id="mix-Tj-d86"/>
+                            <constraint firstItem="Avm-yN-DE9" firstAttribute="top" secondItem="PCx-fi-Z0i" secondAttribute="bottom" constant="8" symbolic="YES" id="sVB-Qb-A9p"/>
+                            <constraint firstAttribute="centerY" secondItem="Twf-5W-3fu" secondAttribute="centerY" id="sgE-Cc-YgO"/>
+                            <constraint firstItem="PCx-fi-Z0i" firstAttribute="top" secondItem="0WV-AT-fr4" secondAttribute="bottom" constant="8" symbolic="YES" id="xyJ-SK-lpj"/>
+                            <constraint firstItem="QMQ-nn-6x5" firstAttribute="height" secondItem="ptI-om-RlZ" secondAttribute="height" multiplier="0.45" id="zDs-CS-L9K"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="zDs-CS-L9K"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="About Us" id="IAD-ha-7WK">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="mL1-Nc-MFL">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="mL1-Nc-MFL">
                             <connections>
                                 <segue destination="xgM-Sj-RHY" kind="unwind" unwindAction="dismissAboutController:" id="cBA-mf-VCC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ipecTextView" destination="QMQ-nn-6x5" id="DxO-YJ-1Aa"/>
+                        <outlet property="redcubeTextView" destination="PCx-fi-Z0i" id="WKL-b0-Euy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ehN-dw-RJP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="xgM-Sj-RHY" userLabel="Exit" sceneMemberID="exit"/>
@@ -207,10 +275,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
-                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="wy6-Hl-QlB">
-                            <rect key="frame" x="0.0" y="64" width="600" height="220"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </imageView>
                         <view key="tableFooterView" contentMode="scaleToFill" id="nTH-dv-h0C">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -241,13 +305,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJN-LD-U1c">
-                                            <rect key="frame" x="20" y="6" width="36" height="31"/>
+                                            <rect key="frame" x="20" y="6" width="100" height="31"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Bgq-Yt-frZ"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7G-ym-sPl">
-                                            <rect key="frame" x="64" y="6" width="470" height="31"/>
+                                            <rect key="frame" x="128" y="6" width="406" height="31"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                         </textField>
@@ -292,13 +359,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS8-7p-ex9">
-                                            <rect key="frame" x="20" y="-8" width="36" height="59"/>
+                                            <rect key="frame" x="20" y="-8" width="100" height="59"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="cQI-pr-1yh"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <pickerView contentMode="scaleToFill" horizontalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="uAu-5i-VIe">
-                                            <rect key="frame" x="64" y="-60" width="528" height="162"/>
+                                            <rect key="frame" x="128" y="-59.5" width="464" height="162"/>
                                         </pickerView>
                                     </subviews>
                                     <constraints>
@@ -324,7 +394,6 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="headerView" destination="wy6-Hl-QlB" id="RuF-N6-XQP"/>
                         <segue destination="R7f-7a-bg7" kind="popoverPresentation" identifier="Input Unit Segue" popoverAnchorView="qqj-4D-ecI" id="yPM-Ox-X8U">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
@@ -445,6 +514,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="rlK-ds-IHp">
+                            <rect key="frame" x="0.0" y="64" width="600" height="220"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Formula Detail Cell" id="dk5-Ci-ukc" customClass="FormulaOutputCell" customModule="IPEC_Toolbox" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -466,13 +539,16 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" text="123.45678" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bom-kC-Nxp">
-                                            <rect key="frame" x="64" y="6" width="470" height="31"/>
+                                            <rect key="frame" x="128" y="6" width="406" height="31"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRK-gk-tl6">
-                                            <rect key="frame" x="20" y="6" width="36" height="31"/>
+                                            <rect key="frame" x="20" y="6" width="100" height="31"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="LFC-Oe-ZXy"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -505,6 +581,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Results" id="9eB-pP-8vi"/>
                     <connections>
+                        <outlet property="headerView" destination="rlK-ds-IHp" id="yiL-9R-57N"/>
                         <segue destination="R7f-7a-bg7" kind="popoverPresentation" identifier="Output Unit Segue" popoverAnchorView="KXl-ZB-ZZr" id="cXf-3W-zUW">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
@@ -554,10 +631,11 @@
     <resources>
         <image name="calc" width="30" height="30"/>
         <image name="logo" width="500" height="253"/>
+        <image name="redcube-logo" width="310" height="94"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yPM-Ox-X8U"/>
         <segue reference="ChO-KV-0Bm"/>
+        <segue reference="cXf-3W-zUW"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.96078431372549022" green="0.51764705882352935" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
 </document>

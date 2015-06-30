@@ -10,8 +10,14 @@ import UIKit
 
 class AboutViewController: UIViewController {
 
+    @IBOutlet weak var ipecTextView: UITextView!
+    @IBOutlet weak var redcubeTextView: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        ipecTextView.scrollRangeToVisible(NSMakeRange(0, 1))
+        redcubeTextView.scrollRangeToVisible(NSMakeRange(0, 1))
 
         // Do any additional setup after loading the view.
     }
@@ -21,15 +27,5 @@ class AboutViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -10,6 +10,16 @@ import UIKit
 
 class ResultsTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate {
     
+    @IBOutlet weak var headerView: UIImageView! {
+        didSet {
+            headerView.image = UIImage(named: "\(formulaTitle) 1")
+            
+            if headerView.image == nil {
+                headerView.frame = CGRectZero
+            }
+        }
+    }
+    
     var inputs = [Double?]()
     var userDefaults: NSUserDefaults?
     private var tutorialView: CRProductTour?
@@ -265,10 +275,10 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         
         switch formulaTitle {
         case "Pipeline Submerged Weight":
-            return "For onshore pipelines, the submerged weight is of no use; only dry weight must be used. \n\nFor calculating weight of a empty pipeline use zero density for the fluid density."
+            return "For onshore pipelines, the submerged weight is of no use; only dry weight must be used. \n\nFor calculating weight of an empty pipeline, use zero density for the fluid density."
             
         case "Maximum Allowable Working Pressure":
-            return "The “Joint Efficiency” must be selected from the Weld Types Tabled provided herein. \n\nAll calculations are in accordance with ASME, Section VIII, Division 1."
+            return "The “Joint Efficiency” must be selected from the Weld Types tabled provided herein. \n\nAll calculations are in accordance with ASME, Section VIII, Division 1."
             
         case "Temperature Drop Across Pipe Wall":
             return "Heat Transfer is assumed one-dimensional and heat flux along the pipe wall is neglected."
@@ -277,7 +287,7 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
             return "The pipe wall thickness is calculated based on ASME B31.8 and ASME B31.4."
             
         case "Pressure Drop for Fluid Flow in Pipelines":
-            return "The friction coefficient is calculated using the so-called implicit Colebrook equation. \n\nFor non-circular pipelines the equivalent hydraulic diameter must be used. \n\nOnly the difference between pipeline inlet and outlet is used in the calculations. \n\nBecause the viscosity is a function of fluid temperature, reference tables should be checked for an accurate calculation. \n\nMinor head losses are not calculated and included in the total head loss reported."
+            return "The friction coefficient is calculated using the so-called implicit Colebrook equation. \n\nFor non-circular pipelines, the equivalent hydraulic diameter must be used. \n\nOnly the difference between pipeline inlet and outlet is used in the calculations. \n\nSince the viscosity is a function of fluid temperature, reference tables should be checked for an accurate calculation. \n\nMinor head losses are not calculated and included in the reported total head loss."
             
         case "Chemical Dosing for Water Treatment":
             return "The most common way of describing dosage (ppm) is used in this calculation. \n\nThis calculation is useful when performing water treatment for pipeline operations such as filling, flooding, cleaning etc."

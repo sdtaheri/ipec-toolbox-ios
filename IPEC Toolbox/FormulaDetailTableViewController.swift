@@ -11,17 +11,7 @@ import UIKit
 class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresentationControllerDelegate, UIPopoverPresentationControllerDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     weak var resultsTableViewController: ResultsTableViewController?
-    
-    @IBOutlet weak var headerView: UIImageView! {
-        didSet {
-            headerView.image = UIImage(named: "\((navigationItem.title)!) 1")
-            
-            if headerView.image == nil {
-                headerView.frame = CGRectZero
-            }
-        }
-    }
-    
+        
     private var previousContentInset = UIEdgeInsetsZero
     
     var userDefaults: NSUserDefaults?
