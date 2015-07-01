@@ -577,7 +577,13 @@ IPEC also has a close contact with local and international partners who have mad
                             <outlet property="delegate" destination="7N4-SC-n8j" id="48Q-vL-F6R"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Results" id="9eB-pP-8vi"/>
+                    <navigationItem key="navigationItem" title="Results" id="9eB-pP-8vi">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="Zhl-la-wpR">
+                            <connections>
+                                <action selector="shareResults:" destination="7N4-SC-n8j" id="kZS-AZ-Fjj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="headerView" destination="rlK-ds-IHp" id="yiL-9R-57N"/>
                         <segue destination="R7f-7a-bg7" kind="popoverPresentation" identifier="Output Unit Segue" popoverAnchorView="KXl-ZB-ZZr" id="cXf-3W-zUW">
@@ -627,13 +633,13 @@ IPEC also has a close contact with local and international partners who have mad
         </scene>
     </scenes>
     <resources>
-        <image name="calc" width="30" height="30"/>
+        <image name="calc" width="30" height="22"/>
         <image name="logo" width="500" height="253"/>
         <image name="redcube-logo" width="310" height="94"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ChO-KV-0Bm"/>
-        <segue reference="yPM-Ox-X8U"/>
+        <segue reference="cXf-3W-zUW"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.96078431372549022" green="0.51764705882352935" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
 </document>

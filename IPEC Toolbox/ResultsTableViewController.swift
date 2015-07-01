@@ -135,6 +135,25 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         }
     }
     
+    @IBAction func shareResults(sender: UIBarButtonItem) {
+    
+        let fileName = "Results.PDF"
+        let arrayPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! [String]
+        let path = arrayPaths[0]
+        let pdfFileName = path.stringByAppendingPathComponent(fileName)
+
+        PDFRenderer.drawPDF(pdfFileName, title: formulaTitle, labels: resultsArrayKeys, results: results)
+        
+        let fileMgr = NSFileManager.defaultManager()
+        if fileMgr.fileExistsAtPath(pdfFileName) {
+            
+            let avc = UIActivityViewController(activityItems: [formulaTitle + " Calculation Results", NSURL(fileURLWithPath: pdfFileName)!], applicationActivities: nil)
+            avc.preferredContentSize = self.navigationController!.preferredContentSize
+            presentViewController(avc, animated: true, completion: nil)
+        }
+        
+    }
+    
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         if tutorialView != nil && tutorialView!.isVisible() {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -239,14 +258,14 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         cell.label.text = resultTitle
         
         if let value = resultsValue[indexPath.row], unit = resultsUnits[indexPath.row] {
-            cell.result.text = value.doubleToStringWithThounsandSeparator()
+            cell.result.text = value.doubleToStringWithThousandSeparator()
             UIView.performWithoutAnimation {
                 cell.unit.setTitle(unit, forState: .Normal)
             }
         } else {
             if let resultValue = results[resultTitle] {
                 resultsValue[indexPath.row] = resultValue.0
-                cell.result.text = resultValue.0.doubleToStringWithThounsandSeparator()
+                cell.result.text = resultValue.0.doubleToStringWithThousandSeparator()
                 
                 if let units = StringConstants.Units[resultValue.1] {
                     UIView.performWithoutAnimation {
@@ -347,7 +366,7 @@ extension Double {
         return Double(round(power * self)/power)
     }
     
-    func doubleToStringWithThounsandSeparator() -> String? {
+    func doubleToStringWithThousandSeparator() -> String? {
         let formatter = NSNumberFormatter()
         formatter.numberStyle = .DecimalStyle
         formatter.locale = NSLocale.currentLocale()
