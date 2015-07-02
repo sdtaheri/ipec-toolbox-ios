@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ResultsTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate {
+class ResultsTableViewController: UITableViewController, UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate, UIDocumentInteractionControllerDelegate {
     
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var headerView: UIImageView! {
         didSet {
             headerView.image = UIImage(named: "\(formulaTitle) 1")
@@ -38,6 +39,8 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
     private var resultsArrayKeys = [String]()
     private var resultsValue = [Double?]()
     private var resultsUnits = [String?]()
+    
+    var documentInteractionController: UIDocumentInteractionController?
 
     private weak var selectedUnitButton: UIButton?
     
@@ -49,6 +52,11 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         super.viewDidLoad()
         
         tableView.estimatedRowHeight = 44.0
+        shareButton.enabled = false
+        
+//        let helpButton = UIBarButtonItem(title: "Help", style: .Plain, target: self, action: "showHelp")
+//        helpButton.enabled = false
+//        navigationItem.rightBarButtonItems?.append(helpButton)
         
         switch formulaTitle {
             
@@ -94,50 +102,61 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        if !formulaTitle.isEmpty {
+            shareButton.enabled = true
+//            (navigationItem.rightBarButtonItems?.last! as! UIBarButtonItem).enabled = true
+        }
+        
         let formulaDetailTutorial = userDefaults?.boolForKey(StringConstants.ResultsTutorial)
+        if formulaDetailTutorial == false {
+            showHelp()
+        }
+    }
+    
+    func showHelp() {
         
         if let svc = splitViewController {
             for v in svc.view.subviews {
                 if v is CRProductTour {
                     v.removeFromSuperview()
+                    tutorialView = nil
                 }
             }
         }
-        
-        if formulaDetailTutorial == false {
-            if tableView.visibleCells().count > 0 {
-                
-                if let firstVisibleRow = tableView.visibleCells()[0] as? FormulaOutputCell {
-                    if tutorialView == nil {
-                        tutorialView = CRProductTour(frame: view.bounds)
-                        
-                        let bubble1 = CRBubble(attachedView: firstVisibleRow.unit, title: "Unit", description: "Tap to convert to a different unit.", arrowPosition: CRArrowPositionTop, andColor: view.tintColor)
-                        
-                        tutorialView!.setBubbles([bubble1])
-                        
-                        tutorialView!.setVisible(false)
-                        if let svc = splitViewController {
-                            svc.view.addSubview(tutorialView!)
-                        }
-                    }
+
+        if tableView.visibleCells().count > 0 {
+            
+            if let firstVisibleRow = tableView.visibleCells()[0] as? FormulaOutputCell {
+                if tutorialView == nil {
+                    tutorialView = CRProductTour(frame: view.bounds)
                     
-                    tutorialView!.setVisible(true)
+                    let bubble1 = CRBubble(attachedView: firstVisibleRow.unit, title: "Unit", description: "Tap to convert to a different unit.", arrowPosition: CRArrowPositionTop, andColor: view.tintColor)
+                    
+                    tutorialView!.setBubbles([bubble1])
+                    
+                    tutorialView!.setVisible(false)
                     if let svc = splitViewController {
-                        svc.view.bringSubviewToFront(tutorialView!)
+                        svc.view.addSubview(tutorialView!)
                     }
-                    
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                    appDelegate.shouldRotate = false
-                    
-                    userDefaults?.setBool(true, forKey: StringConstants.ResultsTutorial)
                 }
+                
+                tutorialView!.setVisible(true)
+                if let svc = splitViewController {
+                    svc.view.bringSubviewToFront(tutorialView!)
+                }
+                
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.shouldRotate = false
+                
+                userDefaults?.setBool(true, forKey: StringConstants.ResultsTutorial)
             }
         }
+
     }
     
     @IBAction func shareResults(sender: UIBarButtonItem) {
     
-        let fileName = "Results.PDF"
+        let fileName = "Results.pdf"
         let arrayPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! [String]
         let path = arrayPaths[0]
         let pdfFileName = path.stringByAppendingPathComponent(fileName)
@@ -147,11 +166,9 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         let fileMgr = NSFileManager.defaultManager()
         if fileMgr.fileExistsAtPath(pdfFileName) {
             
-            let avc = UIActivityViewController(activityItems: [formulaTitle + " Calculation Results", NSURL(fileURLWithPath: pdfFileName)!], applicationActivities: nil)
-            avc.preferredContentSize = self.navigationController!.preferredContentSize
-            presentViewController(avc, animated: true, completion: nil)
+            documentInteractionController = UIDocumentInteractionController(URL: NSURL(fileURLWithPath: pdfFileName)!)
+            documentInteractionController!.presentOptionsMenuFromBarButtonItem(sender, animated: true)
         }
-        
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {

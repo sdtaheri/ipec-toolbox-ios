@@ -586,6 +586,7 @@ IPEC also has a close contact with local and international partners who have mad
                     </navigationItem>
                     <connections>
                         <outlet property="headerView" destination="rlK-ds-IHp" id="yiL-9R-57N"/>
+                        <outlet property="shareButton" destination="Zhl-la-wpR" id="FO2-Xv-8e6"/>
                         <segue destination="R7f-7a-bg7" kind="popoverPresentation" identifier="Output Unit Segue" popoverAnchorView="KXl-ZB-ZZr" id="cXf-3W-zUW">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>

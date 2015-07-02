@@ -178,7 +178,10 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         
         let infoButton = UIButton.buttonWithType(.DetailDisclosure) as! UIButton
         infoButton.addTarget(self, action: "showMoreInfo:", forControlEvents: .TouchUpInside)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: infoButton)
+        
+        let helpButton = UIBarButtonItem(title: "Help", style: .Plain, target: self, action: "showHelp:")
+        
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: infoButton), helpButton]
         
         if let splitVC = self.splitViewController {
             let controllers = splitVC.viewControllers
@@ -197,43 +200,10 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let svc = splitViewController {
-            for v in svc.view.subviews {
-                if v is CRProductTour {
-                    v.removeFromSuperview()
-                }
-            }
-        }
-        
         let formulaDetailTutorial = userDefaults?.boolForKey(StringConstants.FormulaDetailTutorial)
-        
         if formulaDetailTutorial == false {
-            if tableView.visibleCells().count > 1 {
-                
-                if let firstVisibleRow = tableView.visibleCells()[1] as? FormulaInputCell {
-                    if tutorialView == nil {
-                        tutorialView = CRProductTour(frame: view.bounds)
-                        
-                        let bubble1 = CRBubble(attachedView: firstVisibleRow.textField, title: "Value", description: "Tap to enter data.\nIf ignored, dafault value will be used.", arrowPosition: CRArrowPositionBottom, andColor: view.tintColor)
-                        
-                        let bubble2 = CRBubble(attachedView: firstVisibleRow.unitLabel, title: "Unit", description: "Tap to choose a different unit.", arrowPosition: CRArrowPositionTop, andColor: view.tintColor)
-                        
-                        tutorialView!.setBubbles([bubble1, bubble2])
-                        
-                        tutorialView!.setVisible(false)
-                        if let svc = splitViewController {
-                            svc.view.addSubview(tutorialView!)
-                        }
-                    }
-                    
-                    tutorialView!.setVisible(true)
-                    
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                    appDelegate.shouldRotate = false
-                    
-                    userDefaults?.setBool(true, forKey: StringConstants.FormulaDetailTutorial)
-                }
-            }
+            let button = navigationItem.rightBarButtonItems![1] as! UIBarButtonItem
+            showHelp(button)
         }
     }
     
@@ -248,6 +218,45 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
                 }
             }
         }
+    }
+    
+    func showHelp(sender: UIBarButtonItem) {
+        if let svc = splitViewController {
+            for v in svc.view.subviews {
+                if v is CRProductTour {
+                    v.removeFromSuperview()
+                    tutorialView = nil
+                }
+            }
+        }
+        
+        if tableView.visibleCells().count > 1 {
+            
+            if let firstVisibleRow = tableView.visibleCells()[1] as? FormulaInputCell {
+                if tutorialView == nil {
+                    tutorialView = CRProductTour(frame: view.bounds)
+                    
+                    let bubble1 = CRBubble(attachedView: firstVisibleRow.textField, title: "Value", description: "Tap to enter data.\nIf ignored, dafault value will be used.", arrowPosition: CRArrowPositionBottom, andColor: view.tintColor)
+                    
+                    let bubble2 = CRBubble(attachedView: firstVisibleRow.unitLabel, title: "Unit", description: "Tap to choose a different unit.", arrowPosition: CRArrowPositionTop, andColor: view.tintColor)
+                    
+                    tutorialView!.setBubbles([bubble1, bubble2])
+                    
+                    tutorialView!.setVisible(false)
+                    if let svc = splitViewController {
+                        svc.view.addSubview(tutorialView!)
+                    }
+                }
+                
+                tutorialView!.setVisible(true)
+                
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.shouldRotate = false
+                
+                userDefaults?.setBool(true, forKey: StringConstants.FormulaDetailTutorial)
+            }
+        }
+
     }
     
     
