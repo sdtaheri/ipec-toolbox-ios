@@ -11,7 +11,7 @@ import UIKit
 class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresentationControllerDelegate, UIPopoverPresentationControllerDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     weak var resultsTableViewController: ResultsTableViewController?
-        
+    
     private var previousContentInset = UIEdgeInsetsZero
     
     var userDefaults: NSUserDefaults?
@@ -152,8 +152,11 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
                 
                 let textFieldRectInWindow = activeTextField!.convertRect(activeTextField!.bounds, toView: nil)
                 if textFieldRectInWindow.origin.y + textFieldRectInWindow.size.height >= UIScreen.mainScreen().bounds.size.height - keyboardFrame.size.height {
-
-                    previousContentInset = tableView.contentInset
+                    
+                    if previousContentInset.bottom == 0 && previousContentInset.top == 0 {
+                        previousContentInset = tableView.contentInset
+                    }
+                    
                     tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height * 1.05, right: 0)
                     tableView.scrollIndicatorInsets = tableView.contentInset
                     
@@ -179,7 +182,7 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         let infoButton = UIButton.buttonWithType(.DetailDisclosure) as! UIButton
         infoButton.addTarget(self, action: "showMoreInfo:", forControlEvents: .TouchUpInside)
         
-        let helpButton = UIBarButtonItem(title: "Help", style: .Plain, target: self, action: "showHelp:")
+        let helpButton = UIBarButtonItem(image: UIImage(named: "help")!, style: .Plain, target: self, action: "showHelp:")
         
         navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: infoButton), helpButton]
         
@@ -256,7 +259,7 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
                 userDefaults?.setBool(true, forKey: StringConstants.FormulaDetailTutorial)
             }
         }
-
+        
     }
     
     
@@ -358,7 +361,7 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
             tutorialView?.setVisible(false)
         }
     }
-
+    
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -415,84 +418,84 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         }
     }
     
-        // MARK: - TextField
+    // MARK: - TextField
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        activeTextField = textField
         
-        func textFieldDidBeginEditing(textField: UITextField) {
-            activeTextField = textField
+        if tutorialView != nil && tutorialView!.isVisible() {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.shouldRotate = true
             
-            if tutorialView != nil && tutorialView!.isVisible() {
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                appDelegate.shouldRotate = true
-                
-                tutorialView?.setVisible(false)
-            }
-            
+            tutorialView?.setVisible(false)
         }
         
-        func textFieldDidEndEditing(textField: UITextField) {
-            activeTextField = nil
-            if let contentView = textField.superview {
-                if let cell = contentView.superview as? FormulaInputCell {
-                    if let cellRow = tableView.indexPathForCell(cell) {
-                        if let doubleValue = textField.text.toDouble() {
-                            inputValues[cellRow.row].0 = doubleValue
-                            
-                            if let titleInputs = StringConstants.Inputs[formulaTitle!] {
-                                if let unitType = titleInputs[(cell.label.text)!] {
-                                    inputValues[cellRow.row].1 = unitType.0
-                                }
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        activeTextField = nil
+        if let contentView = textField.superview {
+            if let cell = contentView.superview as? FormulaInputCell {
+                if let cellRow = tableView.indexPathForCell(cell) {
+                    if let doubleValue = textField.text.toDouble() {
+                        inputValues[cellRow.row].0 = doubleValue
+                        
+                        if let titleInputs = StringConstants.Inputs[formulaTitle!] {
+                            if let unitType = titleInputs[(cell.label.text)!] {
+                                inputValues[cellRow.row].1 = unitType.0
                             }
                         }
                     }
                 }
             }
         }
-        
-        func textFieldShouldReturn(textField: UITextField) -> Bool {
-            textField.resignFirstResponder()
-            compute(UIButton())
-            return true
-        }
-        
-        // MARK: - PickerView
-        
-        func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-            return 1
-        }
-        
-        func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-            if let cell = pickerView.superview?.superview as? FormulaInputCellMultipleChoice {
-                if let items = MultipleChoiceItems.Dictionary[formulaTitle! + cell.label.text!] {
-                    return items.count
-                }
-            }
-            return 0
-        }
-        
-        func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
-            var label = view as? UILabel
-            if label == nil {
-                label = UILabel()
-                label?.textAlignment = NSTextAlignment.Center
-                label?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
-                label?.lineBreakMode = NSLineBreakMode.ByTruncatingTail
-                label?.adjustsFontSizeToFitWidth = true
-                label?.minimumScaleFactor = 0.5
-                label?.numberOfLines = 0
-            }
-            
-            if let cell = pickerView.superview?.superview as? FormulaInputCellMultipleChoice {
-                if let items = MultipleChoiceItems.Dictionary[formulaTitle! + cell.label.text!] {
-                    label?.text = items[row]
-                }
-            }
-            
-            return label!
-        }
     }
     
-    extension String {
-        func toDouble() -> Double? {
-            return NSNumberFormatter().numberFromString(self)?.doubleValue
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        compute(UIButton())
+        return true
+    }
+    
+    // MARK: - PickerView
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if let cell = pickerView.superview?.superview as? FormulaInputCellMultipleChoice {
+            if let items = MultipleChoiceItems.Dictionary[formulaTitle! + cell.label.text!] {
+                return items.count
+            }
         }
+        return 0
+    }
+    
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+        var label = view as? UILabel
+        if label == nil {
+            label = UILabel()
+            label?.textAlignment = NSTextAlignment.Center
+            label?.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+            label?.lineBreakMode = NSLineBreakMode.ByTruncatingTail
+            label?.adjustsFontSizeToFitWidth = true
+            label?.minimumScaleFactor = 0.5
+            label?.numberOfLines = 0
+        }
+        
+        if let cell = pickerView.superview?.superview as? FormulaInputCellMultipleChoice {
+            if let items = MultipleChoiceItems.Dictionary[formulaTitle! + cell.label.text!] {
+                label?.text = items[row]
+            }
+        }
+        
+        return label!
+    }
+}
+
+extension String {
+    func toDouble() -> Double? {
+        return NSNumberFormatter().numberFromString(self)?.doubleValue
+    }
 }

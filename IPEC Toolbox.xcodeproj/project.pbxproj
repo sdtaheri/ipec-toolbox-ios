@@ -21,6 +21,8 @@
 		3081F1D91B109CCB004BA309 /* IPEC_ToolboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F1D81B109CCB004BA309 /* IPEC_ToolboxTests.swift */; };
 		3081F1E31B109E41004BA309 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F1E21B109E41004BA309 /* MoreTableViewController.swift */; };
 		3081F2151B10A34C004BA309 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F2141B10A34C004BA309 /* AboutViewController.swift */; };
+		30936AA11B4B1132005D32CA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30936A9F1B4B1111005D32CA /* MessageUI.framework */; };
+		30936AA41B4B1339005D32CA /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 30936AA31B4B1339005D32CA /* DeviceInfo.m */; };
 		309C2FAC1B44657200605E6F /* PDFRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 309C2FAB1B44657200605E6F /* PDFRenderer.swift */; };
 		309C2FAE1B4468BE00605E6F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 309C2FAD1B4468BE00605E6F /* CoreText.framework */; };
 		30DABCD31B18AF000015DE8E /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DABCD21B18AF000015DE8E /* MoreInfoViewController.swift */; };
@@ -62,6 +64,9 @@
 		3081F1D81B109CCB004BA309 /* IPEC_ToolboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPEC_ToolboxTests.swift; sourceTree = "<group>"; };
 		3081F1E21B109E41004BA309 /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
 		3081F2141B10A34C004BA309 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		30936A9F1B4B1111005D32CA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		30936AA21B4B1339005D32CA /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
+		30936AA31B4B1339005D32CA /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
 		309C2FAB1B44657200605E6F /* PDFRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFRenderer.swift; sourceTree = "<group>"; };
 		309C2FAD1B4468BE00605E6F /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		30DABCD21B18AF000015DE8E /* MoreInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30936AA11B4B1132005D32CA /* MessageUI.framework in Frameworks */,
 				309C2FAE1B4468BE00605E6F /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -104,7 +110,6 @@
 		3081F1B41B109CCB004BA309 = {
 			isa = PBXGroup;
 			children = (
-				309C2FAD1B4468BE00605E6F /* CoreText.framework */,
 				3081F1BF1B109CCB004BA309 /* IPEC Toolbox */,
 				3081F1D51B109CCB004BA309 /* IPEC ToolboxTests */,
 				3081F1BE1B109CCB004BA309 /* Products */,
@@ -143,7 +148,11 @@
 		3081F1C01B109CCB004BA309 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				30936A9F1B4B1111005D32CA /* MessageUI.framework */,
+				309C2FAD1B4468BE00605E6F /* CoreText.framework */,
 				309C2FAB1B44657200605E6F /* PDFRenderer.swift */,
+				30936AA21B4B1339005D32CA /* DeviceInfo.h */,
+				30936AA31B4B1339005D32CA /* DeviceInfo.m */,
 				301148241B3D7F9A00AEA3EA /* IPEC-Toolbox-Bridging-Header.h */,
 				3011481D1B3D7EE900AEA3EA /* ProductTour */,
 				303155A61B1BA7F9009B32CA /* UnitsExtension.swift */,
@@ -276,6 +285,7 @@
 				3081F1C51B109CCB004BA309 /* MainTableViewController.swift in Sources */,
 				3081F1E31B109E41004BA309 /* MoreTableViewController.swift in Sources */,
 				3081F2151B10A34C004BA309 /* AboutViewController.swift in Sources */,
+				30936AA41B4B1339005D32CA /* DeviceInfo.m in Sources */,
 				304D0E6F1B165EB2006483A9 /* UnitsTableViewController.swift in Sources */,
 				301148221B3D7EE900AEA3EA /* CRBubble.m in Sources */,
 				30E823321B15BA9600835D73 /* FormulaDetailTableViewController.swift in Sources */,

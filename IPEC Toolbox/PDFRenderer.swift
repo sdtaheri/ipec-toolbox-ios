@@ -144,7 +144,7 @@ class PDFRenderer: NSObject {
                     CGContextFillRect(UIGraphicsGetCurrentContext(), frame)
                 }
                 
-                let labelFrame = CGRectMake(from.x, from.y + (rowHeight - 20)/2, columnWidth * 2, 20);
+                let labelFrame = CGRectMake(from.x + 20, from.y + (rowHeight - 20)/2, columnWidth * 2, 20)
                 drawText(labels[i], inFrame: labelFrame, fontName: "Helvetica", fontSize: 14, centerAligned: false)
                 
                 if let resultValue = results[labels[i]] {
