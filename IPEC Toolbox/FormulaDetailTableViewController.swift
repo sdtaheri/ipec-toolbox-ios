@@ -153,9 +153,11 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
                 let textFieldRectInWindow = activeTextField!.convertRect(activeTextField!.bounds, toView: nil)
                 if textFieldRectInWindow.origin.y + textFieldRectInWindow.size.height >= UIScreen.mainScreen().bounds.size.height - keyboardFrame.size.height {
                     
-                    if previousContentInset.bottom == 0 && previousContentInset.top == 0 {
+                    if previousContentInset.bottom == 0 && previousContentInset.top == 0 && tableView.contentInset.bottom != 0 {
                         previousContentInset = tableView.contentInset
                     }
+                    
+                    println(tableView.contentInset.bottom)
                     
                     tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height * 1.05, right: 0)
                     tableView.scrollIndicatorInsets = tableView.contentInset

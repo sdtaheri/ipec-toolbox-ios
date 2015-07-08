@@ -11,6 +11,9 @@ import MessageUI
 
 class MoreTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
 
+    private let appURL = "http://itunes.apple.com/app/id1017269434"
+    private let reviewURL = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1017269434&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"
+    
     private var selectedIndexPath: NSIndexPath?
     
     // MARK: - Table view data source
@@ -39,15 +42,32 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedIndexPath = indexPath
+        
         switch indexPath.row {
         case 0: //About Us
             performSegueWithIdentifier("About Segue", sender: nil)
+        case 1: // Share this app
+            let url = NSURL(string: appURL)!
+            let vc = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            presentViewController(vc, animated: true, completion: nil)
+            
+            if selectedIndexPath != nil {
+                tableView.deselectRowAtIndexPath(selectedIndexPath!, animated: true)
+            }
         case 2: // Contact Us
             sendEmail()
+        case 3: // Rate Us
+            let url = NSURL(string: reviewURL)!
+
+            if selectedIndexPath != nil {
+                tableView.deselectRowAtIndexPath(selectedIndexPath!, animated: true)
+            }
+
+            UIApplication.sharedApplication().openURL(url)
         default: break
         }
         
-        selectedIndexPath = indexPath
     }
     
     // MARK: - Helper Methods
@@ -60,7 +80,7 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
             let OSVersion = UIDevice.currentDevice().systemVersion
             
             let emailSubject = "IPEC Toolbox Support"
-            let messageBody = "<p> About IPEC Toolbox ... </p><br><p>Device: <b>\(deviceModel)</b><br>iOS Version: <b>\(OSVersion)</b></p>"
+            let messageBody = "<p> About IPEC Toolbox ... </p><br><p>Device: <b>\(deviceModel)</b><br>iOS Version: <b>\(OSVersion)</b></p><p>We will never send you any ads or spams.</p>"
             let toRecipients = ["toolbox@ipecgroup.net"]
             
             let mc = MFMailComposeViewController()
