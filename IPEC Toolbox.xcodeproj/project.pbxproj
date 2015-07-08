@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		300AA1FB1B4D3F9B002F393C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 300AA1FA1B4D3F9B002F393C /* Images.xcassets */; };
 		301148221B3D7EE900AEA3EA /* CRBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 3011481F1B3D7EE900AEA3EA /* CRBubble.m */; };
 		301148231B3D7EE900AEA3EA /* CRProductTour.m in Sources */ = {isa = PBXBuildFile; fileRef = 301148211B3D7EE900AEA3EA /* CRProductTour.m */; };
 		301D94831B21DB48006FBFC0 /* FormulaInputCellMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301D94821B21DB48006FBFC0 /* FormulaInputCellMultipleChoice.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		300AA1FA1B4D3F9B002F393C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3011481E1B3D7EE900AEA3EA /* CRBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRBubble.h; sourceTree = "<group>"; };
 		3011481F1B3D7EE900AEA3EA /* CRBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRBubble.m; sourceTree = "<group>"; };
 		301148201B3D7EE900AEA3EA /* CRProductTour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRProductTour.h; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				304D0E701B1723AB006483A9 /* ResultsTableViewController.swift */,
 				3081F2141B10A34C004BA309 /* AboutViewController.swift */,
 				3081F1E21B109E41004BA309 /* MoreTableViewController.swift */,
+				300AA1FA1B4D3F9B002F393C /* Images.xcassets */,
 				3081F1C01B109CCB004BA309 /* Supporting Files */,
 			);
 			path = "IPEC Toolbox";
@@ -259,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				300AA1FB1B4D3F9B002F393C /* Images.xcassets in Resources */,
 				3081F1C81B109CCB004BA309 /* Main.storyboard in Resources */,
 				3081F1CD1B109CCB004BA309 /* LaunchScreen.xib in Resources */,
 			);
