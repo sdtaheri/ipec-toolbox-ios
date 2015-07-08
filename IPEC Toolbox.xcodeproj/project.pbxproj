@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		301148221B3D7EE900AEA3EA /* CRBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 3011481F1B3D7EE900AEA3EA /* CRBubble.m */; };
 		301148231B3D7EE900AEA3EA /* CRProductTour.m in Sources */ = {isa = PBXBuildFile; fileRef = 301148211B3D7EE900AEA3EA /* CRProductTour.m */; };
-		301491741B223B7A0069C778 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3081F1C91B109CCB004BA309 /* Images.xcassets */; };
 		301D94831B21DB48006FBFC0 /* FormulaInputCellMultipleChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 301D94821B21DB48006FBFC0 /* FormulaInputCellMultipleChoice.swift */; };
 		303155A71B1BA7F9009B32CA /* UnitsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 303155A61B1BA7F9009B32CA /* UnitsExtension.swift */; };
 		304D0E6F1B165EB2006483A9 /* UnitsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304D0E6E1B165EB2006483A9 /* UnitsTableViewController.swift */; };
@@ -57,7 +56,6 @@
 		3081F1C21B109CCB004BA309 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3081F1C41B109CCB004BA309 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		3081F1C71B109CCB004BA309 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3081F1C91B109CCB004BA309 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3081F1CC1B109CCB004BA309 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3081F1D21B109CCB004BA309 /* IPEC ToolboxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IPEC ToolboxTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3081F1D71B109CCB004BA309 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 				304D0E701B1723AB006483A9 /* ResultsTableViewController.swift */,
 				3081F2141B10A34C004BA309 /* AboutViewController.swift */,
 				3081F1E21B109E41004BA309 /* MoreTableViewController.swift */,
-				3081F1C91B109CCB004BA309 /* Images.xcassets */,
 				3081F1C01B109CCB004BA309 /* Supporting Files */,
 			);
 			path = "IPEC Toolbox";
@@ -262,7 +259,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				301491741B223B7A0069C778 /* Images.xcassets in Resources */,
 				3081F1C81B109CCB004BA309 /* Main.storyboard in Resources */,
 				3081F1CD1B109CCB004BA309 /* LaunchScreen.xib in Resources */,
 			);
