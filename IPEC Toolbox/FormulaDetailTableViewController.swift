@@ -151,20 +151,11 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
                 let keyboardFrame = notificationValue.CGRectValue()
                 
                 let textFieldRectInWindow = activeTextField!.convertRect(activeTextField!.bounds, toView: nil)
-                if textFieldRectInWindow.origin.y + textFieldRectInWindow.size.height >= UIScreen.mainScreen().bounds.size.height - keyboardFrame.size.height {
-                    
-                    if previousContentInset.bottom == 0 && previousContentInset.top == 0 && tableView.contentInset.bottom != 0 {
-                        previousContentInset = tableView.contentInset
-                    }
-                    
-                    println(tableView.contentInset.bottom)
-                    
-                    tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height * 1.05, right: 0)
-                    tableView.scrollIndicatorInsets = tableView.contentInset
-                    
-                    let textFieldRectInTableView = activeTextField!.convertRect(activeTextField!.bounds, toView: tableView)
-                    tableView.scrollRectToVisible(textFieldRectInTableView, animated: true)
-                }
+                tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height * 1.05, right: 0)
+                tableView.scrollIndicatorInsets = tableView.contentInset
+                
+                let textFieldRectInTableView = activeTextField!.convertRect(activeTextField!.bounds, toView: tableView)
+                tableView.scrollRectToVisible(textFieldRectInTableView, animated: true)
             }
         }
     }
@@ -184,9 +175,11 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
         let infoButton = UIButton.buttonWithType(.DetailDisclosure) as! UIButton
         infoButton.addTarget(self, action: "showMoreInfo:", forControlEvents: .TouchUpInside)
         
-        let helpButton = UIBarButtonItem(image: UIImage(named: "help")!, style: .Plain, target: self, action: "showHelp:")
-        
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: infoButton), helpButton]
+        let helpButton = UIButton(frame: CGRectMake(0, 0, 22, 22))
+        helpButton.setImage(UIImage(named: "help")!, forState: .Normal)
+        helpButton.addTarget(self, action: "showHelp:", forControlEvents: .TouchUpInside)
+
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: infoButton), UIBarButtonItem(customView: helpButton)]
         
         if let splitVC = self.splitViewController {
             let controllers = splitVC.viewControllers
@@ -204,6 +197,8 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        previousContentInset = tableView.contentInset
         
         let formulaDetailTutorial = userDefaults?.boolForKey(StringConstants.FormulaDetailTutorial)
         if formulaDetailTutorial == false {
