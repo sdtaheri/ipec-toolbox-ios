@@ -76,6 +76,15 @@ class UnitsTableViewController: UITableViewController {
         }
         
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        if let ppcDelegate = self.popoverPresentationController!.delegate {
+            if ppcDelegate is FormulaDetailTableViewController {
+                (ppcDelegate as! FormulaDetailTableViewController).popoverPresentationControllerDidDismissPopover(self.popoverPresentationController!)
+            } else if ppcDelegate is ResultsTableViewController {
+                (ppcDelegate as! ResultsTableViewController).popoverPresentationControllerDidDismissPopover(self.popoverPresentationController!)
+            }
+        }
+        dismissViewControllerAnimated(true, completion:nil)
     }
     
 }

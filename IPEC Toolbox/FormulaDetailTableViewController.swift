@@ -221,6 +221,9 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
     }
     
     func showHelp(sender: UIBarButtonItem) {
+        
+        tableView.contentOffset = CGPointZero
+        
         if let svc = splitViewController {
             for v in svc.view.subviews {
                 if v is CRProductTour {

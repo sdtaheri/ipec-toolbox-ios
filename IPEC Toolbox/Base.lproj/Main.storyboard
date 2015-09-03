@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NUl-hR-MnK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NUl-hR-MnK">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Calculations-->
@@ -99,70 +98,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Nqw-n9-g4s">
-                                <rect key="frame" x="0.0" y="52" width="600" height="60"/>
+                                <rect key="frame" x="50" y="56" width="500" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="VVg-RJ-KUT"/>
+                                </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMQ-nn-6x5">
-                                <rect key="frame" x="16" y="120" width="568" height="179"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMQ-nn-6x5">
+                                <rect key="frame" x="0.0" y="124" width="600" height="476"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">IPEC (Ideh-Pouyan Energy Co.) is a private company, specialized in engineering and services of different types of pipelines. According to the team’s high level of expertise in both onshore and offshore pipelines, IPEC is always interested to carry out projects that challenge the engineering society of oil and gas industry. Our capability spans all types of pipeline services such as basic design, detailed design and precommissioning. By employing the most capable and experienced engineers and industry leading processes.
 IPEC also has a close contact with local and international partners who have made IPEC gain reputation among most of the local project owners. The international partners of IPEC include those who share the engineering know-how with our engineering team and also those who share their most high-tech equipment with us during the projects. 
 </string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Twf-5W-3fu">
-                                <rect key="frame" x="0.0" y="299" width="600" height="2"/>
-                                <color key="backgroundColor" red="0.96078431369999995" green="0.51764705879999995" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="2" id="OjF-1Z-kRh"/>
-                                </constraints>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="redcube-logo" translatesAutoresizingMaskIntoConstraints="NO" id="0WV-AT-fr4">
-                                <rect key="frame" x="0.0" y="309" width="600" height="60"/>
-                            </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCx-fi-Z0i">
-                                <rect key="frame" x="16" y="377" width="568" height="215"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Red Cube Process Development Comapny founded in 2013 as a science-based company in Shahid Beheshti University (SUB) Technology Incubator. Our Company has three departments:
-
-- Software Department: Our professional and expert designers and developers work on different customized softwares depend on our customers' needs.  We have different teams for working on different platforms and operating systems such as iOS, OS X, Microsoft Windows, and Android.
-
-- Network Depatment: We are expert in Implementing, Designing, Technical Support and Securing Microsoft-based networks; also, we have an expert team doing peneteration testing and reports and finding security holes in different types of network and softwares.
-
-- Hardware department: We provide different brands of hardwares in Iran and middle east including Switches, Routers, Servers, Backup Storages, Firewalls, WAFs and UTMs.</string>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Twf-5W-3fu" firstAttribute="top" secondItem="QMQ-nn-6x5" secondAttribute="bottom" id="2TW-5T-pQd"/>
-                            <constraint firstItem="Nqw-n9-g4s" firstAttribute="top" secondItem="qjT-lD-wWt" secondAttribute="bottom" constant="8" symbolic="YES" id="9Hv-DN-kEF"/>
-                            <constraint firstAttribute="centerX" secondItem="Twf-5W-3fu" secondAttribute="centerX" id="9ox-bQ-CSp"/>
-                            <constraint firstItem="PCx-fi-Z0i" firstAttribute="leading" secondItem="QMQ-nn-6x5" secondAttribute="leading" id="DEW-61-r6v"/>
-                            <constraint firstItem="Nqw-n9-g4s" firstAttribute="height" secondItem="ptI-om-RlZ" secondAttribute="height" multiplier="0.1" id="DQX-I1-8kl"/>
-                            <constraint firstItem="0WV-AT-fr4" firstAttribute="top" secondItem="Twf-5W-3fu" secondAttribute="bottom" constant="8" symbolic="YES" id="Gee-Ab-FUE"/>
+                            <constraint firstItem="Nqw-n9-g4s" firstAttribute="top" secondItem="qjT-lD-wWt" secondAttribute="bottom" constant="12" id="9Hv-DN-kEF"/>
                             <constraint firstAttribute="centerX" secondItem="Nqw-n9-g4s" secondAttribute="centerX" id="NWy-6y-eei"/>
-                            <constraint firstItem="0WV-AT-fr4" firstAttribute="trailing" secondItem="Nqw-n9-g4s" secondAttribute="trailing" id="S7e-2z-JpY"/>
-                            <constraint firstItem="0WV-AT-fr4" firstAttribute="leading" secondItem="Nqw-n9-g4s" secondAttribute="leading" id="YgL-QS-NFv"/>
-                            <constraint firstItem="QMQ-nn-6x5" firstAttribute="leading" secondItem="ptI-om-RlZ" secondAttribute="leadingMargin" id="ZYd-Bp-guY"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="QMQ-nn-6x5" secondAttribute="trailing" id="bkh-52-Kf1"/>
-                            <constraint firstItem="Nqw-n9-g4s" firstAttribute="width" secondItem="ptI-om-RlZ" secondAttribute="width" id="h3d-yA-cgi"/>
+                            <constraint firstItem="QMQ-nn-6x5" firstAttribute="leading" secondItem="ptI-om-RlZ" secondAttribute="leading" id="ZYd-Bp-guY"/>
+                            <constraint firstAttribute="trailing" secondItem="QMQ-nn-6x5" secondAttribute="trailing" id="bkh-52-Kf1"/>
                             <constraint firstAttribute="centerX" secondItem="QMQ-nn-6x5" secondAttribute="centerX" id="hRh-b5-36f"/>
                             <constraint firstItem="QMQ-nn-6x5" firstAttribute="top" secondItem="Nqw-n9-g4s" secondAttribute="bottom" constant="8" symbolic="YES" id="i08-R2-MS3"/>
-                            <constraint firstItem="0WV-AT-fr4" firstAttribute="height" secondItem="Nqw-n9-g4s" secondAttribute="height" id="k3b-1s-YFS"/>
-                            <constraint firstAttribute="width" secondItem="Twf-5W-3fu" secondAttribute="width" id="law-eF-Coj"/>
-                            <constraint firstItem="PCx-fi-Z0i" firstAttribute="trailing" secondItem="QMQ-nn-6x5" secondAttribute="trailing" id="mix-Tj-d86"/>
-                            <constraint firstItem="Avm-yN-DE9" firstAttribute="top" secondItem="PCx-fi-Z0i" secondAttribute="bottom" constant="8" symbolic="YES" id="sVB-Qb-A9p"/>
-                            <constraint firstAttribute="centerY" secondItem="Twf-5W-3fu" secondAttribute="centerY" id="sgE-Cc-YgO"/>
-                            <constraint firstItem="PCx-fi-Z0i" firstAttribute="top" secondItem="0WV-AT-fr4" secondAttribute="bottom" constant="8" symbolic="YES" id="xyJ-SK-lpj"/>
-                            <constraint firstItem="QMQ-nn-6x5" firstAttribute="height" secondItem="ptI-om-RlZ" secondAttribute="height" multiplier="0.45" id="zDs-CS-L9K"/>
+                            <constraint firstItem="Avm-yN-DE9" firstAttribute="top" secondItem="QMQ-nn-6x5" secondAttribute="bottom" id="l9Z-X5-fVW"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="zDs-CS-L9K"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="About Us" id="IAD-ha-7WK">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="mL1-Nc-MFL">
@@ -172,8 +133,8 @@ IPEC also has a close contact with local and international partners who have mad
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="ipecLogo" destination="Nqw-n9-g4s" id="icF-0u-hB7"/>
                         <outlet property="ipecTextView" destination="QMQ-nn-6x5" id="DxO-YJ-1Aa"/>
-                        <outlet property="redcubeTextView" destination="PCx-fi-Z0i" id="WKL-b0-Euy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ehN-dw-RJP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -451,38 +412,37 @@ IPEC also has a close contact with local and international partners who have mad
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFj-Do-2q9">
-                                <rect key="frame" x="0.0" y="104" width="600" height="496"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFj-Do-2q9">
+                                <rect key="frame" x="16" y="103" width="568" height="497"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M7r-Mj-mkQ">
-                                <rect key="frame" x="254" y="52" width="44" height="44"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bz2-zv-Hky">
+                                <rect key="frame" x="68" y="52" width="41" height="43"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M7r-Mj-mkQ">
+                                <rect key="frame" x="16" y="51" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="EWn-Re-145"/>
                                     <constraint firstAttribute="width" constant="44" id="cx4-4P-K4A"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bz2-zv-Hky">
-                                <rect key="frame" x="306" y="52" width="41" height="45"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="LFj-Do-2q9" secondAttribute="trailing" id="1rL-gJ-OTi"/>
-                            <constraint firstItem="M7r-Mj-mkQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bsP-sC-Lhk" secondAttribute="leadingMargin" id="82V-Mc-VmT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LFj-Do-2q9" secondAttribute="trailing" id="1rL-gJ-OTi"/>
                             <constraint firstItem="LFj-Do-2q9" firstAttribute="top" secondItem="M7r-Mj-mkQ" secondAttribute="bottom" priority="750" constant="8" symbolic="YES" id="EeT-s5-EHi"/>
-                            <constraint firstItem="LFj-Do-2q9" firstAttribute="leading" secondItem="bsP-sC-Lhk" secondAttribute="leading" id="HfW-HV-QKp"/>
+                            <constraint firstItem="LFj-Do-2q9" firstAttribute="leading" secondItem="M7r-Mj-mkQ" secondAttribute="leading" id="FKN-EE-zqo"/>
+                            <constraint firstItem="LFj-Do-2q9" firstAttribute="leading" secondItem="bsP-sC-Lhk" secondAttribute="leadingMargin" id="HfW-HV-QKp"/>
                             <constraint firstItem="M7r-Mj-mkQ" firstAttribute="top" secondItem="JyH-pc-9py" secondAttribute="bottom" priority="750" constant="8" symbolic="YES" id="J1U-0V-PZU"/>
                             <constraint firstItem="LFj-Do-2q9" firstAttribute="bottom" secondItem="qvc-Go-LIC" secondAttribute="top" id="OPO-aU-c7k"/>
                             <constraint firstItem="bz2-zv-Hky" firstAttribute="top" secondItem="JyH-pc-9py" secondAttribute="bottom" constant="8" symbolic="YES" id="Pwd-PP-vtg"/>
                             <constraint firstItem="LFj-Do-2q9" firstAttribute="top" secondItem="bz2-zv-Hky" secondAttribute="bottom" constant="8" symbolic="YES" id="YcO-n9-cqJ"/>
                             <constraint firstItem="bz2-zv-Hky" firstAttribute="leading" secondItem="M7r-Mj-mkQ" secondAttribute="trailing" constant="8" symbolic="YES" id="jH2-TS-9ke"/>
-                            <constraint firstAttribute="centerX" secondItem="bz2-zv-Hky" secondAttribute="centerX" constant="-26" id="o8r-Ol-Giu"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="bz2-zv-Hky" secondAttribute="trailing" id="rCe-Hc-aev"/>
                             <constraint firstItem="bz2-zv-Hky" firstAttribute="centerY" secondItem="M7r-Mj-mkQ" secondAttribute="centerY" id="yWA-0O-q3E"/>
                         </constraints>
@@ -636,7 +596,6 @@ IPEC also has a close contact with local and international partners who have mad
     <resources>
         <image name="calc" width="30" height="22"/>
         <image name="logo" width="500" height="253"/>
-        <image name="redcube-logo" width="310" height="94"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ChO-KV-0Bm"/>

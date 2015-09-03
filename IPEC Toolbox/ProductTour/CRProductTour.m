@@ -140,6 +140,14 @@ static NSMutableArray *arrayOfAllocatedTours;
     }
 }
 
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    if ([self pointInside:point withEvent:event]) {
+        [self setVisible:NO];
+        return nil;
+    }
+    return [super hitTest:point withEvent:event];
+}
+
 -(void)dealloc
 {
     [arrayOfAllocatedTours removeObject:self];

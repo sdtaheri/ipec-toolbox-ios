@@ -12,7 +12,11 @@ class MoreInfoViewController: UIViewController {
 
     var formulaTitle: String?
     let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textView: UITextView! {
+        didSet {
+            textView.textContainerInset = UIEdgeInsetsZero
+        }
+    }
     @IBOutlet weak var formulaLabel: UILabel! {
         didSet {
             formulaLabel.text = formulaTitle
@@ -90,6 +94,6 @@ class MoreInfoViewController: UIViewController {
         default: break
         }
         
-        textView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        textView.font = UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline)
     }
 }
