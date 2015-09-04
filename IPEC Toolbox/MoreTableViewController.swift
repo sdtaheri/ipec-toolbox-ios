@@ -10,11 +10,16 @@ import UIKit
 import MessageUI
 
 class MoreTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
-
+    
     private let appURL = "http://itunes.apple.com/app/id1017269434"
     private let reviewURL = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1017269434&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8"
     
     private var selectedIndexPath: NSIndexPath?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.estimatedRowHeight = 44.0
+    }
     
     // MARK: - Table view data source
 
@@ -70,6 +75,13 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
         
     }
     
+    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        var string = "You can share this app with your friends or colleagues so they can enjoy using it as well as you.\n\n"
+        string += "We will never send you any spams or ads. Feel free to contact us via email.\n\n"
+        string += "By rating the app in the App Store, you'll give us more energy in order to provide you with a better experience."
+        return string
+    }
+    
     // MARK: - Helper Methods
     
     func sendEmail() {
@@ -80,7 +92,7 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
             let OSVersion = UIDevice.currentDevice().systemVersion
             
             let emailSubject = "IPEC Toolbox Support"
-            let messageBody = "<p> About IPEC Toolbox ... </p><br><p>Device: <b>\(deviceModel)</b><br>iOS Version: <b>\(OSVersion)</b></p><p>We will never send you any ads or spams.</p>"
+            let messageBody = "<small><p>Please type your comments about this app below this line.</small></p><hr><br><br><br><br><br><br><br><hr><p><small>Device: <b>\(deviceModel)</b><br>iOS Version: <b>\(OSVersion)</b></small></p>"
             let toRecipients = ["toolbox@ipecgroup.net"]
             
             let mc = MFMailComposeViewController()

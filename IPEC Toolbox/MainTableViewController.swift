@@ -89,6 +89,7 @@ class MainTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         tableView.estimatedRowHeight = 44
+        tableView.contentInset.bottom += 16
     }
     
     override func viewWillAppear(animated: Bool) {
