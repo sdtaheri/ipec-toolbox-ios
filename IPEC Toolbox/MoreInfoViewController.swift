@@ -75,8 +75,8 @@ class MoreInfoViewController: UIViewController {
             textView.text = "This module calculates the pressure drop for flow of a fluid through a pipeline. The fluid phase must be liquid or gas. The calculation considers major losses due to friction and also the pressure drop due to change in elevation of pipeline inlet and outlet. For calculating the friction coefficient, the estimated absolute surface roughness must be specified."
             formulaIcon.image = UIImage(named: "Formula21")
             
-        case "Chemical Dosing for Water Treatment":
-            textView.text = "This module calculates the required pumping capacity for a dosing (injection) pump in water treatment operations. It is assumed that a specified chemical dosage must be provided for the main water stream. Knowing the water flow rate value in addition to the dosage, the flow rate of injection pump can be calculated."
+        case "Inhibitor Chemical and Sea Dye Injection Rate":
+            textView.text = "This formula calculates the total required inhibitor chemical and sea dye for flooding a pipeline with given dimensions."
             formulaIcon.image = UIImage(named: "Formula22")
             
         case "Pipeline Internal Volume":

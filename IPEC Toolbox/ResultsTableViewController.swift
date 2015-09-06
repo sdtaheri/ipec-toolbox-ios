@@ -54,10 +54,6 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         tableView.estimatedRowHeight = 44.0
         shareButton.enabled = false
         
-//        let helpButton = UIBarButtonItem(title: "Help", style: .Plain, target: self, action: "showHelp")
-//        helpButton.enabled = false
-//        navigationItem.rightBarButtonItems?.append(helpButton)
-        
         switch formulaTitle {
             
         case "Maximum Allowable Working Pressure":
@@ -82,8 +78,8 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         case "Pressure Drop for Fluid Flow in Pipelines":
             results = Calculations.pressureDropForFluidFlowInPipelines(fluidDensity: inputs[0]!, fluidDynamicViscosity: inputs[1]!, pipelineInletElevation: inputs[2]!, pipelineLength: inputs[3]!, pipelineOutletElevation: inputs[4]!, pipelineOutsideDiameter: inputs[5]!, pipelineWallThickness: inputs[6]!, surfaceRoughness: inputs[7]!, volumetricFlowRate: inputs[8]!)
             
-        case "Chemical Dosing for Water Treatment":
-            results = Calculations.chemicalDosingForWaterTreatment(chemicalDosage: inputs[0]!, volumetricFlowRate: inputs[1]!)
+        case "Inhibitor Chemical and Sea Dye Injection Rate":
+            results = Calculations.inhibitorChemicalAndSeaDyeInjectionRate(inhibitorChemicalDensity: inputs[0]!, inhibitorChemicalDosage: inputs[1]!, pipelineLength: inputs[2]!, outerDiameter: inputs[3]!, wallThickness: inputs[4]!, pumpStationFlowRate: inputs[5]!, coefficient: inputs[6]!, seaDyeDensity: inputs[7]!, seaDyeDosage: inputs[8]!)
             
         case "Pipeline Internal Volume":
             results = Calculations.pipelineInternalVolume(pipelineLength: inputs[0]!, pipelineOutsideDiameter: inputs[1]!, pipelineWallThickness: inputs[2]!)
@@ -104,7 +100,6 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         
         if !formulaTitle.isEmpty {
             shareButton.enabled = true
-//            (navigationItem.rightBarButtonItems?.last! as! UIBarButtonItem).enabled = true
         }
         
         let formulaDetailTutorial = userDefaults?.boolForKey(StringConstants.ResultsTutorial)
@@ -325,7 +320,7 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         case "Pressure Drop for Fluid Flow in Pipelines":
             return "The friction coefficient is calculated using the so-called implicit Colebrook equation. \n\nFor non-circular pipelines, the equivalent hydraulic diameter must be used. \n\nOnly the difference between pipeline inlet and outlet is used in the calculations. \n\nSince the viscosity is a function of fluid temperature, reference tables should be checked for an accurate calculation. \n\nMinor head losses are not calculated and included in the reported total head loss."
             
-        case "Chemical Dosing for Water Treatment":
+        case "Inhibitor Chemical and Sea Dye Injection Rate":
             return "The most common way of describing dosage (ppm) is used in this calculation. \n\nThis calculation is useful when performing water treatment for pipeline operations such as filling, flooding, cleaning etc."
             
         case "Pipeline Internal Volume":

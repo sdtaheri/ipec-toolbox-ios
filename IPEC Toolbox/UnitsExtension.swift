@@ -53,55 +53,55 @@ extension Double {
         
         case "Molar Density":
             switch unit {
-            case "mole/m3": temp = self.molePerM3
-            case "mole/cm3": temp = self.molePerCm3
+            case "mole/m³": temp = self.molePerM3
+            case "mole/cm³": temp = self.molePerCm3
             case "mole/gal": temp = self.molePerGallon
             case "mole/L": temp = self.molePerLiter
-            case "mole/ft3": temp = self.molePerFt3
+            case "mole/ft³": temp = self.molePerFt3
             default: return nil
             }
             switch toUnit {
-            case "mole/m3": return temp.molePerM3
-            case "mole/cm3": return temp.toMolePerCm3
+            case "mole/m³": return temp.molePerM3
+            case "mole/cm³": return temp.toMolePerCm3
             case "mole/gal": return temp.toMolePerGallon
             case "mole/L": return temp.toMolePerLiter
-            case "mole/ft3": return temp.toMolePerFt3
+            case "mole/ft³": return temp.toMolePerFt3
             default: return nil
             }
             
         case "Density":
             switch unit {
-            case "kg/m3": temp = self.kgPerM3
-            case "g/m3": temp = self.gPerM3
-            case "g/cm3": temp = self.gPerCm3
-            case "lb/ft3": temp = self.lbPerFt3
-            case "lb/in3": temp = self.lbPerIn3
+            case "kg/m³": temp = self.kgPerM3
+            case "g/m³": temp = self.gPerM3
+            case "g/cm³": temp = self.gPerCm3
+            case "lb/ft³": temp = self.lbPerFt3
+            case "lb/in³": temp = self.lbPerIn3
             default: return nil
             }
             switch toUnit {
-            case "kg/m3": return temp.kgPerM3
-            case "g/m3": return temp.toGPerM3
-            case "g/cm3": return temp.toGPerCm3
-            case "lb/ft3": return temp.toLbPerFt3
-            case "lb/in3": return temp.toLbPerIn3
+            case "kg/m³": return temp.kgPerM3
+            case "g/m³": return temp.toGPerM3
+            case "g/cm³": return temp.toGPerCm3
+            case "lb/ft³": return temp.toLbPerFt3
+            case "lb/in³": return temp.toLbPerIn3
             default: return nil
             }
             
         case "Inverse Volume":
             switch unit {
-            case "1/m3": temp = self.onePerM3
-            case "1/cm3": temp = self.onePerCm3
+            case "1/m³": temp = self.onePerM3
+            case "1/cm³": temp = self.onePerCm3
             case "1/gal": temp = self.onePerGallon
             case "1/L": temp = self.onePerLiter
-            case "1/ft3": temp = self.onePerFt3
+            case "1/ft³": temp = self.onePerFt3
             default: return nil
             }
             switch toUnit {
-            case "1/m3": return temp.onePerM3
-            case "1/cm3": return temp.toOnePerCm3
+            case "1/m³": return temp.onePerM3
+            case "1/cm³": return temp.toOnePerCm3
             case "1/gal": return temp.toOnePerGallon
             case "1/L": return temp.toOnePerLiter
-            case "1/ft3": return temp.toOnePerFt3
+            case "1/ft³": return temp.toOnePerFt3
             default: return nil
             }
         
@@ -145,53 +145,69 @@ extension Double {
 
         case "Volume Rate":
             switch unit {
-            case "m3/s": temp = self.m3PerS
-            case "m3/min": temp = self.m3PerMin
-            case "m3/hr": temp = self.m3PerHr
+            case "m³/s": temp = self.m3PerS
+            case "m³/min": temp = self.m3PerMin
+            case "m³/hr": temp = self.m3PerHr
             case "L/s": temp = self.literPerS
             case "L/min": temp = self.literPerMin
             case "L/hr": temp = self.literPerHr
             case "gal/s": temp = self.gallonPerS
             case "gal/min": temp = self.gallonPerMin
             case "gal/hr": temp = self.gallonPerHr
-            case "ft3/s": temp = self.ft3PerS
-            case "ft3/min": temp = self.ft3PerMin
-            case "ft3/hr": temp = self.ft3PerHr
+            case "ft³/s": temp = self.ft3PerS
+            case "ft³/min": temp = self.ft3PerMin
+            case "ft³/hr": temp = self.ft3PerHr
             default: return nil
             }
             switch toUnit {
-            case "m3/s": return temp.m3PerS
-            case "m3/min": return temp.toM3PerMin
-            case "m3/hr": return temp.toM3PerHr
+            case "m³/s": return temp.m3PerS
+            case "m³/min": return temp.toM3PerMin
+            case "m³/hr": return temp.toM3PerHr
             case "L/s": return temp.toLiterPerS
             case "L/min": return temp.toLiterPerMin
             case "L/hr": return temp.toLiterPerHr
             case "gal/s": return temp.toGallonPerS
             case "gal/min": return temp.toGallonPerMin
             case "gal/hr": return temp.toGallonPerHr
-            case "ft3/s": return temp.toFt3PerS
-            case "ft3/min": return temp.toFt3PerMin
-            case "ft3/hr": return temp.toFt3PerHr
+            case "ft³/s": return temp.toFt3PerS
+            case "ft³/min": return temp.toFt3PerMin
+            case "ft³/hr": return temp.toFt3PerHr
             default: return nil
             }
 
         case "Viscosity":
             switch unit {
             case "Pa.s": temp = self.PaS
-            case "N.s/m2": temp = self.NSPerM2
+            case "N.s/m²": temp = self.NSPerM2
             case "Poise": temp = self.poise
             case "cPoise": temp = self.cPoise
-            case "lb.s/ft2": temp = self.lbSPerFt2
-            case "lb.s/in2": temp = self.lbSPerIn2
+            case "lb.s/ft²": temp = self.lbSPerFt2
+            case "lb.s/in²": temp = self.lbSPerIn2
             default: return nil
             }
             switch toUnit {
             case "Pa.s": return temp.PaS
-            case "N.s/m2": return temp.toNSPerM2
+            case "N.s/m²": return temp.toNSPerM2
             case "Poise": return temp.toPoise
             case "cPoise": return temp.toCPoise
-            case "lb.s/ft2": return temp.toLbSPerFt2
-            case "lb.s/in2": return temp.toLbSPerIn2
+            case "lb.s/ft²": return temp.toLbSPerFt2
+            case "lb.s/in²": return temp.toLbSPerIn2
+            default: return nil
+            }
+
+        case "Mass":
+            switch unit {
+            case "kg": temp = self.kg
+            case "g": temp = self.g
+            case "ton": temp = self.ton
+            case "lb": temp = self.lb
+            default: return nil
+            }
+            switch toUnit {
+            case "kg": return temp.kg
+            case "g": return temp.toG
+            case "ton": return temp.toTon
+            case "lb": return temp.toLb
             default: return nil
             }
 
@@ -255,21 +271,21 @@ extension Double {
 
         case "Volume":
             switch unit {
-            case "m3": temp = self.m3
-            case "cm3": temp = self.cm3
+            case "m³": temp = self.m3
+            case "cm³": temp = self.cm3
             case "L": temp = self.L
-            case "ft3": temp = self.ft3
-            case "mi3": temp = self.mi3
+            case "ft³": temp = self.ft3
+            case "mi³": temp = self.mi3
             case "gallon": temp = self.gallon
             case "barrel": temp = self.barrel
             default: return nil
             }
             switch toUnit {
-            case "m3": return temp.m3
-            case "cm3": return temp.toCm3
+            case "m³": return temp.m3
+            case "cm³": return temp.toCm3
             case "L": return temp.toL
-            case "ft3": return temp.toFt3
-            case "mi3": return temp.toMi3
+            case "ft³": return temp.toFt3
+            case "mi³": return temp.toMi3
             case "gallon": return temp.toGallon
             case "barrel": return temp.toBarrel
             default: return nil
@@ -279,6 +295,18 @@ extension Double {
         default: return self
         }
     }
+}
+
+extension Double { //Mass
+    private var kg: Double { return self }
+    
+    private var g: Double { return self / 1000.0 }
+    private var ton: Double { return self * 1000.0 }
+    private var lb: Double { return self * 0.45359 }
+    
+    private var toG: Double { return self * 1000.0 }
+    private var toTon: Double { return self / 1000.0 }
+    private var toLb: Double { return self / 0.45359 }
 }
 
 extension Double { //Temperature

@@ -28,7 +28,7 @@ struct StringConstants {
     static let ResultsTutorial = "Results Tutorial"
 
     
-    static let Titles = [["Pipeline Submerged Weight", "Maximum Allowable Working Pressure", "Temperature Drop Across Pipe Wall", "Pipe Wall Thickness"], ["Pressure Drop for Fluid Flow in Pipelines", "Chemical Dosing for Water Treatment", "Pipeline Internal Volume", "Dew Point Temperature", "Mean Flow Velocity"]]
+    static let Titles = [["Pipeline Submerged Weight", "Maximum Allowable Working Pressure", "Temperature Drop Across Pipe Wall", "Pipe Wall Thickness"], ["Pressure Drop for Fluid Flow in Pipelines", "Inhibitor Chemical and Sea Dye Injection Rate", "Pipeline Internal Volume", "Dew Point Temperature", "Mean Flow Velocity"]]
     
     static let Inputs: [String: [String:(String,Int,Double)]] =
     //"Formula Name":["Input Name":("Unit Type","Unit Index","Predefined Value")]
@@ -43,7 +43,7 @@ struct StringConstants {
         
         "Pressure Drop for Fluid Flow in Pipelines": ["Volumetric Flow Rate": ("Volume Rate",2,500.0), "Pipeline Outside Diameter": ("Length",4,32.0), "Pipeline Wall Thickness": ("Length",4,0.5), "Pipeline Length": ("Length",0,3500.0), "Surface Roughness": ("Length",2,0.1), "Fluid Dynamic Viscosity": ("Viscosity",0,1.002/1000), "Fluid Density": ("Density",0,998.2), "Pipeline Inlet Elevation": ("Length",0,10.0), "Pipeline Outlet Elevation": ("Length",0,10.0)],
         
-        "Chemical Dosing for Water Treatment": ["Volumetric Flow Rate": ("Volume Rate",2,500.0), "Chemical Dosage": ("Dosage",0,500.0)],
+        "Inhibitor Chemical and Sea Dye Injection Rate": ["Pump Station Flow Rate": ("Volume Rate",2,500.0), "Inhibitor Chemical Dosage": ("Dosage",0,800.0), "Sea Dye Dosage": ("Dosage",0,50.0), "Pipeline Outside Diameter":("Length",4,32.0), "Pipeline Wall Thickness": ("Length",4,0.5), "Pipeline Length": ("Length",0,3500.0), "Inhibitor Chemical Density": ("Density",0,1100.0), "Sea Dye Density": ("Density",0,1040.0), "Ratio of Flooding Volume to Pipeline Volume": ("Fraction",0,1.1)],
         
         "Pipeline Internal Volume": ["Pipeline Length":("Length",0,2500.0), "Pipeline Outside Diameter":("Length",4,32.0), "Pipeline Wall Thickness":("Length",4,0.5)],
         
@@ -58,20 +58,21 @@ struct StringConstants {
         "Temperature":["°C","K","°F"],
         "Percentage":["%"],
         "Pressure":["Pa","kPa","bar","millibar","psi","ksi", "MPa", "GPa"],
-        "Molar Density":["mole/m3", "mole/cm3", "mole/gal", "mole/L", "mole/ft3"],
-        "Density": ["kg/m3", "g/cm3", "lb/ft3", "lb/in3", "g/m3", "kg/L", "lb/gal"],
+        "Molar Density":["mole/m³", "mole/cm³", "mole/gal", "mole/L", "mole/ft³"],
+        "Density": ["kg/m³", "g/cm³", "lb/ft³", "lb/in³", "g/m³", "kg/L", "lb/gal"],
         "Fraction":[""],
-        "Inverse Volume":["1/cm3", "1/m3", "1/gal", "1/L", "1/ft3"],
+        "Inverse Volume":["1/cm³", "1/m³", "1/gal", "1/L", "1/ft³"],
         "Length": ["m", "cm", "mm", "ft", "in", "mi", "km"],
         "Force Per Length": ["N/m", "kN/m", "kgf/m", "lbf/ft"],
-        "Volume Rate": ["m3/s", "m3/min", "m3/hr", "L/s", "L/min", "L/hr", "gal/s", "gal/min", "gal/hr", "ft3/s", "ft3/min", "ft3/hr"],
-        "Viscosity": ["Pa.s", "N.s/m2", "Poise", "cPoise", "lb.s/ft2", "lb.s/in2"],
+        "Volume Rate": ["m³/s", "m³/min", "m³/hr", "L/s", "L/min", "L/hr", "gal/s", "gal/min", "gal/hr", "ft³/s", "ft³/min", "ft³/hr"],
+        "Viscosity": ["Pa.s", "N.s/m²", "Poise", "cPoise", "lb.s/ft²", "lb.s/in²"],
         "Speed": ["m/s", "km/h", "ft/s"],
         "Heat Capacity": ["J/(kg.°C)", "J/(kg.K)", "Btu/(lbm.R)"],
         "Thermal Conductivity": ["W/(m.°C)", "W/(m.K)", "Cal/(m.hr.K)", "Btu/(ft.hr.R)"],
         "Power Per Length": ["W/m", "Cal/(m.hr)", "Btu/(ft.hr)"],
         "Dosage": ["ppm"],
-        "Volume": ["m3", "cm3", "L", "ft3", "mi3", "gallon", "barrel"]
+        "Volume": ["m³", "cm³", "L", "ft³", "mi³", "gallon", "barrel"],
+        "Mass": ["kg", "g", "ton", "lb"]
     ]
 }
 

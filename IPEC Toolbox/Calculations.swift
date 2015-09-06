@@ -347,11 +347,21 @@ class Calculations: NSObject {
         return ["Head Loss Due to Elevation": (deltaH_z,"Length",0), "Major Head Loss": (deltaH_m,"Length",0), "Total Head Loss": (deltaH_T,"Length",0), "Total Pressure Drop": (deltaP_T,"Pressure",0)]
     }
     
-    class func chemicalDosingForWaterTreatment(chemicalDosage D_c: Double, volumetricFlowRate Q_w: Double) -> [String: (Double,String,Int)] {
+    class func inhibitorChemicalAndSeaDyeInjectionRate(inhibitorChemicalDensity r_ic: Double, inhibitorChemicalDosage d_ic: Double, pipelineLength L: Double, outerDiameter OD: Double, wallThickness WT: Double, pumpStationFlowRate Q: Double, coefficient N_v: Double, seaDyeDensity r_sd: Double, seaDyeDosage d_sd: Double) -> [String: (Double,String,Int)] {
+    
+        let d_ic_fraction = d_ic / 1_000_000.0
+        let d_sd_fraction = d_sd / 1_000_000.0
         
-        let Q_p = (D_c * Q_w) / 1_000_000.0
+        let ID = OD - 2 * WT
+        let V = M_PI_4 * pow(ID, 2.0) * L
+        let V_ic = N_v * d_ic_fraction * V
+        let V_sd = N_v * d_sd_fraction * V
+        let m_ic = r_ic * V_ic
+        let m_sd = r_sd * V_sd
+        let Q_ic = d_ic_fraction * Q
+        let Q_sd = d_sd_fraction * Q
         
-        return ["Volumetric Flow Rate of Dosing Pump": (Q_p,"Volume Rate",0)]
+        return ["Inner Diameter": (ID, "Length", 4), "Pipeline Volume": (V, "Volume", 0), "Required Inhibitor Chemical Volume": (V_ic, "Volume", 2), "Required Sea Dye Volume": (V_sd, "Volume", 2), "Required Inhibitor Chemical Mass": (m_ic, "Mass", 0), "Required Sea Dye Mass": (m_sd, "Mass", 0), "Required Inhibitor Chemical Flow Rate": (Q_ic, "Volume Rate", 5), "Required Sea Dye Flow Rate": (Q_sd, "Volume Rate", 5)]
     }
     
     class func pipelineInternalVolume(pipelineLength L: Double, pipelineOutsideDiameter OD: Double, pipelineWallThickness t: Double) -> [String: (Double,String,Int)] {
