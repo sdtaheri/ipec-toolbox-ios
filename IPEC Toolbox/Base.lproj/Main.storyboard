@@ -13,7 +13,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
-                        <imageView key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" id="IeK-gG-VZO">
+                        <imageView key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="IeK-gG-VZO">
                             <rect key="frame" x="0.0" y="167.5" width="600" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -42,6 +42,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Calculations" id="fMn-NQ-hdZ"/>
+                    <connections>
+                        <outlet property="footerView" destination="IeK-gG-VZO" id="n1x-jJ-3e6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Njl-94-5hp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

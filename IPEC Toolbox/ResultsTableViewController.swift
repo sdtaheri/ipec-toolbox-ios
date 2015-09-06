@@ -167,35 +167,39 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
     }
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
-        if tutorialView != nil && tutorialView!.isVisible() {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.shouldRotate = true
-            
-            tutorialView?.setVisible(false)
-        }
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.shouldRotate = true
     }
     
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+        if let superView = view.superview {
+            for v in superView.subviews {
+                if v is UIImageView {
+                    v.removeFromSuperview()
+                }
+            }
+        }
         if let window = UIApplication.sharedApplication().delegate!.window! {
             if window.traitCollection.horizontalSizeClass == .Regular && results.count == 0 {
                 
                 if let superView = view.superview {
-                    for v in superView.subviews {
-                        if v is UIImageView {
-                            return
-                        }
-                    }
+
                     let image = UIImage(named: "logo")!
                     let aspectRatio = image.size.width / image.size.height
+                    let size = CGSize(width: 0.3 * superView.frame.size.width, height: 0.3 * superView.frame.size.width / aspectRatio)
                     
-                    let imageView = UIImageView(image: image)
+                    UIGraphicsBeginImageContextWithOptions(size, false, 0)
+                    image.drawInRect(CGRect(origin: CGPointZero, size: size))
+                    
+                    let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+
+                    let imageView = UIImageView(image: scaledImage)
                     imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
                     superView.addSubview(imageView)
                     
                     superView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Bottom, relatedBy: .Equal, toItem: superView, attribute: .Bottom, multiplier: 1.0, constant: -8.0))
                     superView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .CenterX, relatedBy: .Equal, toItem: superView, attribute: .CenterX, multiplier: 1.0, constant: 0.0))
-                    superView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Width, relatedBy: .Equal, toItem: superView, attribute: .Width, multiplier: 0.3, constant: 0.0))
-                    superView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Width, relatedBy: .Equal, toItem: imageView, attribute: .Height, multiplier: aspectRatio, constant: 0.0))
 
                 }
             }

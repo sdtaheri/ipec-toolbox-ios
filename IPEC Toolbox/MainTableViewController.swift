@@ -28,7 +28,7 @@ struct StringConstants {
     static let ResultsTutorial = "Results Tutorial"
 
     
-    static let Titles = [["Pipeline Submerged Weight", "Maximum Allowable Working Pressure", "Temperature Drop Across Pipe Wall", "Pipe Wall Thickness"], ["Pressure Drop for Fluid Flow in Pipelines", "Inhibitor Chemical and Sea Dye Injection Rate", "Pipeline Internal Volume", "Dew Point Temperature", "Mean Flow Velocity"]]
+    static let Titles = [["Pipeline Submerged Weight", "Maximum Allowable Working Pressure", "Temperature Drop Across Pipe Wall", "Pipe Wall Thickness"], ["Pressure Drop for Fluid Flow in Pipelines", "Inhibitor Chemical and Sea Dye Injection Rate", "Pipeline Internal Volume", "Dew Point Temperature", "Mean Flow Velocity", "Pig Launching and Receiving Time Prediction"]]
     
     static let Inputs: [String: [String:(String,Int,Double)]] =
     //"Formula Name":["Input Name":("Unit Type","Unit Index","Predefined Value")]
@@ -78,17 +78,32 @@ struct StringConstants {
 
 class MainTableViewController: UITableViewController {
     
-    private let userDefaults = NSUserDefaults()
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            self.clearsSelectionOnViewWillAppear = false
-            self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
+    @IBOutlet weak var footerView: UIImageView! {
+        didSet {
+            let image = UIImage(named: "logo")!
+            let aspectRatio = image.size.width / image.size.height
+            let size = CGSize(width: 80.0 * aspectRatio, height: 80.0)
+            
+            UIGraphicsBeginImageContextWithOptions(size, false, 0)
+            image.drawInRect(CGRect(origin: CGPointZero, size: size))
+            
+            let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            footerView.image = scaledImage
         }
     }
+    private let userDefaults = NSUserDefaults()
     
     override func viewDidLoad() {
+        
+        if let window = UIApplication.sharedApplication().keyWindow {
+            if window.traitCollection.horizontalSizeClass == .Regular {
+                self.clearsSelectionOnViewWillAppear = false
+                self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
+            }
+        }
+        
         tableView.estimatedRowHeight = 44
         tableView.contentInset.bottom += 16
     }
@@ -117,10 +132,15 @@ class MainTableViewController: UITableViewController {
     
     override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
         if let window = UIApplication.sharedApplication().delegate!.window! {
+            let tabBarHeight = tabBarController!.tabBar.frame.size.height;
             if window.traitCollection.horizontalSizeClass == .Regular {
-                tableView.tableFooterView?.frame.size.height = 0.0
+                footerView.frame.size.height = 0.0
+                tableView.contentInset.bottom = tabBarHeight - 80.0
             } else {
-                tableView.tableFooterView?.frame.size.height = 80.0
+                footerView.frame.size.height = 80.0
+                if previousTraitCollection != nil {
+                    tableView.contentInset.bottom = tabBarHeight + 16.0
+                }
             }
         }
     }

@@ -354,12 +354,8 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
     
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
-        if tutorialView != nil && tutorialView!.isVisible() {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.shouldRotate = true
-            
-            tutorialView?.setVisible(false)
-        }
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.shouldRotate = true
     }
     
     // MARK: - Navigation
@@ -400,9 +396,11 @@ class FormulaDetailTableViewController: UITableViewController, UIAdaptivePresent
             if let nc = segue.destinationViewController as? UINavigationController {
                 if let rtvc = nc.childViewControllers[0] as? ResultsTableViewController {
                     rtvc.userDefaults = userDefaults
-                    if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-                        rtvc.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-                        rtvc.navigationItem.leftItemsSupplementBackButton = true
+                    if let window = UIApplication.sharedApplication().keyWindow {
+                        if window.traitCollection.horizontalSizeClass == .Compact || window.traitCollection.verticalSizeClass == .Compact {
+                            rtvc.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                            rtvc.navigationItem.leftItemsSupplementBackButton = true
+                        }
                     }
                     rtvc.formulaTitle = formulaTitle!
                     rtvc.inputs = inputValuesForSegue
