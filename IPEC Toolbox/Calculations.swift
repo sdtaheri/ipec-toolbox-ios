@@ -361,7 +361,7 @@ class Calculations: NSObject {
         let Q_ic = d_ic_fraction * Q
         let Q_sd = d_sd_fraction * Q
         
-        return ["Inner Diameter": (ID, "Length", 4), "Pipeline Volume": (V, "Volume", 0), "Required Inhibitor Chemical Volume": (V_ic, "Volume", 2), "Required Sea Dye Volume": (V_sd, "Volume", 2), "Required Inhibitor Chemical Mass": (m_ic, "Mass", 0), "Required Sea Dye Mass": (m_sd, "Mass", 0), "Required Inhibitor Chemical Flow Rate": (Q_ic, "Volume Rate", 5), "Required Sea Dye Flow Rate": (Q_sd, "Volume Rate", 5)]
+        return ["Inner Diameter": (ID, "Length", 0), "Pipeline Volume": (V, "Volume", 0), "Required Inhibitor Chemical Volume": (V_ic, "Volume", 0), "Required Sea Dye Volume": (V_sd, "Volume", 0), "Required Inhibitor Chemical Mass": (m_ic, "Mass", 0), "Required Sea Dye Mass": (m_sd, "Mass", 0), "Required Inhibitor Chemical Flow Rate": (Q_ic, "Volume Rate", 0), "Required Sea Dye Flow Rate": (Q_sd, "Volume Rate", 0)]
     }
     
     class func pipelineInternalVolume(pipelineLength L: Double, pipelineOutsideDiameter OD: Double, pipelineWallThickness t: Double) -> [String: (Double,String,Int)] {
@@ -380,5 +380,37 @@ class Calculations: NSObject {
         return ["Mean Flow Velocity": (V,"Speed",0)]
     }
 
+    class func pigLaunchingAndReceivingTimePrediction(pipelineLength L: Double, pipelineOutsideDiameter OD: Double, pipelineWallThickness WT: Double, pumpStationFlowRate Q: Double, requiredExtraTimeToLaunchASinglePig t_L: Double, requiredExtraTimeToReceiveASinglePig t_R: Double, startTimeSinceReferenceDate t_start: Double, dynamicValues dynamicInputs: [Double]) -> [String: (Double,String,Int)] {
+        
+        let ID = OD - 2 * WT
+        let V = M_PI_4 * pow(ID, 2.0) * L
+        
+        var T = [Double]()
+        for i in 0 ..< dynamicInputs.count {
+            let t_B = (dynamicInputs[i] / 100.0 * V) / Q
+            T.append(t_B)
+            
+            T.append(t_L)
+        }
+        
+        let t_total = (V * (dynamicInputs.reduce(0, combine: +) - dynamicInputs[0]) / 100.0) / Q
+        T.append(t_total)
+        
+        for i in 1 ..< dynamicInputs.count {
+            T.append(t_R)
+            
+            let t_B = (dynamicInputs[i] / 100.0 * V) / Q
+            T.append(t_B)
+        }
+        T.append(t_R)
+        
+        var result = ["Operation Start Time": (t_start, "Fraction", 0)]
+        for i in 0 ..< T.count {
+            let index = i+1 < 10 ? "0\(i+1)" : "\(i+1)"
+            result["Dynamic Output \(index)"] = (T[i],"Fraction",0)
+        }
+        
+        return result
+    }
     
 }

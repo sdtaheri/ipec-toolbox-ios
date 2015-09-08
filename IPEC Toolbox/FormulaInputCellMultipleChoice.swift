@@ -12,4 +12,6 @@ class FormulaInputCellMultipleChoice: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var timePicker: UIDatePicker!
+    
 }

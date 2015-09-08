@@ -22,7 +22,7 @@ private struct Constants {
 
 class PDFRenderer: NSObject {
 
-    class func drawPDF(pdfFileName: String, title: String, labels: [String], results: [String: (Double,String,Int)]) {
+    class func drawPDF(pdfFileName: String, title: String, labels: [String], results: [String: (Double,String,Int)]?, dynamicResults: [String]?) {
         
         // Create the PDF context using the default page size of 612 x 792.
         UIGraphicsBeginPDFContextToFile(pdfFileName, CGRectZero, nil);
@@ -40,11 +40,16 @@ class PDFRenderer: NSObject {
         let frame = CGRect(x: 20, y: 20, width: Constants.LogoWidth, height: Constants.LogoHeight);
         drawImage(logo, inRect: frame)
         
-        let formulaImage = UIImage(named: "\(title) 1")!
-        let formulaImageFrame = CGRect(x: (Constants.Width - Constants.ImageWidth) / 2, y: 100, width: Constants.ImageWidth, height: Constants.ImageHeight)
-        drawImage(formulaImage, inRect: formulaImageFrame)
+        if let formulaImage = UIImage(named: "\(title) 1") {
+            let formulaImageFrame = CGRect(x: (Constants.Width - Constants.ImageWidth) / 2, y: 100, width: Constants.ImageWidth, height: Constants.ImageHeight)
+            drawImage(formulaImage, inRect: formulaImageFrame)
+        }
         
-        drawTableAt(CGPoint(x: 40, y: 120 + Constants.ImageHeight), rowHeight: results.count > 10 ? (Constants.Height - 140.0 - Constants.ImageHeight) / CGFloat(results.count) : 44, columnWidth: (Constants.Width - 80) / 2, rowCount: results.count, columnCount: 2, labels: labels, results: results)
+        if dynamicResults == nil {
+            drawTableAt(CGPoint(x: 40, y: 120 + Constants.ImageHeight), rowHeight: results!.count > 10 ? (Constants.Height - 140.0 - Constants.ImageHeight) / CGFloat(results!.count) : 44, columnWidth: (Constants.Width - 80) / 2, rowCount: results!.count, columnCount: 2, labels: labels, results: results, dynamicResults: dynamicResults)
+        } else {
+            drawTableAt(CGPoint(x: 40, y: 120), rowHeight: dynamicResults!.count > 10 ? (Constants.Height - 140.0 - Constants.ImageHeight) / CGFloat(dynamicResults!.count) : 44, columnWidth: (Constants.Width - 80) / 2, rowCount: dynamicResults!.count, columnCount: 2, labels: labels, results: results, dynamicResults: dynamicResults)
+        }
         
         drawTitle(title)
         
@@ -104,7 +109,8 @@ class PDFRenderer: NSObject {
     }
     
     private class func drawTitle(title: String) {
-        drawText(title, inFrame: CGRect(x: 0, y: 75, width: Constants.Width, height: 50), fontName: "Helvetica-Bold", fontSize: 17, centerAligned: true)
+        let font = UIFont.boldSystemFontOfSize(17)
+        drawText(title, inFrame: CGRect(x: 0, y: 75, width: Constants.Width, height: 50), fontName: font.fontName, fontSize: font.pointSize, centerAligned: true)
     }
     
     private class func drawImage(image: UIImage, inRect rect: CGRect) {
@@ -129,7 +135,7 @@ class PDFRenderer: NSObject {
         CGContextStrokePath(context);
     }
     
-    private class func drawTableAt(origin: CGPoint, rowHeight: CGFloat, columnWidth: CGFloat, rowCount: Int, columnCount: Int, labels: [String], results: [String: (Double,String,Int)]) {
+    private class func drawTableAt(origin: CGPoint, rowHeight: CGFloat, columnWidth: CGFloat, rowCount: Int, columnCount: Int, labels: [String], results: [String: (Double,String,Int)]?, dynamicResults: [String]?) {
         for i in 0...rowCount {
             let newOrigin = origin.y + rowHeight * CGFloat(i)
             
@@ -144,10 +150,12 @@ class PDFRenderer: NSObject {
                     CGContextFillRect(UIGraphicsGetCurrentContext(), frame)
                 }
                 
-                let labelFrame = CGRectMake(from.x + 20, from.y + (rowHeight - 20)/2, columnWidth * 2, 20)
-                drawText(labels[i], inFrame: labelFrame, fontName: "Helvetica", fontSize: 14, centerAligned: false)
+                let font = UIFont.systemFontOfSize(14)
                 
-                if let resultValue = results[labels[i]] {
+                let labelFrame = CGRectMake(from.x + 20, from.y + (rowHeight - 20)/2, columnWidth * 2, 20)
+                drawText(labels[i], inFrame: labelFrame, fontName: font.fontName, fontSize: font.pointSize, centerAligned: false)
+                
+                if let resultValue = results?[labels[i]] {
                     var result = resultValue.0.doubleToStringWithThousandSeparator()!
                     
                     if let units = StringConstants.Units[resultValue.1] {
@@ -155,21 +163,17 @@ class PDFRenderer: NSObject {
                     }
                     
                     let resultFrame = CGRect(x: from.x + 1.5 * columnWidth, y: from.y + (rowHeight - 20)/2, width: columnWidth * 2, height: 20)
-                    drawText(result, inFrame: resultFrame, fontName: "Helvetica", fontSize: 14, centerAligned: false)
+                    drawText(result, inFrame: resultFrame, fontName: font.fontName, fontSize: font.pointSize, centerAligned: false)
+                } else if dynamicResults != nil {
+                    var result = dynamicResults![i]
+                    
+                    let resultFrame = CGRect(x: from.x + 1.5 * columnWidth, y: from.y + (rowHeight - 20)/2, width: columnWidth * 2, height: 20)
+                    drawText(result, inFrame: resultFrame, fontName: font.fontName, fontSize: font.pointSize, centerAligned: false)
                 }
                 
             }
 
             drawLineFromPoint(from, to: to)
         }
-        
-//        for (var i = 0; i < columnCount; i++) {
-//            let newOrigin = origin.x + columnWidth * CGFloat(i)
-//            
-//            let from = CGPointMake(newOrigin, origin.y);
-//            let to = CGPointMake(newOrigin, origin.y + (CGFloat(rowCount) * rowHeight));
-//            
-//            drawLineFromPoint(from, to: to)
-//        }
     }
 }

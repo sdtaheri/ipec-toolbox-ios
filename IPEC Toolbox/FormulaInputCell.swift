@@ -12,6 +12,8 @@ class FormulaInputCell: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
     
+    @IBOutlet weak var accessoryButton: UIButton!
+    
     @IBOutlet weak var unitLabel: UIButton! {
         didSet {
             unitLabel.titleLabel?.minimumScaleFactor = 0.5

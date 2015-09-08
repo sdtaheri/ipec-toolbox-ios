@@ -12,6 +12,9 @@ struct StringConstants {
     static let MainCellReuseIdentifier = "Main Cell"
     static let FormulaCellReuseIdentifier = "Formula Detail Cell"
     static let FormulaCellMultipleChoiceResuseIdentifier = "Formula Detail Cell Multiple Choice"
+    static let FormulaCellTimePickerResuseIdentifier = "Formula Detail Cell Time"
+    static let FormulaCellDynamicResuseIdentifier = "Formula Detail Cell Dynamic"
+    static let FormulaCellAddReuseIdentifier = "Formula Detail Add Cell"
     static let UnitCellReuseIdentifier = "Unit Cell"
 
     static let ShowFormulaSegueIdentifier = "Formula Detail"
@@ -50,7 +53,8 @@ struct StringConstants {
         "Dew Point Temperature":["Air Temperature":("Temperature",0,28.0), "Relative Humidity":("Percentage",0,75.0), "Air Pressure": ("Pressure",2,1.0) ],
         
         "Mean Flow Velocity": ["Pipeline Outside Diameter":("Length",4,32.0), "Pipeline Wall Thickness":("Length",4,0.5), "Volumetric Flow Rate": ("Volume Rate",2,500.0)],
-
+        
+        "Pig Launching and Receiving Time Prediction": ["Pipeline Outside Diameter":("Length",4,32.0), "Pipeline Wall Thickness":("Length",4,0.5), "Pipeline Length": ("Length",0,3500.0), "Pump Station Flow Rate": ("Volume Rate",2,500.0), "Required Extra Time to Launch a Single Pig": ("Time",2,2.0), "Required Extra Time to Receive a Single Pig": ("Time",2,1.0), "Start Time": ("Time Picker",0,0)]
     ]
     
     static let Units: [String:[String]] =
@@ -72,7 +76,8 @@ struct StringConstants {
         "Power Per Length": ["W/m", "Cal/(m.hr)", "Btu/(ft.hr)"],
         "Dosage": ["ppm"],
         "Volume": ["m³", "cm³", "L", "ft³", "mi³", "gallon", "barrel"],
-        "Mass": ["kg", "g", "ton", "lb"]
+        "Mass": ["kg", "g", "ton", "lb"],
+        "Time": ["s", "min", "hr"]
     ]
 }
 

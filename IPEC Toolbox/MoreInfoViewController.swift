@@ -91,6 +91,10 @@ class MoreInfoViewController: UIViewController {
             textView.text = "This module calculates the mean flow velocity of a fluid flowing inside a pipe/pipeline. It must be noticed that velocity of fluid particles are not equal at a pipe cross-section. However, it can be assumed that there is an average velocity value with respect to the flow."
             formulaIcon.image = UIImage(named: "Formula25")
             
+        case "Pig Launching and Receiving Time Prediction":
+            textView.text = "This formula gives an estimate of the pig register table, i.e. pig launching and pig arrival time."
+            formulaIcon.image = UIImage(named: "Formula26")
+
         default: break
         }
         

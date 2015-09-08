@@ -210,6 +210,20 @@ extension Double {
             case "lb": return temp.toLb
             default: return nil
             }
+            
+        case "Time":
+            switch unit {
+            case "s": temp = self.s
+            case "min": temp = self.min
+            case "hr": temp = self.hr
+            default: return nil
+            }
+            switch toUnit {
+            case "s": return temp.s
+            case "min": return temp.toMin
+            case "hr": return temp.toHr
+            default: return nil
+            }
 
         case "Speed":
             switch unit {
@@ -295,6 +309,16 @@ extension Double {
         default: return self
         }
     }
+}
+
+extension Double { //Time
+    private var s: Double { return self }
+    
+    private var min: Double { return self * 60 }
+    private var hr: Double { return self * 60 * 60 }
+    
+    private var toMin: Double { return self / 60 }
+    private var toHr: Double { return self / 60 / 60 }
 }
 
 extension Double { //Mass

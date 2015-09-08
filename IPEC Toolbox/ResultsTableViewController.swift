@@ -22,6 +22,7 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
     }
     
     var inputs = [Double?]()
+    var dynamicInputs = [Double]()
     var userDefaults: NSUserDefaults?
     private var tutorialView: CRProductTour?
     private var results = [String: (Double,String,Int)]() {
@@ -30,8 +31,18 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
                 resultsArrayKeys = results.keys.array.sorted {
                     return $0 < $1
                 }
-                resultsValue = [Double?](count: results.count, repeatedValue: nil)
-                resultsUnits = [String?](count: results.count, repeatedValue: nil)
+                
+                if formulaTitle == "Pig Launching and Receiving Time Prediction" {
+                    if let index = find(resultsArrayKeys,"Operation Start Time") {
+                        resultsArrayKeys.removeAtIndex(index)
+                    }
+                    resultsArrayKeys.insert("Operation Start Time", atIndex: 0)
+                    
+                    populateDynamicDatasource()
+                } else {
+                    resultsValue = [Double?](count: results.count, repeatedValue: nil)
+                    resultsUnits = [String?](count: results.count, repeatedValue: nil)
+                }
             }
         }
     }
@@ -40,6 +51,13 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
     private var resultsValue = [Double?]()
     private var resultsUnits = [String?]()
     
+    private var dynamicResultsValue: [String]?
+    private var dynamicResultsUnit: [String]?
+    private var dynamicResultsTitles: [String]?
+    
+    lazy private var dateFormatter = NSDateFormatter()
+    lazy private var weekDayFormatter = NSDateFormatter()
+    
     var documentInteractionController: UIDocumentInteractionController?
 
     private weak var selectedUnitButton: UIButton?
@@ -47,6 +65,65 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
     var formulaTitle = String()
     
     private var footerOnScreen = false
+    
+    func populateDynamicDatasource() {
+        dynamicResultsUnit = [String](count: results.count, repeatedValue: "")
+        dynamicResultsValue = [String](count: results.count, repeatedValue: "")
+        dynamicResultsTitles = resultsArrayKeys
+        
+        let operationStartTime = NSDate(timeIntervalSinceReferenceDate: results[resultsArrayKeys[0]]!.0)
+        
+        dynamicResultsValue![0] = dateFormatter.stringFromDate(operationStartTime)
+        dynamicResultsUnit![0] = "Today"
+        dynamicResultsTitles![0] = "Lubrication Start Time"
+        
+        var cumulativeSeconds = [Double](count: results.count - 1, repeatedValue: 0)
+        for i in 1 ..< resultsArrayKeys.count {
+            let key = resultsArrayKeys[i]
+            let value = results[key]
+            let resultInSeconds = value!.0
+            
+            if i-2 >= 0 {
+                cumulativeSeconds[i-1] = cumulativeSeconds[i-2] + resultInSeconds
+            } else {
+                cumulativeSeconds[i-1] = resultInSeconds
+            }
+        }
+        
+        for i in 1 ..< dynamicResultsValue!.count {
+            let time = NSDate(timeInterval: cumulativeSeconds[i-1], sinceDate: operationStartTime)
+
+            let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+            
+            if calendar!.isDateInToday(time) {
+                dynamicResultsUnit![i] = "Today"
+            } else {
+                dynamicResultsUnit![i] = weekDayFormatter.stringFromDate(time)
+            }
+
+            dynamicResultsValue![i] = dateFormatter.stringFromDate(time)
+        }
+        
+        let numberOfPigs = (results.count - 1) / 4
+        
+        for var i = 0; i < 2 * numberOfPigs; i += 2 {
+            dynamicResultsTitles![i + 1] = "Pig \(i / 2 + 1) Launch Time"
+        }
+        
+        for var i = 1; i < 2 * numberOfPigs; i += 2 {
+            dynamicResultsTitles![i + 1] = "Pig \((i - 1) / 2 + 1) Run Time"
+        }
+        
+        dynamicResultsTitles![1 + 2 * numberOfPigs] = "Train Run Time"
+        
+        for var i = 2 + 2 * numberOfPigs; i < dynamicResultsTitles!.count; ++i {
+            if i % 2 == 0 {
+                dynamicResultsTitles![i] = "Pig \(i/2 - numberOfPigs) Receive Time"
+            } else {
+                dynamicResultsTitles![i] = "Pumping to Receive Pig \((i+1)/2 - numberOfPigs) Time"
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +166,12 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
 
         case "Mean Flow Velocity":
             results = Calculations.meanFlowVelocity(pipelineOutsideDiameter: inputs[0]!, pipelineWallThickness: inputs[1]!, volumetricFlowRate: inputs[2]!)
+            
+        case "Pig Launching and Receiving Time Prediction":
+            dateFormatter.dateFormat = "hh:mm a"
+            weekDayFormatter.dateFormat = "EEE"
 
+            results = Calculations.pigLaunchingAndReceivingTimePrediction(pipelineLength: inputs[0]!, pipelineOutsideDiameter: inputs[1]!, pipelineWallThickness: inputs[2]!, pumpStationFlowRate: inputs[3]!, requiredExtraTimeToLaunchASinglePig: inputs[4]!, requiredExtraTimeToReceiveASinglePig: inputs[5]!, startTimeSinceReferenceDate: inputs[6]!, dynamicValues: dynamicInputs)
             
         default: break
         }
@@ -156,7 +238,18 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         let path = arrayPaths[0]
         let pdfFileName = path.stringByAppendingPathComponent(fileName)
 
-        PDFRenderer.drawPDF(pdfFileName, title: formulaTitle, labels: resultsArrayKeys, results: results)
+        if dynamicResultsValue == nil {
+            PDFRenderer.drawPDF(pdfFileName, title: formulaTitle, labels: resultsArrayKeys, results: results, dynamicResults: dynamicResultsValue)
+        } else {
+            
+            var array = dynamicResultsValue
+            for i in 0 ..< dynamicResultsValue!.count {
+                array![i] += " \(dynamicResultsUnit![i])"
+            }
+            
+            PDFRenderer.drawPDF(pdfFileName, title: formulaTitle, labels: dynamicResultsTitles!, results: nil, dynamicResults: array)
+        }
+        
         
         let fileMgr = NSFileManager.defaultManager()
         if fileMgr.fileExistsAtPath(pdfFileName) {
@@ -270,28 +363,38 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(StringConstants.FormulaCellReuseIdentifier, forIndexPath: indexPath) as! FormulaOutputCell
         
-        let resultTitle = resultsArrayKeys[indexPath.row]
-        cell.label.text = resultTitle
-        
-        if let value = resultsValue[indexPath.row], unit = resultsUnits[indexPath.row] {
-            cell.result.text = value.doubleToStringWithThousandSeparator()
-            UIView.performWithoutAnimation {
-                cell.unit.setTitle(unit, forState: .Normal)
-            }
+        if dynamicResultsValue != nil && dynamicResultsValue!.count > 0 {
+            cell.result.text = dynamicResultsValue![indexPath.row]
+            cell.unit.setTitle(dynamicResultsUnit![indexPath.row], forState: .Normal)
+            cell.label.text = dynamicResultsTitles![indexPath.row]
         } else {
-            if let resultValue = results[resultTitle] {
-                resultsValue[indexPath.row] = resultValue.0
-                cell.result.text = resultValue.0.doubleToStringWithThousandSeparator()
+            
+            let resultTitle = resultsArrayKeys[indexPath.row]
+            cell.label.text = resultTitle
+            
+            if let value = resultsValue[indexPath.row], unit = resultsUnits[indexPath.row] {
                 
-                if let units = StringConstants.Units[resultValue.1] {
-                    UIView.performWithoutAnimation {
-                        cell.unit.setTitle(units[resultValue.2], forState: .Normal)
-                        self.resultsUnits[indexPath.row] = units[resultValue.2]
+                cell.result.text = value.doubleToStringWithThousandSeparator()
+                UIView.performWithoutAnimation {
+                    cell.unit.setTitle(unit, forState: .Normal)
+                }
+                
+            } else {
+                if let resultValue = results[resultTitle] {
+                    resultsValue[indexPath.row] = resultValue.0
+                    
+                    cell.result.text = resultValue.0.doubleToStringWithThousandSeparator()
+                    
+                    if let units = StringConstants.Units[resultValue.1] {
+                        UIView.performWithoutAnimation {
+                            cell.unit.setTitle(units[resultValue.2], forState: .Normal)
+                            self.resultsUnits[indexPath.row] = units[resultValue.2]
+                        }
                     }
                 }
             }
         }
-
+        
         return cell
     }
     

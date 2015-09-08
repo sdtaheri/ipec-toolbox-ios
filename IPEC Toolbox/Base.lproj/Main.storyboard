@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NUl-hR-MnK">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -271,18 +272,18 @@ IPEC also has a close contact with local and international partners who have mad
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJN-LD-U1c">
-                                            <rect key="frame" x="20" y="6" width="36" height="31"/>
+                                            <rect key="frame" x="38" y="6" width="36" height="31"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7G-ym-sPl">
-                                            <rect key="frame" x="63" y="6" width="471" height="31"/>
+                                            <rect key="frame" x="82" y="6" width="445" height="31"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6L-P2-5xc">
-                                            <rect key="frame" x="542" y="6" width="50" height="31"/>
+                                            <rect key="frame" x="534" y="6" width="50" height="31"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="vDb-1O-e4t"/>
                                             </constraints>
@@ -297,10 +298,10 @@ IPEC also has a close contact with local and international partners who have mad
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="HJN-LD-U1c" firstAttribute="leading" secondItem="33p-pP-eRo" secondAttribute="leading" constant="20" symbolic="YES" id="4ad-qu-atN"/>
+                                        <constraint firstItem="HJN-LD-U1c" firstAttribute="leading" secondItem="33p-pP-eRo" secondAttribute="leading" constant="38" id="4ad-qu-atN"/>
                                         <constraint firstItem="K7G-ym-sPl" firstAttribute="top" secondItem="33p-pP-eRo" secondAttribute="top" constant="6" id="6Iu-qZ-s0o"/>
                                         <constraint firstAttribute="bottom" secondItem="I6L-P2-5xc" secondAttribute="bottom" constant="6" id="GPh-55-9cX"/>
-                                        <constraint firstAttribute="trailing" secondItem="I6L-P2-5xc" secondAttribute="trailing" constant="8" id="S7s-wp-KYo"/>
+                                        <constraint firstAttribute="trailing" secondItem="I6L-P2-5xc" secondAttribute="trailing" constant="16" id="S7s-wp-KYo"/>
                                         <constraint firstItem="I6L-P2-5xc" firstAttribute="leading" secondItem="K7G-ym-sPl" secondAttribute="trailing" constant="8" symbolic="YES" id="UXV-I5-sQf"/>
                                         <constraint firstAttribute="bottom" secondItem="HJN-LD-U1c" secondAttribute="bottom" constant="6" id="gDb-1h-bDO"/>
                                         <constraint firstItem="K7G-ym-sPl" firstAttribute="width" secondItem="HJN-LD-U1c" secondAttribute="width" priority="250" id="nmZ-Rw-cTy"/>
@@ -316,6 +317,106 @@ IPEC also has a close contact with local and international partners who have mad
                                     <outlet property="unitLabel" destination="I6L-P2-5xc" id="9do-Nk-K9K"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Formula Detail Cell Dynamic" id="oxH-4x-jvl" customClass="FormulaInputCell" customModule="IPEC_Toolbox" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oxH-4x-jvl" id="Iaa-Q3-i8e">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60q-X0-f0N">
+                                            <rect key="frame" x="38" y="6" width="36" height="31"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BP7-Js-uNg">
+                                            <rect key="frame" x="82" y="6" width="445" height="31"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                        </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKM-d4-VIr">
+                                            <rect key="frame" x="534" y="6" width="50" height="31"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="kzc-hg-8T7"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <state key="normal" title="kg/m3">
+                                                <color key="titleColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="showMoreUnits:" destination="mpV-SF-10f" eventType="touchUpInside" id="gMZ-sx-aFW"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3R3-l8-1NM">
+                                            <rect key="frame" x="8" y="10" width="22" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="3R3-l8-1NM" secondAttribute="height" multiplier="1:1" id="YPn-be-QmH"/>
+                                            </constraints>
+                                            <state key="normal" image="removeRow">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="eKM-d4-VIr" firstAttribute="top" secondItem="Iaa-Q3-i8e" secondAttribute="top" constant="6" id="1WM-Tf-Bhh"/>
+                                        <constraint firstItem="BP7-Js-uNg" firstAttribute="leading" secondItem="60q-X0-f0N" secondAttribute="trailing" constant="8" symbolic="YES" id="a23-XN-3C9"/>
+                                        <constraint firstItem="3R3-l8-1NM" firstAttribute="leading" secondItem="Iaa-Q3-i8e" secondAttribute="leadingMargin" id="aEM-Yg-OXt"/>
+                                        <constraint firstItem="eKM-d4-VIr" firstAttribute="leading" secondItem="BP7-Js-uNg" secondAttribute="trailing" constant="8" symbolic="YES" id="c7m-YY-mxi"/>
+                                        <constraint firstItem="60q-X0-f0N" firstAttribute="top" secondItem="Iaa-Q3-i8e" secondAttribute="top" constant="6" id="egF-Pe-Pd3"/>
+                                        <constraint firstAttribute="centerY" secondItem="3R3-l8-1NM" secondAttribute="centerY" id="fV3-J9-Bpk"/>
+                                        <constraint firstItem="BP7-Js-uNg" firstAttribute="width" secondItem="60q-X0-f0N" secondAttribute="width" priority="250" id="fXP-et-msU"/>
+                                        <constraint firstAttribute="trailing" secondItem="eKM-d4-VIr" secondAttribute="trailing" constant="16" id="jbO-fY-n6v"/>
+                                        <constraint firstAttribute="bottom" secondItem="eKM-d4-VIr" secondAttribute="bottom" constant="6" id="k9U-5H-inj"/>
+                                        <constraint firstItem="60q-X0-f0N" firstAttribute="leading" secondItem="3R3-l8-1NM" secondAttribute="trailing" constant="8" symbolic="YES" id="pNR-nt-ssQ"/>
+                                        <constraint firstAttribute="bottom" secondItem="BP7-Js-uNg" secondAttribute="bottom" constant="6" id="qCP-18-nIK"/>
+                                        <constraint firstAttribute="bottom" secondItem="60q-X0-f0N" secondAttribute="bottom" constant="6" id="r3o-t4-OkV"/>
+                                        <constraint firstItem="BP7-Js-uNg" firstAttribute="top" secondItem="Iaa-Q3-i8e" secondAttribute="top" constant="6" id="si3-Mv-8cB"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="accessoryButton" destination="3R3-l8-1NM" id="jdB-qr-JCW"/>
+                                    <outlet property="label" destination="60q-X0-f0N" id="h8f-oi-snx"/>
+                                    <outlet property="textField" destination="BP7-Js-uNg" id="9Om-B0-b1l"/>
+                                    <outlet property="unitLabel" destination="eKM-d4-VIr" id="bxI-VD-pQp"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Formula Detail Add Cell" id="rH5-Ad-Jux" customClass="FormulaInputCell" customModule="IPEC_Toolbox" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rH5-Ad-Jux" id="NQj-Oy-OPO">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZN3-xs-YHt">
+                                            <rect key="frame" x="38" y="6" width="36" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="Pwd-d9-tk5"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8WP-D7-GEW">
+                                            <rect key="frame" x="8" y="10" width="22" height="22"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="8WP-D7-GEW" secondAttribute="height" multiplier="1:1" id="Lb7-j7-U0c"/>
+                                            </constraints>
+                                            <state key="normal" image="addRow">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ZN3-xs-YHt" firstAttribute="leading" secondItem="8WP-D7-GEW" secondAttribute="trailing" constant="8" symbolic="YES" id="Ief-pw-bQG"/>
+                                        <constraint firstItem="8WP-D7-GEW" firstAttribute="leading" secondItem="NQj-Oy-OPO" secondAttribute="leadingMargin" id="Ppx-aJ-jQ7"/>
+                                        <constraint firstItem="ZN3-xs-YHt" firstAttribute="top" secondItem="NQj-Oy-OPO" secondAttribute="top" constant="6" id="pbD-sJ-Js0"/>
+                                        <constraint firstAttribute="centerY" secondItem="8WP-D7-GEW" secondAttribute="centerY" id="uJw-ZN-Xuz"/>
+                                        <constraint firstAttribute="bottom" secondItem="ZN3-xs-YHt" secondAttribute="bottom" constant="6" id="y3j-4y-7Wx"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="accessoryButton" destination="8WP-D7-GEW" id="WNn-Gu-kHf"/>
+                                    <outlet property="label" destination="ZN3-xs-YHt" id="t8u-CS-P5g"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Formula Detail Cell Multiple Choice" id="XGJ-ET-og1" customClass="FormulaInputCellMultipleChoice" customModule="IPEC_Toolbox" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -323,7 +424,7 @@ IPEC also has a close contact with local and international partners who have mad
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS8-7p-ex9">
-                                            <rect key="frame" x="20" y="-8" width="100" height="59"/>
+                                            <rect key="frame" x="38" y="-8" width="100" height="59"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="q6p-PV-CuZ"/>
                                             </constraints>
@@ -332,7 +433,7 @@ IPEC also has a close contact with local and international partners who have mad
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <pickerView contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="uAu-5i-VIe">
-                                            <rect key="frame" x="128" y="-60" width="464" height="162"/>
+                                            <rect key="frame" x="146" y="-59" width="438" height="162"/>
                                         </pickerView>
                                     </subviews>
                                     <constraints>
@@ -342,13 +443,56 @@ IPEC also has a close contact with local and international partners who have mad
                                         <constraint firstItem="uAu-5i-VIe" firstAttribute="leading" secondItem="iS8-7p-ex9" secondAttribute="trailing" constant="8" symbolic="YES" id="RLU-Aw-qte"/>
                                         <constraint firstItem="iS8-7p-ex9" firstAttribute="top" secondItem="Rf5-ce-uji" secondAttribute="top" constant="-8" id="RVo-tx-VTt"/>
                                         <constraint firstItem="uAu-5i-VIe" firstAttribute="top" secondItem="Rf5-ce-uji" secondAttribute="top" constant="-8" id="WA1-8K-JCq"/>
-                                        <constraint firstItem="iS8-7p-ex9" firstAttribute="leading" secondItem="Rf5-ce-uji" secondAttribute="leading" constant="20" symbolic="YES" id="dTO-QH-Y6u"/>
-                                        <constraint firstAttribute="trailing" secondItem="uAu-5i-VIe" secondAttribute="trailing" constant="8" id="iwW-vq-wBS"/>
+                                        <constraint firstItem="iS8-7p-ex9" firstAttribute="leading" secondItem="Rf5-ce-uji" secondAttribute="leading" constant="38" id="dTO-QH-Y6u"/>
+                                        <constraint firstAttribute="trailing" secondItem="uAu-5i-VIe" secondAttribute="trailing" constant="16" id="iwW-vq-wBS"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="label" destination="iS8-7p-ex9" id="RC1-Yr-hB4"/>
                                     <outlet property="pickerView" destination="uAu-5i-VIe" id="PHD-7D-KRy"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Formula Detail Cell Time" id="k1O-Gt-NXf" customClass="FormulaInputCellMultipleChoice" customModule="IPEC_Toolbox" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k1O-Gt-NXf" id="tca-6h-QDK">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLh-YG-GKW">
+                                            <rect key="frame" x="38" y="-8" width="100" height="59"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="yER-X8-XIi"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <datePicker contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="EPF-a4-T1N">
+                                            <rect key="frame" x="146" y="-59" width="438" height="162"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" id="KEc-au-6pH"/>
+                                            </constraints>
+                                            <date key="date" timeIntervalSinceReferenceDate="463299788.229931">
+                                                <!--2015-09-07 06:23:08 +0000-->
+                                            </date>
+                                            <connections>
+                                                <action selector="datePickerValueChanged:" destination="mpV-SF-10f" eventType="valueChanged" id="bKD-Ye-acn"/>
+                                            </connections>
+                                        </datePicker>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="EPF-a4-T1N" secondAttribute="trailing" constant="16" id="02Q-N0-3Or"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="EPF-a4-T1N" secondAttribute="bottom" constant="-8" id="6m7-oa-HnG"/>
+                                        <constraint firstItem="WLh-YG-GKW" firstAttribute="top" secondItem="tca-6h-QDK" secondAttribute="top" constant="-8" id="Txi-2p-RHq"/>
+                                        <constraint firstAttribute="bottom" secondItem="WLh-YG-GKW" secondAttribute="bottom" constant="-8" id="rDq-ny-ISv"/>
+                                        <constraint firstItem="WLh-YG-GKW" firstAttribute="leading" secondItem="tca-6h-QDK" secondAttribute="leading" constant="38" id="s20-74-CCZ"/>
+                                        <constraint firstItem="EPF-a4-T1N" firstAttribute="leading" secondItem="WLh-YG-GKW" secondAttribute="trailing" constant="8" symbolic="YES" id="uXE-jR-JMy"/>
+                                        <constraint firstItem="EPF-a4-T1N" firstAttribute="top" secondItem="tca-6h-QDK" secondAttribute="topMargin" constant="-8" id="xul-hK-dn1"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label" destination="WLh-YG-GKW" id="xqy-FF-hXX"/>
+                                    <outlet property="timePicker" destination="EPF-a4-T1N" id="57N-jh-Esz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -416,19 +560,19 @@ IPEC also has a close contact with local and international partners who have mad
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFj-Do-2q9">
-                                <rect key="frame" x="16" y="103" width="568" height="497"/>
+                                <rect key="frame" x="16" y="136" width="568" height="464"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bz2-zv-Hky">
-                                <rect key="frame" x="68" y="52" width="41" height="43"/>
+                                <rect key="frame" x="68" y="68" width="41" height="44"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M7r-Mj-mkQ">
-                                <rect key="frame" x="16" y="51" width="44" height="44"/>
+                                <rect key="frame" x="16" y="68" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="EWn-Re-145"/>
                                     <constraint firstAttribute="width" constant="44" id="cx4-4P-K4A"/>
@@ -438,13 +582,13 @@ IPEC also has a close contact with local and international partners who have mad
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="LFj-Do-2q9" secondAttribute="trailing" id="1rL-gJ-OTi"/>
-                            <constraint firstItem="LFj-Do-2q9" firstAttribute="top" secondItem="M7r-Mj-mkQ" secondAttribute="bottom" priority="750" constant="8" symbolic="YES" id="EeT-s5-EHi"/>
+                            <constraint firstItem="LFj-Do-2q9" firstAttribute="top" secondItem="M7r-Mj-mkQ" secondAttribute="bottom" priority="750" constant="24" id="EeT-s5-EHi"/>
                             <constraint firstItem="LFj-Do-2q9" firstAttribute="leading" secondItem="M7r-Mj-mkQ" secondAttribute="leading" id="FKN-EE-zqo"/>
                             <constraint firstItem="LFj-Do-2q9" firstAttribute="leading" secondItem="bsP-sC-Lhk" secondAttribute="leadingMargin" id="HfW-HV-QKp"/>
-                            <constraint firstItem="M7r-Mj-mkQ" firstAttribute="top" secondItem="JyH-pc-9py" secondAttribute="bottom" priority="750" constant="8" symbolic="YES" id="J1U-0V-PZU"/>
+                            <constraint firstItem="M7r-Mj-mkQ" firstAttribute="top" secondItem="JyH-pc-9py" secondAttribute="bottom" priority="750" constant="24" id="J1U-0V-PZU"/>
                             <constraint firstItem="LFj-Do-2q9" firstAttribute="bottom" secondItem="qvc-Go-LIC" secondAttribute="top" id="OPO-aU-c7k"/>
-                            <constraint firstItem="bz2-zv-Hky" firstAttribute="top" secondItem="JyH-pc-9py" secondAttribute="bottom" constant="8" symbolic="YES" id="Pwd-PP-vtg"/>
-                            <constraint firstItem="LFj-Do-2q9" firstAttribute="top" secondItem="bz2-zv-Hky" secondAttribute="bottom" constant="8" symbolic="YES" id="YcO-n9-cqJ"/>
+                            <constraint firstItem="bz2-zv-Hky" firstAttribute="top" secondItem="JyH-pc-9py" secondAttribute="bottom" constant="24" id="Pwd-PP-vtg"/>
+                            <constraint firstItem="LFj-Do-2q9" firstAttribute="top" secondItem="bz2-zv-Hky" secondAttribute="bottom" constant="24" id="YcO-n9-cqJ"/>
                             <constraint firstItem="bz2-zv-Hky" firstAttribute="leading" secondItem="M7r-Mj-mkQ" secondAttribute="trailing" constant="8" symbolic="YES" id="jH2-TS-9ke"/>
                             <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="bz2-zv-Hky" secondAttribute="trailing" id="rCe-Hc-aev"/>
                             <constraint firstItem="bz2-zv-Hky" firstAttribute="centerY" secondItem="M7r-Mj-mkQ" secondAttribute="centerY" id="yWA-0O-q3E"/>
@@ -597,12 +741,14 @@ IPEC also has a close contact with local and international partners who have mad
         </scene>
     </scenes>
     <resources>
+        <image name="addRow" width="22" height="22"/>
         <image name="calc" width="30" height="22"/>
         <image name="logo" width="500" height="253"/>
+        <image name="removeRow" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="yPM-Ox-X8U"/>
         <segue reference="ChO-KV-0Bm"/>
-        <segue reference="cXf-3W-zUW"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.96078431372549022" green="0.51764705882352935" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
 </document>
