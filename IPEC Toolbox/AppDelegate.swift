@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let splitViewController = self.window!.rootViewController as! UISplitViewController
         splitViewController.delegate = self
         
+        splitViewController.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
+        
         let minimumWidth = min(CGRectGetWidth(splitViewController.view.bounds),CGRectGetHeight(splitViewController.view.bounds));
         splitViewController.minimumPrimaryColumnWidth = minimumWidth / 3;
         splitViewController.maximumPrimaryColumnWidth = minimumWidth;
@@ -62,24 +64,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     // MARK: - Split view
     
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
-        if let secondaryAsNavController = secondaryViewController as? UINavigationController {
-            if let topAsDetailController = secondaryAsNavController.topViewController as? ResultsTableViewController {
-                if topAsDetailController.tableView.numberOfRowsInSection(0) > 0 {
-                    // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-                    return true
-                }
-            }
-        }
-        return false
-    }
-
     func splitViewController(splitViewController: UISplitViewController, showDetailViewController vc: UIViewController, sender: AnyObject?) -> Bool {
         
         if splitViewController.collapsed {
-            if let master = splitViewController.viewControllers[0] as? UITabBarController {
+            if let master = splitViewController.viewControllers.first as? UITabBarController {
                 if let masterNC = master.selectedViewController as? UINavigationController {
-                    masterNC.pushViewController(vc, animated: true)
+                    masterNC.showViewController(vc, sender: self)
                     
                     return true
                 }

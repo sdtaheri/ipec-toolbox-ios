@@ -12,8 +12,6 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
     
     weak var resultsTableViewController: ResultsTableViewController?
     
-    private var previousContentInset = UIEdgeInsetsZero
-    
     var userDefaults: NSUserDefaults?
     private var tutorialView: CRProductTour?
     
@@ -164,19 +162,21 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
             if let notificationValue = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
                 let keyboardFrame = notificationValue.CGRectValue()
                 
-                let textFieldRectInWindow = activeTextField!.convertRect(activeTextField!.bounds, toView: nil)
-                tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height * 1.05, right: 0)
-                tableView.scrollIndicatorInsets = tableView.contentInset
-                
-                let textFieldRectInTableView = activeTextField!.convertRect(activeTextField!.bounds, toView: tableView)
-                tableView.scrollRectToVisible(textFieldRectInTableView, animated: true)
+                if keyboardFrame.height != 0 {
+                    let textFieldRectInWindow = activeTextField!.convertRect(activeTextField!.bounds, toView: nil)
+                    tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height * 1.05, right: 0)
+                    tableView.scrollIndicatorInsets = tableView.contentInset
+                    
+                    let textFieldRectInTableView = activeTextField!.convertRect(activeTextField!.bounds, toView: tableView)
+                    tableView.scrollRectToVisible(textFieldRectInTableView, animated: true)
+                }
             }
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
         UIView.animateWithDuration(0.3) {
-            self.tableView.contentInset = self.previousContentInset
+            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.tabBarController!.tabBar.frame.height + 8.0, 0)
             self.tableView.scrollIndicatorInsets = self.tableView.contentInset
         }
     }
@@ -185,6 +185,7 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
         super.viewDidLoad()
         
         tableView.estimatedRowHeight = 44.0
+        tableView.contentInset.bottom += 8.0
         
         let infoButton = UIButton.buttonWithType(.DetailDisclosure) as! UIButton
         infoButton.addTarget(self, action: "showMoreInfo:", forControlEvents: .TouchUpInside)
@@ -211,9 +212,7 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        previousContentInset = tableView.contentInset
-        
+                
         let formulaDetailTutorial = userDefaults?.boolForKey(StringConstants.FormulaDetailTutorial)
         if formulaDetailTutorial == false {
             let button = navigationItem.rightBarButtonItems![1] as! UIBarButtonItem

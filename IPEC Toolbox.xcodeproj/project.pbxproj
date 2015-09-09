@@ -129,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				3081F1C61B109CCB004BA309 /* Main.storyboard */,
+				3081F1C21B109CCB004BA309 /* AppDelegate.swift */,
 				3081F1C41B109CCB004BA309 /* MainTableViewController.swift */,
 				30E823311B15BA9600835D73 /* FormulaDetailTableViewController.swift */,
 				30DABCD21B18AF000015DE8E /* MoreInfoViewController.swift */,
@@ -158,7 +159,6 @@
 				303155A61B1BA7F9009B32CA /* UnitsExtension.swift */,
 				30E8232F1B15B50200835D73 /* Calculations.swift */,
 				3081F1CB1B109CCB004BA309 /* LaunchScreen.xib */,
-				3081F1C21B109CCB004BA309 /* AppDelegate.swift */,
 				3081F1C11B109CCB004BA309 /* Info.plist */,
 			);
 			name = "Supporting Files";

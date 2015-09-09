@@ -358,10 +358,12 @@ class Calculations: NSObject {
         let V_sd = N_v * d_sd_fraction * V
         let m_ic = r_ic * V_ic
         let m_sd = r_sd * V_sd
-        let Q_ic = d_ic_fraction * Q
-        let Q_sd = d_sd_fraction * Q
+        var Q_ic = d_ic_fraction * Q
+        Q_ic = Q_ic.convert(fromUnit: "m³/s", toUnit: "m³/hr", kind: "Volume Rate")!
+        var Q_sd = d_sd_fraction * Q
+        Q_sd = Q_sd.convert(fromUnit: "m³/s", toUnit: "m³/hr", kind: "Volume Rate")!
         
-        return ["Inner Diameter": (ID, "Length", 0), "Pipeline Volume": (V, "Volume", 0), "Required Inhibitor Chemical Volume": (V_ic, "Volume", 0), "Required Sea Dye Volume": (V_sd, "Volume", 0), "Required Inhibitor Chemical Mass": (m_ic, "Mass", 0), "Required Sea Dye Mass": (m_sd, "Mass", 0), "Required Inhibitor Chemical Flow Rate": (Q_ic, "Volume Rate", 0), "Required Sea Dye Flow Rate": (Q_sd, "Volume Rate", 0)]
+        return ["Inner Diameter": (ID, "Length", 0), "Pipeline Volume": (V, "Volume", 0), "Required Inhibitor Chemical Volume": (V_ic, "Volume", 0), "Required Sea Dye Volume": (V_sd, "Volume", 0), "Required Inhibitor Chemical Mass": (m_ic, "Mass", 0), "Required Sea Dye Mass": (m_sd, "Mass", 0), "Required Inhibitor Chemical Flow Rate": (Q_ic, "Volume Rate", 2), "Required Sea Dye Flow Rate": (Q_sd, "Volume Rate", 2)]
     }
     
     class func pipelineInternalVolume(pipelineLength L: Double, pipelineOutsideDiameter OD: Double, pipelineWallThickness t: Double) -> [String: (Double,String,Int)] {

@@ -101,23 +101,10 @@ class MainTableViewController: UITableViewController {
     private let userDefaults = NSUserDefaults()
     
     override func viewDidLoad() {
-        
-        if let window = UIApplication.sharedApplication().keyWindow {
-            if window.traitCollection.horizontalSizeClass == .Regular {
-                self.clearsSelectionOnViewWillAppear = false
-                self.splitViewController?.preferredDisplayMode = UISplitViewControllerDisplayMode.AllVisible
-            }
-        }
+        super.viewDidLoad()
         
         tableView.estimatedRowHeight = 44
         tableView.contentInset.bottom += 16
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        if let indexPath = tableView.indexPathForSelectedRow() {
-            tableView.deselectRowAtIndexPath(indexPath, animated: animated)
-        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -196,6 +183,9 @@ class MainTableViewController: UITableViewController {
             }
         default: return nil
         }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {            tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
