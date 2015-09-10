@@ -24,7 +24,7 @@ class Calculations: NSObject {
     
     //Output means:["Output Title": (Value, Unit Type , Unit Index)]
     
-    class func dewPointTemperature(#airTemperature: Double, relativeHumidity: Double, airPressure: Double) -> [String: (Double,String,Int)] {
+    class func dewPointTemperature(airTemperature airTemperature: Double, relativeHumidity: Double, airPressure: Double) -> [String: (Double,String,Int)] {
         
         let N_A = 6.022 * pow(10.0, 23.0)
         let R = 8.314
@@ -65,7 +65,7 @@ class Calculations: NSObject {
         
         let c_H2O = x_H2O * n_air * M_H2O
         
-        let m_H2O = x_H2O * n_air * N_A * pow(10.0, -6)
+        _ = x_H2O * n_air * N_A * pow(10.0, -6)
         
         return ["Saturated Water Vapor Pressure": (P_s,"Pressure",0), "Dew Point Temperature": (T_dp,"Temperature",0), "Dew Point Difference" : (T_diff,"Temperature",0), "Partial Pressure of Water": (P_H2O,"Pressure",0), "Partial Pressure of Dry Air": (P_a,"Pressure",0), "Wet Air Molar Density": (n_air,"Molar Density",0), "Dry Air Density": (Ro_air,"Density",0), "Vapor Density": (Ro_v,"Density",0), "Mole Fraction, Volume Mixing Ratio of Water": (x_H2O,"Fraction",0), "Specific Humidity (Mass Mixing Ratio in Wet Air)": (q,"Fraction",0), "Mass Mixing Ratio in Dry Air": (mmv,"Fraction",0), "Mass Concentration of Water": (c_H2O,"Density",4), "Molecular Concentration of Water": (M_H2O,"Inverse Volume",0)]
     }
@@ -99,6 +99,8 @@ class Calculations: NSObject {
                 default: ro_p = ro_f
             }
             
+            ro_p = ro_p * 1
+            
             var t_CA: Double = 0
             switch PC {
                 case "Operation (Marine Growth Present)", "Operation (Without Marine Growth)": t_CA = CA * 0.5
@@ -113,7 +115,7 @@ class Calculations: NSObject {
             
             let A_i = M_PI_4 * pow(ID, 2.0)
             
-            let CSA_s = M_PI_4 * (pow(OD_s, 2.0) - pow(ID, 2.0))
+            _ = M_PI_4 * (pow(OD_s, 2.0) - pow(ID, 2.0))
             
             let CSA_corr = M_PI_4 * (pow(OD_s + 2 * t_corr, 2.0) - pow(OD_s, 2.0))
             
@@ -264,7 +266,7 @@ class Calculations: NSObject {
             
             let R_concrete = (log((OD + 2 * t_coat + 2 * t_concrete)/(OD + 2 * t_coat))) / (2 * M_PI * K_concrete)
             
-            let R_soil_concrete = (log((OD + 2 * t_coat + 2 * t_concrete + 2 * t_soil_concrete)/(OD + 2 * t_coat + 2 * t_concrete))) / (2 * M_PI * K_soil)
+            _ = (log((OD + 2 * t_coat + 2 * t_concrete + 2 * t_soil_concrete)/(OD + 2 * t_coat + 2 * t_concrete))) / (2 * M_PI * K_soil)
             
             let R_outside_film_concrete = 1 / (h_outside_concrete * M_PI * (OD_coated_concrete + t_soil_concrete))
             
@@ -324,7 +326,7 @@ class Calculations: NSObject {
         var f_old = 0.25 * pow(log10(epsilon / (3.7 * ID) + 5.74 / pow(Re, 0.9)) , -2)
         var f_new = f_old
         
-        do {
+        repeat {
             f_old = f_new
             let RHS = -2 * log10(epsilon / (3.7 * ID) + 2.51 / (Re * sqrt(f_old)))
             f_new = 1 / pow(RHS, 2.0)

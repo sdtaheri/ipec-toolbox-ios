@@ -156,7 +156,7 @@ class MainTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(StringConstants.MainCellReuseIdentifier) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(StringConstants.MainCellReuseIdentifier)!
         
         if indexPath.section == 2 {
             //Recent Section
@@ -176,7 +176,7 @@ class MainTableViewController: UITableViewController {
         case 0: return StringConstants.FirstSectionHeader
         case 1: return StringConstants.SecondSectionHeader
         case 2:
-            if let recentFormulas = userDefaults.arrayForKey(StringConstants.RecentFormulas) {
+            if let _ = userDefaults.arrayForKey(StringConstants.RecentFormulas) {
                 return StringConstants.RecentFormulas
             } else {
                 return nil
@@ -185,7 +185,8 @@ class MainTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

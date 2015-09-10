@@ -28,12 +28,10 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
     private var results = [String: (Double,String,Int)]() {
         didSet {
             if results.count > 0 {
-                resultsArrayKeys = results.keys.array.sorted {
-                    return $0 < $1
-                }
+                resultsArrayKeys = ([String](results.keys)).sort()
                 
                 if formulaTitle == "Pig Launching and Receiving Time Prediction" {
-                    if let index = find(resultsArrayKeys,"Operation Start Time") {
+                    if let index = resultsArrayKeys.indexOf("Operation Start Time") {
                         resultsArrayKeys.removeAtIndex(index)
                     }
                     resultsArrayKeys.insert("Operation Start Time", atIndex: 0)
@@ -201,9 +199,9 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
             }
         }
 
-        if tableView.visibleCells().count > 0 {
+        if tableView.visibleCells.count > 0 {
             
-            if let firstVisibleRow = tableView.visibleCells()[0] as? FormulaOutputCell {
+            if let firstVisibleRow = tableView.visibleCells[0] as? FormulaOutputCell {
                 if tutorialView == nil {
                     tutorialView = CRProductTour(frame: view.bounds)
                     
@@ -234,9 +232,9 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
     @IBAction func shareResults(sender: UIBarButtonItem) {
     
         let fileName = "Results.pdf"
-        let arrayPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! [String]
+        let arrayPaths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
         let path = arrayPaths[0]
-        let pdfFileName = path.stringByAppendingPathComponent(fileName)
+        let pdfFileName = (path as NSString).stringByAppendingPathComponent(fileName)
 
         if dynamicResultsValue == nil {
             PDFRenderer.drawPDF(pdfFileName, title: formulaTitle, labels: resultsArrayKeys, results: results, dynamicResults: dynamicResultsValue)
@@ -254,7 +252,7 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         let fileMgr = NSFileManager.defaultManager()
         if fileMgr.fileExistsAtPath(pdfFileName) {
             
-            documentInteractionController = UIDocumentInteractionController(URL: NSURL(fileURLWithPath: pdfFileName)!)
+            documentInteractionController = UIDocumentInteractionController(URL: NSURL(fileURLWithPath: pdfFileName))
             documentInteractionController!.presentOptionsMenuFromBarButtonItem(sender, animated: true)
         }
     }
@@ -288,7 +286,7 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
                     UIGraphicsEndImageContext()
 
                     let imageView = UIImageView(image: scaledImage)
-                    imageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+                    imageView.translatesAutoresizingMaskIntoConstraints = false
                     superView.addSubview(imageView)
                     
                     superView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Bottom, relatedBy: .Equal, toItem: superView, attribute: .Bottom, multiplier: 1.0, constant: -8.0))
@@ -317,7 +315,7 @@ class ResultsTableViewController: UITableViewController, UIPopoverPresentationCo
         return UIModalPresentationStyle.None
     }
     
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController!, traitCollection: UITraitCollection!) -> UIModalPresentationStyle {
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.None
     }
     

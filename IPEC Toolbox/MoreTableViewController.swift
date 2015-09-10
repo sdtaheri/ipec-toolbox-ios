@@ -33,7 +33,7 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("moreCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("moreCell", forIndexPath: indexPath)
 
         switch indexPath.row {
         case 0: cell.textLabel?.text = "About Us"
@@ -109,7 +109,7 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
     }
 
     
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         
         if selectedIndexPath != nil {
             tableView.deselectRowAtIndexPath(selectedIndexPath!, animated: true)

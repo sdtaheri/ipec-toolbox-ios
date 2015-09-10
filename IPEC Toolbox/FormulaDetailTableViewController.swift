@@ -15,7 +15,7 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
     var userDefaults: NSUserDefaults?
     private var tutorialView: CRProductTour?
     
-    private var inputValues = [Double?,String?]()
+    private var inputValues = [(Double?,String?)]()
     private var inputValuesForSegue = [Double?]()
     private var inputUnits = [String]()
     private weak var activeTextField: UITextField?
@@ -40,9 +40,9 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
     }
     
     
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController!, traitCollection: UITraitCollection!) -> UIModalPresentationStyle {
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         switch controller.presentedViewController {
-        case let vc as UnitsTableViewController: return .None // Keep the popover in Compact screens
+        case _ as UnitsTableViewController: return .None // Keep the popover in Compact screens
         default:
             if traitCollection.horizontalSizeClass == .Regular {
                 return .FormSheet
@@ -83,31 +83,23 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
             }
         }
         
-        var inputValuesMirror = reflect(inputValues)
-        
         for i in 0..<inputValues.count {
-            let (_, mirror) = inputValuesMirror[i]
-            let element = mirror.value as! (Double?,String?)
+            let element = inputValues[i]
             if element.0 == nil || element.1 == nil {
                 if formulaTitle != nil {
                     if let inputs = StringConstants.Inputs[formulaTitle!] {
-                        let inputsArray = inputs.keys.array.sorted {
-                            return $0 < $1
-                        }
+                        let inputsArray = [String](inputs.keys).sort()
                         inputValues[i].0 = (inputs[inputsArray[i]])!.2
                         inputValues[i].1 = (inputs[inputsArray[i]])!.0
                     }
                 }
             }
         }
-        
-        inputValuesMirror = reflect(inputValues)
-        
+                
         inputValuesForSegue = [Double?](count: inputValues.count, repeatedValue: nil)
         
         for i in 0..<inputValues.count {
-            let (_, mirror) = inputValuesMirror[i]
-            let element = mirror.value as! (Double?, String?)
+            let element = inputValues[i]
             inputValuesForSegue[i] = element.0
             
             if let unitKind = element.1 {
@@ -163,7 +155,6 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
                 let keyboardFrame = notificationValue.CGRectValue()
                 
                 if keyboardFrame.height != 0 {
-                    let textFieldRectInWindow = activeTextField!.convertRect(activeTextField!.bounds, toView: nil)
                     tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardFrame.size.height * 1.05, right: 0)
                     tableView.scrollIndicatorInsets = tableView.contentInset
                     
@@ -174,7 +165,7 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
         }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardDidHide(notification: NSNotification) {
         UIView.animateWithDuration(0.3) {
             self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.tabBarController!.tabBar.frame.height + 8.0, 0)
             self.tableView.scrollIndicatorInsets = self.tableView.contentInset
@@ -187,7 +178,7 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
         tableView.estimatedRowHeight = 44.0
         tableView.contentInset.bottom += 8.0
         
-        let infoButton = UIButton.buttonWithType(.DetailDisclosure) as! UIButton
+        let infoButton = UIButton(type: .DetailDisclosure)
         infoButton.addTarget(self, action: "showMoreInfo:", forControlEvents: .TouchUpInside)
         
         let helpButton = UIButton(frame: CGRectMake(0, 0, 22, 22))
@@ -198,7 +189,9 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
         
         if let splitVC = self.splitViewController {
             let controllers = splitVC.viewControllers
-            resultsTableViewController = controllers[controllers.count-1].topViewController as? ResultsTableViewController
+            if controllers.count > 1 {
+                resultsTableViewController = (controllers.last as! UINavigationController).topViewController as? ResultsTableViewController
+            }
         }
         
     }
@@ -207,7 +200,7 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
         super.viewWillAppear(animated)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidHide:", name: UIKeyboardDidHideNotification, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -215,19 +208,19 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
                 
         let formulaDetailTutorial = userDefaults?.boolForKey(StringConstants.FormulaDetailTutorial)
         if formulaDetailTutorial == false {
-            let button = navigationItem.rightBarButtonItems![1] as! UIBarButtonItem
+            let button = navigationItem.rightBarButtonItems![1]
             showHelp(button)
         }
     }
     
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardDidHideNotification, object: nil)
         
         if let svc = splitViewController {
             for v in svc.view.subviews {
                 if v is CRProductTour {
-                    v.setVisible(false)
+                    (v as! CRProductTour).setVisible(false)
                 }
             }
         }
@@ -246,9 +239,9 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
             }
         }
         
-        if tableView.visibleCells().count > 1 {
+        if tableView.visibleCells.count > 1 {
             
-            if let firstVisibleRow = tableView.visibleCells()[1] as? FormulaInputCell {
+            if let firstVisibleRow = tableView.visibleCells[1] as? FormulaInputCell {
                 if tutorialView == nil {
                     tutorialView = CRProductTour(frame: view.bounds)
                     
@@ -290,13 +283,13 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
         if section == 0 {
             if formulaTitle != nil {
                 if let inputs = StringConstants.Inputs[formulaTitle!] {
-                    let inputsArray = inputs.keys.array
+                    let inputsArray = [String](inputs.keys)
                     if inputUnits.count == 0 {
                         inputUnits = [String](count: inputsArray.count, repeatedValue: "")
                     }
                     if inputValues.count != inputsArray.count {
                         for _ in 0..<inputsArray.count {
-                            inputValues.append(nil,nil)
+                            inputValues.append((nil,nil))
                         }
                     }
                     return inputsArray.count
@@ -317,19 +310,13 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
             let cell = tableView.dequeueReusableCellWithIdentifier(StringConstants.FormulaCellReuseIdentifier, forIndexPath: indexPath) as! FormulaInputCell
             
             if let titleInputs = StringConstants.Inputs[formulaTitle!] {
-                let titleInputsArray = titleInputs.keys.array.sorted {
-                    return $0 < $1
-                }
-                
+                let titleInputsArray = [String](titleInputs.keys).sort()
                 cell.label.text = titleInputsArray[indexPath.row]
                 
                 cell.textField.delegate = self
                 
                 if inputValues.count == tableView.numberOfRowsInSection(0) {
-                    let inputValuesMirror = reflect(inputValues)
-                    
-                    let (_,mirror) = inputValuesMirror[indexPath.row]
-                    let element = mirror.value as! (Double?,String?)
+                    let element = inputValues[indexPath.row]
                     if element.0 != nil {
                         cell.textField.text = "\(element.0!)"
                     } else {
@@ -515,7 +502,7 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
             if let cell = contentView.superview as? FormulaInputCell {
                 if let cellIndexPath = tableView.indexPathForCell(cell) {
                     if cellIndexPath.section == 0 {
-                        if let doubleValue = textField.text.toDouble() {
+                        if let doubleValue = textField.text?.toDouble() {
                             inputValues[cellIndexPath.row].0 = doubleValue
                             
                             if let titleInputs = StringConstants.Inputs[formulaTitle!] {
@@ -525,7 +512,7 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
                             }
                         }
                     } else if cellIndexPath.section == 1 {
-                        if let doubleValue = textField.text.toDouble() {
+                        if let doubleValue = textField.text?.toDouble() {
                             dynamicInputValues[cellIndexPath.row] = doubleValue
                         }
                     }
@@ -555,7 +542,7 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
         return 0
     }
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         var label = view as? UILabel
         if label == nil {
             label = UILabel()

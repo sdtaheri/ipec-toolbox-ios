@@ -73,7 +73,7 @@ class PDFRenderer: NSObject {
         
         CFAttributedStringSetAttribute(currentText, CFRangeMake(0, CFAttributedStringGetLength(currentText)),kCTFontAttributeName, ctFont);
         
-        var alignment = centerAligned ? CTTextAlignment.TextAlignmentCenter : CTTextAlignment.TextAlignmentLeft
+        var alignment = centerAligned ? CTTextAlignment.Center : CTTextAlignment.Left
         let alignmentSetting = [CTParagraphStyleSetting(spec: .Alignment, valueSize: Int(sizeofValue(alignment)), value: &alignment)]
         let paragraphStyle = CTParagraphStyleCreate(alignmentSetting, 1)
         
@@ -82,7 +82,7 @@ class PDFRenderer: NSObject {
         let framesetter = CTFramesetterCreateWithAttributedString(currentText)
         
         let frameRect = frame
-        var framePath = CGPathCreateMutable()
+        let framePath = CGPathCreateMutable()
         CGPathAddRect(framePath, nil, frameRect);
         
         // Get the frame that will do the rendering.
@@ -90,22 +90,23 @@ class PDFRenderer: NSObject {
         let frameRef = CTFramesetterCreateFrame(framesetter, currentRange, framePath, nil);
         
         // Get the graphics context.
-        let currentContext = UIGraphicsGetCurrentContext();
         
-        // Put the text matrix into a known state. This ensures
-        // that no old scaling factors are left in place.
-        CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity);
-        
-        // Core Text draws from the bottom-left corner up, so flip
-        // the current transform prior to drawing.
-        CGContextTranslateCTM(currentContext, 0, frameRect.origin.y*2 + frameRect.size.height);
-        CGContextScaleCTM(currentContext, 1.0, -1.0);
-        
-        // Draw the frame.
-        CTFrameDraw(frameRef, currentContext);
-        
-        CGContextScaleCTM(currentContext, 1.0, -1.0);
-        CGContextTranslateCTM(currentContext, 0, -frameRect.origin.y*2 - frameRect.size.height);
+        if let currentContext = UIGraphicsGetCurrentContext() {
+            // Put the text matrix into a known state. This ensures
+            // that no old scaling factors are left in place.
+            CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity);
+            
+            // Core Text draws from the bottom-left corner up, so flip
+            // the current transform prior to drawing.
+            CGContextTranslateCTM(currentContext, 0, frameRect.origin.y*2 + frameRect.size.height);
+            CGContextScaleCTM(currentContext, 1.0, -1.0);
+            
+            // Draw the frame.
+            CTFrameDraw(frameRef, currentContext);
+            
+            CGContextScaleCTM(currentContext, 1.0, -1.0);
+            CGContextTranslateCTM(currentContext, 0, -frameRect.origin.y*2 - frameRect.size.height);
+        }
     }
     
     private class func drawTitle(title: String) {
@@ -165,7 +166,7 @@ class PDFRenderer: NSObject {
                     let resultFrame = CGRect(x: from.x + 1.5 * columnWidth, y: from.y + (rowHeight - 20)/2, width: columnWidth * 2, height: 20)
                     drawText(result, inFrame: resultFrame, fontName: font.fontName, fontSize: font.pointSize, centerAligned: false)
                 } else if dynamicResults != nil {
-                    var result = dynamicResults![i]
+                    let result = dynamicResults![i]
                     
                     let resultFrame = CGRect(x: from.x + 1.5 * columnWidth, y: from.y + (rowHeight - 20)/2, width: columnWidth * 2, height: 20)
                     drawText(result, inFrame: resultFrame, fontName: font.fontName, fontSize: font.pointSize, centerAligned: false)

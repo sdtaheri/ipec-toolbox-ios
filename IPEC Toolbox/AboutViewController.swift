@@ -31,14 +31,13 @@ class AboutViewController: UIViewController {
         let ipecURL = NSAttributedString(string: "www.ipecgroup.net\n\n\n", attributes: [NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline), NSParagraphStyleAttributeName:paragraphStyle])
         attributedString.appendAttributedString(ipecURL)
         
-        var redcubeAttributedString = NSMutableAttributedString(string: "Developed by:\n")
+        let redcubeAttributedString = NSMutableAttributedString(string: "Developed by:\n")
         redcubeAttributedString.addAttribute(NSFontAttributeName, value: UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote), range: NSMakeRange(0, redcubeAttributedString.length))
 
         redcubeAttributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, redcubeAttributedString.length))
         
         let textAttachment = NSTextAttachment()
         let image = UIImage(named: "redcube-logo")!
-        let scale = ipecLogo.image!.size.height / image.size.height;
         
         let size = CGSize(width: 3.3 * ipecLogo.frame.size.height, height: ipecLogo.frame.size.height)
         UIGraphicsBeginImageContextWithOptions(size, true, 0)
@@ -48,7 +47,7 @@ class AboutViewController: UIViewController {
         UIGraphicsEndImageContext()
         
         textAttachment.image = scaledImage
-        var attrStringWithImage = NSAttributedString(attachment: textAttachment)
+        let attrStringWithImage = NSAttributedString(attachment: textAttachment)
         let temp = NSMutableAttributedString(attributedString: attrStringWithImage)
         temp.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, temp.length))
 

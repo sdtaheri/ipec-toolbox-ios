@@ -69,7 +69,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         if splitViewController.collapsed {
             if let master = splitViewController.viewControllers.first as? UITabBarController {
                 if let masterNC = master.selectedViewController as? UINavigationController {
-                    masterNC.showViewController(vc, sender: self)
+                    if vc is UINavigationController {
+                        masterNC.pushViewController((vc as! UINavigationController).childViewControllers[0], animated: true)
+                    } else {
+                        masterNC.pushViewController(vc, animated: true)
+                    }
                     
                     return true
                 }
@@ -79,13 +83,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         return false
     }
     
-    func splitViewController(splitViewController: UISplitViewController, separateSecondaryViewControllerFromPrimaryViewController primaryViewController: UIViewController!) -> UIViewController? {
+    func splitViewController(splitViewController: UISplitViewController, separateSecondaryViewControllerFromPrimaryViewController primaryViewController: UIViewController) -> UIViewController? {
         if let master = splitViewController.viewControllers[0] as? UITabBarController {
             if let masterNC = master.selectedViewController as? UINavigationController {
                 if let lastController = masterNC.childViewControllers.last as? UINavigationController {
-                    if let resultTVC = lastController.childViewControllers[0] as? ResultsTableViewController {
+                    if let _ = lastController.childViewControllers[0] as? ResultsTableViewController {
                         return masterNC.popViewControllerAnimated(true)
                     }
+                } else if let rtvc = masterNC.childViewControllers.last as? ResultsTableViewController {
+                    let nc = UINavigationController(rootViewController: masterNC.popViewControllerAnimated(true)!)
+                    rtvc.navigationItem.leftBarButtonItem = nil
+                    
+                    return nc
                 }
             }
         }

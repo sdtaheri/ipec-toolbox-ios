@@ -16,7 +16,7 @@ class UnitsTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
                 
-        if let selectedIndex = find(unitsArray, selectedUnit) {
+        if let selectedIndex = unitsArray.indexOf(selectedUnit) {
             if let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedIndex, inSection: 0)) {
                 cell.accessoryType = .Checkmark
             }
@@ -48,7 +48,7 @@ class UnitsTableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StringConstants.UnitCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(StringConstants.UnitCellReuseIdentifier, forIndexPath: indexPath) 
 
         cell.textLabel?.text = unitsArray[indexPath.row]
         

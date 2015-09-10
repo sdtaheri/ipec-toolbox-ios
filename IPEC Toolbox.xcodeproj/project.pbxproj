@@ -18,7 +18,6 @@
 		3081F1C51B109CCB004BA309 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F1C41B109CCB004BA309 /* MainTableViewController.swift */; };
 		3081F1C81B109CCB004BA309 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3081F1C61B109CCB004BA309 /* Main.storyboard */; };
 		3081F1CD1B109CCB004BA309 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3081F1CB1B109CCB004BA309 /* LaunchScreen.xib */; };
-		3081F1D91B109CCB004BA309 /* IPEC_ToolboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F1D81B109CCB004BA309 /* IPEC_ToolboxTests.swift */; };
 		3081F1E31B109E41004BA309 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F1E21B109E41004BA309 /* MoreTableViewController.swift */; };
 		3081F2151B10A34C004BA309 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3081F2141B10A34C004BA309 /* AboutViewController.swift */; };
 		30936AA11B4B1132005D32CA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30936A9F1B4B1111005D32CA /* MessageUI.framework */; };
@@ -31,16 +30,6 @@
 		30E823321B15BA9600835D73 /* FormulaDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E823311B15BA9600835D73 /* FormulaDetailTableViewController.swift */; };
 		30E823341B15D7F900835D73 /* FormulaInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E823331B15D7F900835D73 /* FormulaInputCell.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3081F1D31B109CCB004BA309 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3081F1B51B109CCB004BA309 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3081F1BC1B109CCB004BA309;
-			remoteInfo = "IPEC Toolbox";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		300AA1FA1B4D3F9B002F393C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -59,7 +48,6 @@
 		3081F1C41B109CCB004BA309 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		3081F1C71B109CCB004BA309 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3081F1CC1B109CCB004BA309 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		3081F1D21B109CCB004BA309 /* IPEC ToolboxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IPEC ToolboxTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3081F1D71B109CCB004BA309 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3081F1D81B109CCB004BA309 /* IPEC_ToolboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPEC_ToolboxTests.swift; sourceTree = "<group>"; };
 		3081F1E21B109E41004BA309 /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
@@ -83,13 +71,6 @@
 			files = (
 				30936AA11B4B1132005D32CA /* MessageUI.framework in Frameworks */,
 				309C2FAE1B4468BE00605E6F /* CoreText.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3081F1CF1B109CCB004BA309 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				3081F1BD1B109CCB004BA309 /* IPEC Toolbox.app */,
-				3081F1D21B109CCB004BA309 /* IPEC ToolboxTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,24 +181,6 @@
 			productReference = 3081F1BD1B109CCB004BA309 /* IPEC Toolbox.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3081F1D11B109CCB004BA309 /* IPEC ToolboxTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3081F1DF1B109CCB004BA309 /* Build configuration list for PBXNativeTarget "IPEC ToolboxTests" */;
-			buildPhases = (
-				3081F1CE1B109CCB004BA309 /* Sources */,
-				3081F1CF1B109CCB004BA309 /* Frameworks */,
-				3081F1D01B109CCB004BA309 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3081F1D41B109CCB004BA309 /* PBXTargetDependency */,
-			);
-			name = "IPEC ToolboxTests";
-			productName = "IPEC ToolboxTests";
-			productReference = 3081F1D21B109CCB004BA309 /* IPEC ToolboxTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -226,15 +188,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Red Cube";
 				TargetAttributes = {
 					3081F1BC1B109CCB004BA309 = {
 						CreatedOnToolsVersion = 6.3.2;
-					};
-					3081F1D11B109CCB004BA309 = {
-						CreatedOnToolsVersion = 6.3.2;
-						TestTargetID = 3081F1BC1B109CCB004BA309;
 					};
 				};
 			};
@@ -252,7 +210,6 @@
 			projectRoot = "";
 			targets = (
 				3081F1BC1B109CCB004BA309 /* IPEC Toolbox */,
-				3081F1D11B109CCB004BA309 /* IPEC ToolboxTests */,
 			);
 		};
 /* End PBXProject section */
@@ -265,13 +222,6 @@
 				300AA1FB1B4D3F9B002F393C /* Images.xcassets in Resources */,
 				3081F1C81B109CCB004BA309 /* Main.storyboard in Resources */,
 				3081F1CD1B109CCB004BA309 /* LaunchScreen.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3081F1D01B109CCB004BA309 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,23 +252,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3081F1CE1B109CCB004BA309 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3081F1D91B109CCB004BA309 /* IPEC_ToolboxTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3081F1D41B109CCB004BA309 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3081F1BC1B109CCB004BA309 /* IPEC Toolbox */;
-			targetProxy = 3081F1D31B109CCB004BA309 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3081F1C61B109CCB004BA309 /* Main.storyboard */ = {
@@ -361,6 +295,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -431,6 +366,7 @@
 				INFOPLIST_FILE = "IPEC Toolbox/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.redcube.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "IPEC Toolbox/IPEC-Toolbox-Bridging-Header.h";
 			};
@@ -444,43 +380,10 @@
 				INFOPLIST_FILE = "IPEC Toolbox/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.redcube.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "IPEC Toolbox/IPEC-Toolbox-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-			};
-			name = Release;
-		};
-		3081F1E01B109CCB004BA309 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "IPEC ToolboxTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IPEC Toolbox.app/IPEC Toolbox";
-			};
-			name = Debug;
-		};
-		3081F1E11B109CCB004BA309 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "IPEC ToolboxTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IPEC Toolbox.app/IPEC Toolbox";
 			};
 			name = Release;
 		};
@@ -501,15 +404,6 @@
 			buildConfigurations = (
 				3081F1DD1B109CCB004BA309 /* Debug */,
 				3081F1DE1B109CCB004BA309 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3081F1DF1B109CCB004BA309 /* Build configuration list for PBXNativeTarget "IPEC ToolboxTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3081F1E01B109CCB004BA309 /* Debug */,
-				3081F1E11B109CCB004BA309 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
