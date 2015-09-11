@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NUl-hR-MnK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NUl-hR-MnK">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -13,25 +14,33 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Dq5-k1-JpJ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <imageView key="tableFooterView" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="IeK-gG-VZO">
                             <rect key="frame" x="0.0" y="167.5" width="600" height="80"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
                         </imageView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Main Cell" textLabel="3PF-ZW-9Kz" style="IBUITableViewCellStyleDefault" id="J0L-pi-ufX">
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="J0L-pi-ufX" id="Pne-n3-lKE">
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3PF-ZW-9Kz">
+                                            <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                 </tableViewCellContentView>
+                                <animations/>
                                 <connections>
                                     <segue destination="mpV-SF-10f" kind="show" identifier="Formula Detail" id="p3k-VG-KeO"/>
                                 </connections>
@@ -58,21 +67,28 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="JcB-TV-lC7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="moreCell" textLabel="Kb6-xa-8pz" style="IBUITableViewCellStyleDefault" id="kaQ-v8-OYr">
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kaQ-v8-OYr" id="eyM-9j-u36">
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kb6-xa-8pz">
+                                            <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                 </tableViewCellContentView>
+                                <animations/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -101,14 +117,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Nqw-n9-g4s">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Nqw-n9-g4s">
                                 <rect key="frame" x="50" y="56" width="500" height="60"/>
+                                <animations/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="VVg-RJ-KUT"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="DPR-rR-3JO" appends="YES" id="KJh-ct-gBZ"/>
+                                </connections>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QMQ-nn-6x5">
                                 <rect key="frame" x="0.0" y="124" width="600" height="476"/>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">IPEC (Ideh-Pouyan Energy Co.) is a private company, specialized in engineering and services of different types of pipelines. According to the team’s high level of expertise in both onshore and offshore pipelines, IPEC is always interested to carry out projects that challenge the engineering society of oil and gas industry. Our capability spans all types of pipeline services such as basic design, detailed design and precommissioning. By employing the most capable and experienced engineers and industry leading processes.
 IPEC also has a close contact with local and international partners who have made IPEC gain reputation among most of the local project owners. The international partners of IPEC include those who share the engineering know-how with our engineering team and also those who share their most high-tech equipment with us during the projects. 
@@ -118,6 +140,7 @@ IPEC also has a close contact with local and international partners who have mad
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Nqw-n9-g4s" firstAttribute="top" secondItem="qjT-lD-wWt" secondAttribute="bottom" constant="12" id="9Hv-DN-kEF"/>
@@ -143,6 +166,11 @@ IPEC also has a close contact with local and international partners who have mad
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ehN-dw-RJP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="xgM-Sj-RHY" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer numberOfTapsRequired="7" id="DPR-rR-3JO">
+                    <connections>
+                        <action selector="easterEgg:" destination="USH-wa-FzK" id="WLz-od-gtG"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2270" y="212"/>
         </scene>
@@ -154,6 +182,7 @@ IPEC also has a close contact with local and international partners who have mad
                     <tabBar key="tabBar" contentMode="scaleToFill" id="j04-lc-aCe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
@@ -187,6 +216,7 @@ IPEC also has a close contact with local and international partners who have mad
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qpe-pv-dmG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -205,6 +235,7 @@ IPEC also has a close contact with local and international partners who have mad
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xdM-Wx-LKq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -224,6 +255,7 @@ IPEC also has a close contact with local and international partners who have mad
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2Dn-0R-aBu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -241,13 +273,15 @@ IPEC also has a close contact with local and international partners who have mad
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="qqj-4D-ecI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="nTH-dv-h0C">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <rect key="frame" x="0.0" y="343.5" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1R-VF-kVQ">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <animations/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                     <state key="normal" title="Compute">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -257,6 +291,7 @@ IPEC also has a close contact with local and international partners who have mad
                                     </connections>
                                 </button>
                             </subviews>
+                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="Y1R-VF-kVQ" secondAttribute="trailing" id="4Pw-Bm-xEt"/>
@@ -267,23 +302,28 @@ IPEC also has a close contact with local and international partners who have mad
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Formula Detail Cell" id="QC0-7c-iCE" customClass="FormulaInputCell" customModule="IPEC_Toolbox" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="113.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QC0-7c-iCE" id="33p-pP-eRo">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJN-LD-U1c">
                                             <rect key="frame" x="38" y="6" width="36" height="31"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K7G-ym-sPl">
                                             <rect key="frame" x="82" y="6" width="445" height="31"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6L-P2-5xc">
                                             <rect key="frame" x="534" y="6" width="50" height="31"/>
+                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="vDb-1O-e4t"/>
                                             </constraints>
@@ -297,6 +337,7 @@ IPEC also has a close contact with local and international partners who have mad
                                             </connections>
                                         </button>
                                     </subviews>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstItem="HJN-LD-U1c" firstAttribute="leading" secondItem="33p-pP-eRo" secondAttribute="leading" constant="38" id="4ad-qu-atN"/>
                                         <constraint firstItem="K7G-ym-sPl" firstAttribute="top" secondItem="33p-pP-eRo" secondAttribute="top" constant="6" id="6Iu-qZ-s0o"/>
@@ -311,6 +352,7 @@ IPEC also has a close contact with local and international partners who have mad
                                         <constraint firstItem="HJN-LD-U1c" firstAttribute="top" secondItem="33p-pP-eRo" secondAttribute="top" constant="6" id="x0v-g4-ZXh"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <animations/>
                                 <connections>
                                     <outlet property="label" destination="HJN-LD-U1c" id="AgQ-si-YtU"/>
                                     <outlet property="textField" destination="K7G-ym-sPl" id="qCl-2k-Nnc"/>
@@ -318,23 +360,28 @@ IPEC also has a close contact with local and international partners who have mad
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Formula Detail Cell Dynamic" id="oxH-4x-jvl" customClass="FormulaInputCell" customModule="IPEC_Toolbox" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="157.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oxH-4x-jvl" id="Iaa-Q3-i8e">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60q-X0-f0N">
                                             <rect key="frame" x="38" y="6" width="36" height="31"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BP7-Js-uNg">
                                             <rect key="frame" x="82" y="6" width="445" height="31"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKM-d4-VIr">
                                             <rect key="frame" x="534" y="6" width="50" height="31"/>
+                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="kzc-hg-8T7"/>
                                             </constraints>
@@ -349,6 +396,7 @@ IPEC also has a close contact with local and international partners who have mad
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3R3-l8-1NM">
                                             <rect key="frame" x="8" y="10" width="22" height="22"/>
+                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="3R3-l8-1NM" secondAttribute="height" multiplier="1:1" id="YPn-be-QmH"/>
                                             </constraints>
@@ -357,6 +405,7 @@ IPEC also has a close contact with local and international partners who have mad
                                             </state>
                                         </button>
                                     </subviews>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstItem="eKM-d4-VIr" firstAttribute="top" secondItem="Iaa-Q3-i8e" secondAttribute="top" constant="6" id="1WM-Tf-Bhh"/>
                                         <constraint firstItem="BP7-Js-uNg" firstAttribute="leading" secondItem="60q-X0-f0N" secondAttribute="trailing" constant="8" symbolic="YES" id="a23-XN-3C9"/>
@@ -373,6 +422,7 @@ IPEC also has a close contact with local and international partners who have mad
                                         <constraint firstItem="BP7-Js-uNg" firstAttribute="top" secondItem="Iaa-Q3-i8e" secondAttribute="top" constant="6" id="si3-Mv-8cB"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <animations/>
                                 <connections>
                                     <outlet property="accessoryButton" destination="3R3-l8-1NM" id="jdB-qr-JCW"/>
                                     <outlet property="label" destination="60q-X0-f0N" id="h8f-oi-snx"/>
@@ -381,12 +431,15 @@ IPEC also has a close contact with local and international partners who have mad
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Formula Detail Add Cell" id="rH5-Ad-Jux" customClass="FormulaInputCell" customModule="IPEC_Toolbox" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="201.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rH5-Ad-Jux" id="NQj-Oy-OPO">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZN3-xs-YHt">
                                             <rect key="frame" x="38" y="6" width="36" height="32"/>
+                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="Pwd-d9-tk5"/>
                                             </constraints>
@@ -396,6 +449,7 @@ IPEC also has a close contact with local and international partners who have mad
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="800" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8WP-D7-GEW">
                                             <rect key="frame" x="8" y="10" width="22" height="22"/>
+                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="8WP-D7-GEW" secondAttribute="height" multiplier="1:1" id="Lb7-j7-U0c"/>
                                             </constraints>
@@ -404,6 +458,7 @@ IPEC also has a close contact with local and international partners who have mad
                                             </state>
                                         </button>
                                     </subviews>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstItem="ZN3-xs-YHt" firstAttribute="leading" secondItem="8WP-D7-GEW" secondAttribute="trailing" constant="8" symbolic="YES" id="Ief-pw-bQG"/>
                                         <constraint firstItem="8WP-D7-GEW" firstAttribute="leading" secondItem="NQj-Oy-OPO" secondAttribute="leadingMargin" id="Ppx-aJ-jQ7"/>
@@ -412,19 +467,22 @@ IPEC also has a close contact with local and international partners who have mad
                                         <constraint firstAttribute="bottom" secondItem="ZN3-xs-YHt" secondAttribute="bottom" constant="6" id="y3j-4y-7Wx"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <animations/>
                                 <connections>
                                     <outlet property="accessoryButton" destination="8WP-D7-GEW" id="WNn-Gu-kHf"/>
                                     <outlet property="label" destination="ZN3-xs-YHt" id="t8u-CS-P5g"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Formula Detail Cell Multiple Choice" id="XGJ-ET-og1" customClass="FormulaInputCellMultipleChoice" customModule="IPEC_Toolbox" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="245.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XGJ-ET-og1" id="Rf5-ce-uji">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS8-7p-ex9">
                                             <rect key="frame" x="38" y="-8" width="100" height="59"/>
+                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="q6p-PV-CuZ"/>
                                             </constraints>
@@ -432,10 +490,12 @@ IPEC also has a close contact with local and international partners who have mad
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <pickerView contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="uAu-5i-VIe">
+                                        <pickerView contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uAu-5i-VIe">
                                             <rect key="frame" x="146" y="-59" width="438" height="162"/>
+                                            <animations/>
                                         </pickerView>
                                     </subviews>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstItem="uAu-5i-VIe" firstAttribute="width" relation="greaterThanOrEqual" secondItem="iS8-7p-ex9" secondAttribute="width" id="1M0-Oy-dUz"/>
                                         <constraint firstAttribute="bottom" secondItem="uAu-5i-VIe" secondAttribute="bottom" constant="-8" id="7gt-Lh-nHk"/>
@@ -447,19 +507,22 @@ IPEC also has a close contact with local and international partners who have mad
                                         <constraint firstAttribute="trailing" secondItem="uAu-5i-VIe" secondAttribute="trailing" constant="16" id="iwW-vq-wBS"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <animations/>
                                 <connections>
                                     <outlet property="label" destination="iS8-7p-ex9" id="RC1-Yr-hB4"/>
                                     <outlet property="pickerView" destination="uAu-5i-VIe" id="PHD-7D-KRy"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Formula Detail Cell Time" id="k1O-Gt-NXf" customClass="FormulaInputCellMultipleChoice" customModule="IPEC_Toolbox" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="289.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k1O-Gt-NXf" id="tca-6h-QDK">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLh-YG-GKW">
                                             <rect key="frame" x="38" y="-8" width="100" height="59"/>
+                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="yER-X8-XIi"/>
                                             </constraints>
@@ -467,8 +530,9 @@ IPEC also has a close contact with local and international partners who have mad
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <datePicker contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="EPF-a4-T1N">
+                                        <datePicker contentMode="scaleToFill" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="30" translatesAutoresizingMaskIntoConstraints="NO" id="EPF-a4-T1N">
                                             <rect key="frame" x="146" y="-59" width="438" height="162"/>
+                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" id="KEc-au-6pH"/>
                                             </constraints>
@@ -480,6 +544,7 @@ IPEC also has a close contact with local and international partners who have mad
                                             </connections>
                                         </datePicker>
                                     </subviews>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="EPF-a4-T1N" secondAttribute="trailing" constant="16" id="02Q-N0-3Or"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="EPF-a4-T1N" secondAttribute="bottom" constant="-8" id="6m7-oa-HnG"/>
@@ -490,6 +555,7 @@ IPEC also has a close contact with local and international partners who have mad
                                         <constraint firstItem="EPF-a4-T1N" firstAttribute="top" secondItem="tca-6h-QDK" secondAttribute="topMargin" constant="-8" id="xul-hK-dn1"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <animations/>
                                 <connections>
                                     <outlet property="label" destination="WLh-YG-GKW" id="xqy-FF-hXX"/>
                                     <outlet property="timePicker" destination="EPF-a4-T1N" id="57N-jh-Esz"/>
@@ -520,21 +586,28 @@ IPEC also has a close contact with local and international partners who have mad
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7VI-TC-Dth">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Unit Cell" textLabel="NAy-R6-UUh" style="IBUITableViewCellStyleDefault" id="C4D-ho-XqL">
+                                <rect key="frame" x="0.0" y="22" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C4D-ho-XqL" id="mZe-4R-l0F">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NAy-R6-UUh">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                 </tableViewCellContentView>
+                                <animations/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -559,26 +632,30 @@ IPEC also has a close contact with local and international partners who have mad
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFj-Do-2q9">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFj-Do-2q9">
                                 <rect key="frame" x="16" y="136" width="568" height="464"/>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bz2-zv-Hky">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bz2-zv-Hky">
                                 <rect key="frame" x="68" y="68" width="41" height="44"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M7r-Mj-mkQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M7r-Mj-mkQ">
                                 <rect key="frame" x="16" y="68" width="44" height="44"/>
+                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="EWn-Re-145"/>
                                     <constraint firstAttribute="width" constant="44" id="cx4-4P-K4A"/>
                                 </constraints>
                             </imageView>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="LFj-Do-2q9" secondAttribute="trailing" id="1rL-gJ-OTi"/>
@@ -620,19 +697,24 @@ IPEC also has a close contact with local and international partners who have mad
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="KXl-ZB-ZZr">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="rlK-ds-IHp">
                             <rect key="frame" x="0.0" y="64" width="600" height="220"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
                         </imageView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Formula Detail Cell" id="dk5-Ci-ukc" customClass="FormulaOutputCell" customModule="IPEC_Toolbox" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="333.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dk5-Ci-ukc" id="cm7-gw-Cja">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8V1-l2-kED">
                                             <rect key="frame" x="542" y="6" width="50" height="31"/>
+                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="50" id="Avk-fj-J5E"/>
                                             </constraints>
@@ -647,17 +729,20 @@ IPEC also has a close contact with local and international partners who have mad
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" text="123.45678" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bom-kC-Nxp">
                                             <rect key="frame" x="64" y="6" width="471" height="31"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRK-gk-tl6">
                                             <rect key="frame" x="20" y="6" width="36" height="31"/>
+                                            <animations/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <animations/>
                                     <constraints>
                                         <constraint firstItem="8V1-l2-kED" firstAttribute="top" secondItem="cm7-gw-Cja" secondAttribute="top" constant="6" id="D7r-Dk-lb4"/>
                                         <constraint firstItem="bom-kC-Nxp" firstAttribute="leading" secondItem="cRK-gk-tl6" secondAttribute="trailing" constant="8" symbolic="YES" id="DPY-45-TLY"/>
@@ -672,6 +757,7 @@ IPEC also has a close contact with local and international partners who have mad
                                         <constraint firstItem="cRK-gk-tl6" firstAttribute="width" secondItem="bom-kC-Nxp" secondAttribute="width" priority="250" id="xeC-hV-MVb"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <animations/>
                                 <connections>
                                     <outlet property="label" destination="cRK-gk-tl6" id="vJR-ll-Qoc"/>
                                     <outlet property="result" destination="bom-kC-Nxp" id="p1D-SP-DJA"/>
@@ -711,6 +797,7 @@ IPEC also has a close contact with local and international partners who have mad
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="y32-L0-22c">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -729,6 +816,7 @@ IPEC also has a close contact with local and international partners who have mad
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jBU-nN-usK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

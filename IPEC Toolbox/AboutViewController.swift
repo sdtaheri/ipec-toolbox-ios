@@ -19,8 +19,6 @@ class AboutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        ipecTextView.scrollRangeToVisible(NSMakeRange(0, 1))
         
         let attributedString = NSMutableAttributedString(string: ipecTextView.text)
         attributedString.addAttribute(NSFontAttributeName, value: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline), range: NSMakeRange(0, attributedString.length))
@@ -59,10 +57,25 @@ class AboutViewController: UIViewController {
         ipecTextView.attributedText = attributedString;
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewDidLayoutSubviews() {
+        ipecTextView.setContentOffset(CGPointZero, animated: false)
     }
     
+    @IBAction func easterEgg(sender: UITapGestureRecognizer) {
+        
+        let label = UITextView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 80))
+        label.text = "Developed By Saeed Taheri\nwww.saeedtaheri.com \nSummer 2015"
+        label.textAlignment = .Center;
+        label.dataDetectorTypes = .Link;
+        label.editable = false;
+        label.selectable = true;
+        label.backgroundColor = view.tintColor
+        label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        label.tintColor = UIColor.blueColor()
+        label.autoresizingMask = .FlexibleWidth
+        
+        view.addSubview(label)
+
+    }
 
 }
