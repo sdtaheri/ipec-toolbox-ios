@@ -539,9 +539,6 @@ IPEC also has a close contact with local and international partners who have mad
                                             <date key="date" timeIntervalSinceReferenceDate="463299788.229931">
                                                 <!--2015-09-07 06:23:08 +0000-->
                                             </date>
-                                            <connections>
-                                                <action selector="datePickerValueChanged:" destination="mpV-SF-10f" eventType="valueChanged" id="bKD-Ye-acn"/>
-                                            </connections>
                                         </datePicker>
                                     </subviews>
                                     <animations/>

@@ -24,35 +24,48 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 3
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        switch section {
+        case 0: return 2
+        default: return 1
+        }
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("moreCell", forIndexPath: indexPath)
 
-        switch indexPath.row {
-        case 0: cell.textLabel?.text = "About Us"
-        case 1: cell.textLabel?.text = "Share This App"
-        case 2: cell.textLabel?.text = "Contact Us"
-        case 3: cell.textLabel?.text = "Rate Us"
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0: cell.textLabel?.text = "About Us"
+            case 1: cell.textLabel?.text = "Contact Us"
+            default: break
+            }
+        case 1:
+            cell.textLabel?.text = "Share This App"
+        case 2:
+            cell.textLabel?.text = "Rate This App"
         default: break
         }
-
+        
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedIndexPath = indexPath
         
-        switch indexPath.row {
-        case 0: //About Us
-            performSegueWithIdentifier("About Segue", sender: nil)
-        case 1: // Share this app
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0: performSegueWithIdentifier("About Segue", sender: nil)
+            case 1: sendEmail()
+            default: break
+            }
+        case 1:
             let url = NSURL(string: appURL)!
             let vc = UIActivityViewController(activityItems: [url], applicationActivities: nil)
             presentViewController(vc, animated: true, completion: nil)
@@ -60,25 +73,32 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
             if selectedIndexPath != nil {
                 tableView.deselectRowAtIndexPath(selectedIndexPath!, animated: true)
             }
-        case 2: // Contact Us
-            sendEmail()
-        case 3: // Rate Us
+        case 2:
             let url = NSURL(string: reviewURL)!
-
+            
             if selectedIndexPath != nil {
                 tableView.deselectRowAtIndexPath(selectedIndexPath!, animated: true)
             }
-
+            
             UIApplication.sharedApplication().openURL(url)
         default: break
         }
-        
     }
     
     override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        var string = "You can share this app with your friends or colleagues so they can enjoy using it as well as you.\n\n"
-        string += "We will never send you any spams or ads. Feel free to contact us via email.\n\n"
-        string += "By rating the app in the App Store, you'll give us more energy in order to provide you with a better experience."
+        
+        var string = ""
+        
+        switch section {
+        case 0:
+            string = "We will never send you any spams or ads. Feel free to contact us via email."
+        case 1:
+            string = "You can share this app with your friends or colleagues so they can enjoy using it as well as you."
+        case 2:
+            string = "By rating the app in the App Store, you'll give us more energy in order to provide you with a better experience."
+        default: break
+        }
+        
         return string
     }
     

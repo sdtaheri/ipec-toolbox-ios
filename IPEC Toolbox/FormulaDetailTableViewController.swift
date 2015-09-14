@@ -137,10 +137,6 @@ class FormulaDetailTableViewController: UITableViewController, UIPopoverPresenta
         }
     }
     
-    @IBAction func datePickerValueChanged(sender: UIDatePicker) {
-        
-    }
-    
     func showMoreInfo(sender: UIButton) {
         performSegueWithIdentifier(StringConstants.MoreInfo, sender: nil)
     }

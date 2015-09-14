@@ -26,8 +26,11 @@ class AboutViewController: UIViewController {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .Center
         
-        let ipecURL = NSAttributedString(string: "www.ipecgroup.net\n\n\n", attributes: [NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline), NSParagraphStyleAttributeName:paragraphStyle])
+        let ipecURL = NSAttributedString(string: "www.ipecgroup.net\n\n", attributes: [NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleSubheadline), NSParagraphStyleAttributeName:paragraphStyle])
         attributedString.appendAttributedString(ipecURL)
+        
+        let line = NSAttributedString(string: "________________________________________________\n\n\n", attributes: [NSFontAttributeName: UIFont.systemFontOfSize(14), NSParagraphStyleAttributeName:paragraphStyle, NSForegroundColorAttributeName: self.view.tintColor])
+        attributedString.appendAttributedString(line)
         
         let redcubeAttributedString = NSMutableAttributedString(string: "Developed by:\n")
         redcubeAttributedString.addAttribute(NSFontAttributeName, value: UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote), range: NSMakeRange(0, redcubeAttributedString.length))
@@ -50,7 +53,7 @@ class AboutViewController: UIViewController {
         temp.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, temp.length))
 
         redcubeAttributedString.appendAttributedString(temp)
-        let redcubeURL = NSAttributedString(string: "\nwww.redcube.ir", attributes: [NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote), NSParagraphStyleAttributeName:paragraphStyle])
+        let redcubeURL = NSAttributedString(string: "\nwww.redcubedev.com", attributes: [NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleFootnote), NSParagraphStyleAttributeName:paragraphStyle])
         redcubeAttributedString.appendAttributedString(redcubeURL)
         attributedString.appendAttributedString(redcubeAttributedString)
        
